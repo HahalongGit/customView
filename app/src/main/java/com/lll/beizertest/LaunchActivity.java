@@ -14,6 +14,7 @@ import com.lll.beizertest.activity.LetterSideBarActivity;
 import com.lll.beizertest.activity.LivePerformActivity;
 import com.lll.beizertest.activity.MainActivity;
 import com.lll.beizertest.activity.MyTextViewActivity;
+import com.lll.beizertest.activity.OriginCodeAnalysisActivity;
 import com.lll.beizertest.activity.QQStepViewActivity;
 import com.lll.beizertest.activity.RatingBarActivity;
 
@@ -33,6 +34,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_shapeView).setOnClickListener(this);
         findViewById(R.id.btn_ratingBar).setOnClickListener(this);
         findViewById(R.id.btn_letterSideBar).setOnClickListener(this);
+        findViewById(R.id.btn_originCode).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
         valueAnimator.setDuration(500);
@@ -89,6 +91,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_letterSideBar:{
                 Intent intent = new Intent(this,LetterSideBarActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_originCode:{
+                Intent intent = new Intent(this,OriginCodeAnalysisActivity.class);
                 startActivity(intent);
                 break;
             }

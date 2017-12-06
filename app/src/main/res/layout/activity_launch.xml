@@ -77,4 +77,10 @@
         android:padding="10dp"
         android:text="LetterSideBar" />
 
+    <Button
+        android:id="@+id/btn_originCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="源码分析" />
 </LinearLayout>
