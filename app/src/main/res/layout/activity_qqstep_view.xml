@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:layout_height="match_parent"
+    tools:context="com.lll.beizertest.activity.QQStepViewActivity">
+
+    
+    <com.lll.beizertest.view.QQStepView
+        android:id="@+id/stepView"
+        android:layout_width="150dp"
+        app:borderWidth="5dp"
+        app:innerColor="@color/colorAccent"
+        app:outerColor="@color/colorPrimary"
+        android:padding="5dp"
+        android:background="#eeeeee"
+        app:stepTextSize="30sp"
+        app:stepTextColor="#d56565"
+        android:layout_height="150dp" />
+
+    <Button
+        android:text="start"
+        android:id="@+id/btn_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

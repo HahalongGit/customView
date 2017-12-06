@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.lll.beizertest.activity.RatingBarActivity">
+
+    <com.lll.beizertest.view.RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_margin="10dp"
+        app:gradeNumber="5"
+        app:startNormal="@mipmap/normal_star"
+        app:startFocus="@mipmap/focus_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

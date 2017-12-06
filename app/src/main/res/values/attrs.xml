@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TextView">
+        <attr name="hahaText" format="string"></attr>
+        <attr name="hahaTextColor" format="color"></attr>
+        <attr name="hahaTextSize" format="dimension"></attr>
+        <attr name="hahaMaxLength" format="integer"></attr>
+        <attr name="inputType">
+            <enum name="number" value="1"></enum>
+            <enum name="text" value="2"></enum>
+            <enum name="password" value="3"></enum>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="StepView">
+        <attr name="outerColor" format="color"></attr>
+        <attr name="innerColor" format="color"></attr>
+        <attr name="borderWidth" format="dimension"></attr>
+        <attr name="stepTextSize" format="dimension"></attr>
+        <attr name="stepTextColor" format="color"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="ColorTrackTextView">
+        <attr name="originColor" format="color"></attr>
+        <attr name="changeColor" format="color"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="ProgressBar">
+        <attr name="outerBackgroundColor" format="color"></attr>
+        <attr name="innerBackgroundColor" format="color"></attr>
+        <attr name="progressBorderWidth" format="dimension"></attr>
+        <attr name="progressTextSize" format="dimension"></attr>
+        <attr name="progressTextColor" format="color"></attr>
+    </declare-styleable>
+    
+    <declare-styleable name="RatingBar">
+        <attr name="startNormal" format="reference"></attr>
+        <attr name="startFocus" format="reference"></attr>
+        <attr name="gradeNumber" format="integer"></attr>
+    </declare-styleable>
+    
+</resources>

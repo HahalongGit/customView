@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context="com.lll.beizertest.activity.DrawShapeActivity">
+
+    <com.lll.beizertest.view.ShapeView
+        android:id="@+id/shapeView"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+    <Button
+        android:text="开始切换"
+        android:layout_marginTop="15dp"
+        android:id="@+id/btn_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
