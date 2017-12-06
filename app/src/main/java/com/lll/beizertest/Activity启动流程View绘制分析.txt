@@ -74,3 +74,16 @@ public static int getChildMeasureSpec(int spec, int padding, int childDimension)
 
  }
  #########这里测量完成后我们的布局才有宽高
+
+
+ View的绘制流程：
+ 测量、摆放、绘制
+
+ ViewRootImpl 中：
+  requestLayout()->
+  performMeasure();测量布局View的大小，ViewGroup 中循环测量子view的大小，父布局先获取测量模式，传递给子View，子View根据传递的
+  测量模式，计算自己的大小，调用set方法设置到宽高中，父View在取子View的宽高，从而计算自己的宽高。
+  performLayout();调用子view的layout()方法，然后调用onLayout()
+  performDraw();绘制布局。绘制自己还有子View，包括背景等。调用了mView.draw()方法.
+  draw中又调用了其他的绘制方法，drawBackground()等。
+  onDraw 的绘制流程中使用了模板设计模式，提供了一个模板，自己没有实现，给子类去实现。
