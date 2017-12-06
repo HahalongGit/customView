@@ -27,7 +27,7 @@ import java.util.Random;
  * Created by longlong on 2017/11/21.
  *
  * @ClassName: LoveLayout
- * @Description:
+ * @Description: 模拟 直播点赞效果
  * @Date 2017/11/21
  */
 

@@ -17,7 +17,7 @@ import com.lll.beizertest.R;
  * Created by longlong on 2017/11/28.
  *
  * @ClassName: QQStepView
- * @Description:
+ * @Description: 进度条定义
  * @Date 2017/11/28
  */
 

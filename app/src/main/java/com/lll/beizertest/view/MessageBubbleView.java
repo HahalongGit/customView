@@ -28,7 +28,7 @@ import android.widget.ViewAnimator;
  * Created by longlong on 2017/11/20.
  *
  * @ClassName: MessageBubble
- * @Description:
+ * @Description: 贝塞尔曲线和属性动画的使用
  * @Date 2017/11/20
  */
 
