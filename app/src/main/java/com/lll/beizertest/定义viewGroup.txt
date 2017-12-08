@@ -34,7 +34,15 @@
 
   5.添加子View的margin
     刚开始重写onMeasure 和onLayout的时候可以先不考虑margin的问题，有了样子后添加上margin 这个参数。子View的getLayoutParam()方法获取的
-    LayoutParm是没有margin的。查看LinearLayout 我们可以知道其实这么实现LayoutParam的。这里我们可以重写方法，使用ViewGroup 中系统提供的
+    LayoutParm是没有margin的。查看LinearLayout 我们可以知道其实这么实现LayoutParam的.LinearLayout 重写了generateLayoutParams方法
+    -->
+    @Override
+           public LayoutParams generateLayoutParams(AttributeSet attrs) {
+               return new LinearLayout.LayoutParams(getContext(), attrs);
+           }
+    返回一个new LinearLayout.LayoutParams(getContext(), attrs);这个LayoutParam 是一个继承了ViewGroup 的MarginLayoutParams 的子类。
+    // public static class LayoutParams extends ViewGroup.MarginLayoutParams
+    这里我们可以重写方法，直接使用ViewGroup 中系统提供的
     MarginLayoutParams这个类,设置一个包含margin的LayoutParam：
         /**
          * 设置margin
