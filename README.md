@@ -19,6 +19,7 @@
 6. MessageBubbleView定义拖拽的view
 定义一个模拟QQ拖拽的消息。使用到了贝塞尔曲线的相关知识，属性动画的使用，估值器，插值器的使用和自定义。
 7. LoveLayout模拟直播点赞效果（贝塞尔曲线的使用）
+8. TagLayout View绘制流程分析，定义ViewGroup实现一个简单的流式布局。
 
 ### 说明：demo搜集自网络，代码自己书写整理
 
