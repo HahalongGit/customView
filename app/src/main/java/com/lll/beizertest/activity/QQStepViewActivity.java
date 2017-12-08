@@ -13,6 +13,9 @@ import android.widget.Button;
 import com.lll.beizertest.R;
 import com.lll.beizertest.view.QQStepView;
 
+/**
+ * 模拟定义一个计步器View
+ */
 public class QQStepViewActivity extends AppCompatActivity implements View.OnClickListener {
 
     QQStepView qqStepView;

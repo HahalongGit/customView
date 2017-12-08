@@ -7,80 +7,100 @@
     android:orientation="vertical"
     tools:context="com.lll.beizertest.LaunchActivity">
 
-    <Button
-        android:id="@+id/btn_qqBeizer"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="模拟QQ消息提示" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_animator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="动画学习" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_livePerform"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="直播效果" />
 
-    <Button
-        android:id="@+id/btn_defineText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="自定义简单TextView" />
+            <Button
+                android:id="@+id/btn_qqBeizer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="模拟QQ消息提示" />
 
-    <Button
-        android:id="@+id/btn_qqStepView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="QQStepView" />
+            <Button
+                android:id="@+id/btn_animator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="动画学习" />
 
-    <Button
-        android:id="@+id/btn_trackText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="变色的Text" />
+            <Button
+                android:id="@+id/btn_livePerform"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="直播效果" />
 
-    <Button
-        android:id="@+id/btn_progressBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="进度条2" />
+            <Button
+                android:id="@+id/btn_defineText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="自定义简单TextView" />
 
-    <Button
-        android:id="@+id/btn_shapeView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="ShapeView" />
+            <Button
+                android:id="@+id/btn_qqStepView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="QQStepView" />
 
-    <Button
-        android:id="@+id/btn_ratingBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="ratingBar" />
+            <Button
+                android:id="@+id/btn_trackText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="变色的Text" />
 
-    <Button
-        android:id="@+id/btn_letterSideBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="LetterSideBar" />
+            <Button
+                android:id="@+id/btn_progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="进度条2" />
 
-    <Button
-        android:id="@+id/btn_originCode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="源码分析" />
+            <Button
+                android:id="@+id/btn_shapeView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="ShapeView" />
+
+            <Button
+                android:id="@+id/btn_ratingBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="ratingBar" />
+
+            <Button
+                android:id="@+id/btn_letterSideBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="LetterSideBar" />
+
+            <Button
+                android:id="@+id/btn_originCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="源码分析" />
+
+            <Button
+                android:id="@+id/btn_customViewGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="定义ViewGroup" />
+        </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>

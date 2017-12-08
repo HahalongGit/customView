@@ -1,0 +1,49 @@
+从View的绘制流程可以大致知道了不同view的绘制过程是怎么调用的。
+ 自定义一个ViewGroup的流程：
+  1.继承VireGroup
+  2.重写ViewGroup中onMeasure方法，循环测量子View，根据子View计算自己的宽高。
+      int width = MeasureSpec.getSize(widthMeasureSpec);//获取宽度
+      int height = getPaddingBottom()+getPaddingTop();//初始化高度值
+            int childCount = getChildCount();
+            int maxHeight = 0;
+            for(int i =0;i<childCount;i++){
+                Log.e("TAG","TagLayout-childHeight2");
+                View childView = getChildAt(i);
+                //调用子View 的onMeasure方法，之后就有宽高了。
+                measureChild(childView,widthMeasureSpec,heightMeasureSpec);
+                int childHeight = childView.getMeasuredHeight();
+                int childWidth = childView.getMeasuredWidth();
+                ...
+                ViewGroup.MarginLayoutParams params = (MarginLayoutParams) childView.getLayoutParams();
+                //计算ViewGroup的高度
+                height+=childHeight+params.topMargin+params.bottomMargin;//换行，增加自己的高度
+                ...
+            }
+   测量就是根据自己要实现的效果，计算出View的宽高
+  3.重写onLayout，循环摆放位置
+    ViewGroup中onLayout的四个参数就是当前ViewGroup 在手机上显示的位置，左边。上边，右边，下边的位置数据
+    如：一个手机屏幕分辨率是width:1080,height:1920
+        onLayout参数--> l:28,t:41,r:1080,b:477 表示这个ViewGroup左边开始在28px，上边在41px(手机顶部向下41)，右边是1080px(也就是手机右边)，下边是477px
+
+    onLayout方法中for循环对每一个子View 的位置进行摆放。 计算出每一个子View的位置，调用子View的layout方法
+    childView.layout(left,childTop,right,bottom);
+
+    重点在于layout方法的四个参数计算。
+  4.重写onDraw
+    设置布局的ViewGroup不需要重写onDraw
+
+  5.添加子View的margin
+    刚开始重写onMeasure 和onLayout的时候可以先不考虑margin的问题，有了样子后添加上margin 这个参数。子View的getLayoutParam()方法获取的
+    LayoutParm是没有margin的。查看LinearLayout 我们可以知道其实这么实现LayoutParam的。这里我们可以重写方法，使用ViewGroup 中系统提供的
+    MarginLayoutParams这个类,设置一个包含margin的LayoutParam：
+        /**
+         * 设置margin
+         * @param attrs
+         * @return
+         */
+        @Override
+        public LayoutParams generateLayoutParams(AttributeSet attrs) {
+            return new MarginLayoutParams(getContext(), attrs);
+        }
+  6.问题，子View高度不一样的时候怎么处理
+     每一行中子View高度不一样的时候怎么处理ViewGroup的高度加最大的高度。我们对一行的子View高度比较，拿最大的作为这一行的整体的高度。

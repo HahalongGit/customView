@@ -87,3 +87,4 @@ public static int getChildMeasureSpec(int spec, int padding, int childDimension)
   performDraw();绘制布局。绘制自己还有子View，包括背景等。调用了mView.draw()方法.
   draw中又调用了其他的绘制方法，drawBackground()等。
   onDraw 的绘制流程中使用了模板设计模式，提供了一个模板，自己没有实现，给子类去实现。
+

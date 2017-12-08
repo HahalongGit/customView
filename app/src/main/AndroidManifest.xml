@@ -30,7 +30,8 @@
         <activity android:name=".activity.DrawShapeActivity" />
         <activity android:name=".activity.RatingBarActivity" />
         <activity android:name=".activity.LetterSideBarActivity" />
-        <activity android:name=".activity.OriginCodeAnalysisActivity"></activity>
+        <activity android:name=".activity.OriginCodeAnalysisActivity" />
+        <activity android:name=".activity.TagLayoutActivity"></activity>
     </application>
 
 </manifest>
