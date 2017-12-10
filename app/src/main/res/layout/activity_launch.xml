@@ -100,6 +100,13 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="定义ViewGroup" />
+
+            <Button
+                android:id="@+id/btn_touchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="OnTouch事件处理" />
         </LinearLayout>
 
     </ScrollView>

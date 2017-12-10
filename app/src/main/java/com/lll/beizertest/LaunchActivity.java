@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 
 import com.lll.beizertest.activity.AnimatorActivity;
 import com.lll.beizertest.activity.ColorTrackTextActivity;
@@ -18,8 +19,11 @@ import com.lll.beizertest.activity.OriginCodeAnalysisActivity;
 import com.lll.beizertest.activity.QQStepViewActivity;
 import com.lll.beizertest.activity.RatingBarActivity;
 import com.lll.beizertest.activity.TagLayoutActivity;
+import com.lll.beizertest.activity.TouchViewActivity;
 
 public class LaunchActivity extends AppCompatActivity implements View.OnClickListener{
+
+    //private ListView listView;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +41,14 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_letterSideBar).setOnClickListener(this);
         findViewById(R.id.btn_originCode).setOnClickListener(this);
         findViewById(R.id.btn_customViewGroup).setOnClickListener(this);
+        findViewById(R.id.btn_touchView).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
         valueAnimator.setDuration(500);
         valueAnimator.start();
+
+        //listView.setAdapter();
+
     }
 
     @Override
@@ -103,6 +111,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_customViewGroup:{
                 Intent intent = new Intent(this,TagLayoutActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_touchView:{
+                Intent intent = new Intent(this,TouchViewActivity.class);
                 startActivity(intent);
                 break;
             }
