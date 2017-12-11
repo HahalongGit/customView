@@ -25,16 +25,16 @@ public class TouchViewActivity extends AppCompatActivity {
         touchView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.e("TAG","onTouch:"+event.getAction());
+                Log.e("TAG","view-onTouch:"+event.getAction());
                 return false;
             }
         });
 
-        touchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("TAG","onClick");
-            }
-        });
+//        touchView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.e("TAG","view-onClick");
+//            }
+//        });
     }
 }
