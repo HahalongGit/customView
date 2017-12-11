@@ -8,94 +8,10 @@
     tools:context="com.lll.beizertest.activity.TagLayoutActivity">
 
     <com.lll.beizertest.view.TagLayout
+        android:id="@+id/tagLayout"
         android:layout_width="match_parent"
-        android:background="@color/colorAccent"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
         android:layout_height="wrap_content">
-        <TextView
-            android:text="hello word!"
-            android:layout_width="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="hello word! 大家好222"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="hello word!333"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="21 世界的好青年"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="中国·北京"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="音乐会"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="青春"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="造作起"
-            android:layout_margin="10dp"
-            android:background="@color/colorPrimary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="年轻人梦想"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="大舞台"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="hello word!大家"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="hello word!333"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="大舞台，大机遇"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="美女"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
     </com.lll.beizertest.view.TagLayout>
 </LinearLayout>
