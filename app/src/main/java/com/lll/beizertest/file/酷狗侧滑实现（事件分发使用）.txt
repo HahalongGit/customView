@@ -1,0 +1,11 @@
+有一个侧滑的效果，该怎么实现？
+1.使用系统已经存在的DrawLayout
+2.自定义ViewGroup，Gesturedetector 处理类
+3.继承ScrollView(这个是可以滚动的，避免写混动)
+
+分析:这个有两个布局，一个当前可见的布局，一个滑动可见的布局。
+继承HorizontalScrollView,完成两个布局menu和content
+运行后布局乱套-> 我们需要制定menu 和content 的宽高。滑动后content留下的宽是多少？
+默认是关闭的，看到主页面
+处理内容部分的缩放，菜单部分的缩放和位移以及透明的变化。
+充分考虑事件分发的源码

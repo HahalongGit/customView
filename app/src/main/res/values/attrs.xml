@@ -38,5 +38,10 @@
         <attr name="startFocus" format="reference"></attr>
         <attr name="gradeNumber" format="integer"></attr>
     </declare-styleable>
+
+    <!--侧滑后menu的宽度-->
+    <declare-styleable name="DrawLayout">
+        <attr name="menuWidth" format="dimension"></attr>
+    </declare-styleable>
     
 </resources>

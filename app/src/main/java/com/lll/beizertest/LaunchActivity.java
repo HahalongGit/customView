@@ -2,6 +2,7 @@ package com.lll.beizertest;
 
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ListView;
 import com.lll.beizertest.activity.AnimatorActivity;
 import com.lll.beizertest.activity.ColorTrackTextActivity;
 import com.lll.beizertest.activity.DefineProgressBarActivity;
+import com.lll.beizertest.activity.DrawLayoutActivity;
 import com.lll.beizertest.activity.DrawShapeActivity;
 import com.lll.beizertest.activity.LetterSideBarActivity;
 import com.lll.beizertest.activity.LivePerformActivity;
@@ -42,6 +44,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_originCode).setOnClickListener(this);
         findViewById(R.id.btn_customViewGroup).setOnClickListener(this);
         findViewById(R.id.btn_touchView).setOnClickListener(this);
+        findViewById(R.id.btn_drawLayout).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
         valueAnimator.setDuration(500);
@@ -116,6 +119,10 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_touchView:{
                 Intent intent = new Intent(this,TouchViewActivity.class);
+                startActivity(intent);
+                break;
+            }case R.id.btn_drawLayout:{
+                Intent intent = new Intent(this,DrawLayoutActivity.class);
                 startActivity(intent);
                 break;
             }
