@@ -9,7 +9,6 @@ import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 
@@ -19,7 +18,7 @@ import com.lll.beizertest.R;
  * Created by longlong on 2017/12/11.
  *
  * @ClassName: DrawLayout
- * @Description:
+ * @Description: 侧滑菜单布局
  * @Date 2017/12/11
  */
 
@@ -80,6 +79,8 @@ public class DrawLayout extends HorizontalScrollView {
     //1.快速滑动（手指快速滑动打开或者关闭菜单）
     //2.事件拦截（打开菜单后右边的view不能点击，打开时点击关闭菜单）
 
+    //QQ的效果和这个的差异：（修改）
+
     public DrawLayout(Context context) {
         this(context, null);
     }
@@ -104,8 +105,11 @@ public class DrawLayout extends HorizontalScrollView {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        // onFinishInflate LayoutInflate.inflate()后调用
         //指定content的宽度是内容的宽度
         //制定menu的宽度是muenu减去属性的宽度
+
+        //这里可以获取View 操作View设置View的属性
         ViewGroup viewGoup = (ViewGroup) getChildAt(0);
         int childCount = viewGoup.getChildCount();
         if (childCount != 2) {
@@ -128,6 +132,7 @@ public class DrawLayout extends HorizontalScrollView {
             //有拦截就不执行自己的onTouchEvent
             return true;
         }
+        //添加手指快速滑动Gesturedetector
         if (gestureDetector.onTouchEvent(ev)) {//回调gestureDetector返回true
             //如果快速滑动执行了（打开或者关闭了）下面 onTouchEvent 就不要执行了
             Log.e("TAG", "onTouchEvent-gestureDetector");
@@ -179,6 +184,8 @@ public class DrawLayout extends HorizontalScrollView {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
+        //onLayout view的绘制流程中的最后一个方法。（onMeasure ,onLayout、onDraw）view 的绘制流程是在在onResumt 方法之后调用的。
+        //可以在ViewRootImpl中查看（requestLayout方法）
         scrollTo(mMenuWidth, 0);//初始化位置是content内容页面
     }
 
@@ -190,10 +197,6 @@ public class DrawLayout extends HorizontalScrollView {
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
-
-        //添加手指快速滑动Gesturedetector
-
-
         // onScrollChanged --范围 mMenuWidth -->0
         //滑动回调，获取滑动距离，设置缩放等滑动的时候的动画。
         Log.e("TAG", "onScrollChanged-l:" + l);
@@ -215,7 +218,5 @@ public class DrawLayout extends HorizontalScrollView {
         //ViewCompat.
         float leftAlpha = 0.5f + 0.5f * (1 - scale);
         ViewCompat.setAlpha(mMenuView, leftAlpha);
-
-
     }
 }
