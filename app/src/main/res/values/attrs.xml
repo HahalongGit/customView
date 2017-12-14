@@ -43,5 +43,15 @@
     <declare-styleable name="DrawLayout">
         <attr name="menuWidth" format="dimension"></attr>
     </declare-styleable>
-    
+
+
+    <!--圆形图片-->
+    <declare-styleable name="RoundImageView">
+        <attr name="borderRadius" format="dimension" />
+        <attr name="type">
+            <enum name="circle" value="0" />
+            <enum name="round" value="1" />
+        </attr>
+    </declare-styleable>
+
 </resources>

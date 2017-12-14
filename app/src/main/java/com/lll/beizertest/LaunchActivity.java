@@ -15,11 +15,13 @@ import com.lll.beizertest.activity.DrawLayoutActivity;
 import com.lll.beizertest.activity.DrawShapeActivity;
 import com.lll.beizertest.activity.LetterSideBarActivity;
 import com.lll.beizertest.activity.LivePerformActivity;
+import com.lll.beizertest.activity.LogisticsProgressViewActivity;
 import com.lll.beizertest.activity.MainActivity;
 import com.lll.beizertest.activity.MyTextViewActivity;
 import com.lll.beizertest.activity.OriginCodeAnalysisActivity;
 import com.lll.beizertest.activity.QQStepViewActivity;
 import com.lll.beizertest.activity.RatingBarActivity;
+import com.lll.beizertest.activity.RoundImageActivity;
 import com.lll.beizertest.activity.TagLayoutActivity;
 import com.lll.beizertest.activity.TouchViewActivity;
 
@@ -45,6 +47,8 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_customViewGroup).setOnClickListener(this);
         findViewById(R.id.btn_touchView).setOnClickListener(this);
         findViewById(R.id.btn_drawLayout).setOnClickListener(this);
+        findViewById(R.id.btn_roundImage).setOnClickListener(this);
+        findViewById(R.id.btn_logisticsProgress).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
         valueAnimator.setDuration(500);
@@ -123,6 +127,16 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             }case R.id.btn_drawLayout:{
                 Intent intent = new Intent(this,DrawLayoutActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_roundImage:{
+                Intent intent = new Intent(this,RoundImageActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_logisticsProgress:{
+                Intent intent = new Intent(this,LogisticsProgressViewActivity.class);
                 startActivity(intent);
                 break;
             }

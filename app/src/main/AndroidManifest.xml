@@ -33,7 +33,9 @@
         <activity android:name=".activity.OriginCodeAnalysisActivity" />
         <activity android:name=".activity.TagLayoutActivity" />
         <activity android:name=".activity.TouchViewActivity" />
-        <activity android:name=".activity.DrawLayoutActivity"></activity>
+        <activity android:name=".activity.DrawLayoutActivity" />
+        <activity android:name=".activity.RoundImageActivity" />
+        <activity android:name=".activity.LogisticsProgressViewActivity"></activity>
     </application>
 
 </manifest>
