@@ -16,6 +16,7 @@ import com.lll.beizertest.activity.DrawShapeActivity;
 import com.lll.beizertest.activity.LetterSideBarActivity;
 import com.lll.beizertest.activity.LivePerformActivity;
 import com.lll.beizertest.activity.LogisticsProgressViewActivity;
+import com.lll.beizertest.activity.LuckPatternViewActivity;
 import com.lll.beizertest.activity.MainActivity;
 import com.lll.beizertest.activity.MyTextViewActivity;
 import com.lll.beizertest.activity.OriginCodeAnalysisActivity;
@@ -51,6 +52,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_roundImage).setOnClickListener(this);
         findViewById(R.id.btn_logisticsProgress).setOnClickListener(this);
         findViewById(R.id.btn_verticalDragView).setOnClickListener(this);
+        findViewById(R.id.btn_luckPatternView).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
         valueAnimator.setDuration(500);
@@ -144,6 +146,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_verticalDragView:{
                 Intent intent = new Intent(this,VerticalDragViewActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_luckPatternView:{
+                Intent intent = new Intent(this,LuckPatternViewActivity.class);
                 startActivity(intent);
                 break;
             }

@@ -104,8 +104,6 @@ public class VerticalDragListView extends FrameLayout {
             }
 
         }
-
-
     };
 
     /**
@@ -161,6 +159,7 @@ public class VerticalDragListView extends FrameLayout {
         //ViewDragHelper did not receive all the events in the event stream.(ListView 处理了DOWN 事件),需要处理Drag
         if (isoPenMenu) {
             return true;
+            // TODO: 2017/12/15 拦截后item和子View不能点击 如何处理
             //return true;//如果菜单打开就拦截ListView 的操作，同时拦截了所有子View的操作，menu不能点击，这里有问题
         }
         switch (ev.getAction()) {
