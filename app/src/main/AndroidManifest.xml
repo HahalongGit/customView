@@ -35,7 +35,8 @@
         <activity android:name=".activity.TouchViewActivity" />
         <activity android:name=".activity.DrawLayoutActivity" />
         <activity android:name=".activity.RoundImageActivity" />
-        <activity android:name=".activity.LogisticsProgressViewActivity"></activity>
+        <activity android:name=".activity.LogisticsProgressViewActivity" />
+        <activity android:name=".activity.VerticalDragViewActivity"></activity>
     </application>
 
 </manifest>

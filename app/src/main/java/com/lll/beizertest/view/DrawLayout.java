@@ -73,6 +73,7 @@ public class DrawLayout extends HorizontalScrollView {
             Log.e("TAG", "velocityX:" + velocityX);
             return super.onFling(e1, e2, velocityX, velocityY);
         }
+
     };
 
     //两个问题：

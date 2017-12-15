@@ -24,6 +24,7 @@ import com.lll.beizertest.activity.RatingBarActivity;
 import com.lll.beizertest.activity.RoundImageActivity;
 import com.lll.beizertest.activity.TagLayoutActivity;
 import com.lll.beizertest.activity.TouchViewActivity;
+import com.lll.beizertest.activity.VerticalDragViewActivity;
 
 public class LaunchActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -49,6 +50,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_drawLayout).setOnClickListener(this);
         findViewById(R.id.btn_roundImage).setOnClickListener(this);
         findViewById(R.id.btn_logisticsProgress).setOnClickListener(this);
+        findViewById(R.id.btn_verticalDragView).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
         valueAnimator.setDuration(500);
@@ -137,6 +139,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_logisticsProgress:{
                 Intent intent = new Intent(this,LogisticsProgressViewActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_verticalDragView:{
+                Intent intent = new Intent(this,VerticalDragViewActivity.class);
                 startActivity(intent);
                 break;
             }
