@@ -1,0 +1,43 @@
+当有ViewGroup 包含一个View的时候的事件分发是怎么样的？
+我们打印出ViewGroup 和View的dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent和View 的dispatchTouchEvent、onTouchEvent等方法执行顺序。
+结果是：
+正常情况：
+1. ViewGroup.dispatchTouchEvent -> viewGroup.onInterceptTouchEvent -> view-dispatchTouchEvent -> view-onTouch -> view-onTouchEvent  按下
+2.ViewGroup.dispatchTouchEvent -> viewGroup.onInterceptTouchEvent -> view-dispatchTouchEvent -> view-onTouch -> view-onTouchEvent   滑动
+3.ViewGroup.dispatchTouchEvent -> viewGroup.onInterceptTouchEvent -> view-dispatchTouchEvent -> view-onTouch -> view-onTouchEvent -> onClick  抬起
+
+现象1：
+不设置onClick监听的时候，其他方法都是执行super：
+结果是：
+12-11 14:24:57.185 6675-6675/com.lll.beizertest E/TAG: viewGroup-dispatchTouchEvent-2:0
+12-11 14:24:57.186 6675-6675/com.lll.beizertest E/TAG: viewGroup-onInterceptTouchEvent-2:0
+12-11 14:24:57.186 6675-6675/com.lll.beizertest E/TAG: view-dispatchTouchEvent-1:0
+12-11 14:24:57.187 6675-6675/com.lll.beizertest E/TAG: view-onTouch:0
+12-11 14:24:57.187 6675-6675/com.lll.beizertest E/TAG: view-onTouchEvent-1:0
+12-11 14:24:57.187 6675-6675/com.lll.beizertest E/TAG: viewGroup-onTouchEvent-2:0
+
+现象2：
+只执行按下：ViewGroup.dispatchTouchEvent -> viewGroup.onInterceptTouchEvent -> view-dispatchTouchEvent view-onTouch -> view-onTouchEvent -> ViewGroup.onTouchEvent
+//我的电脑测试都执行了，除了onClick没执行。
+
+现象3：
+假设 View 的 onTouchEvent 返回true（我们在重写View的时候一般都返回true）
+这时候就是没有了onClick 的执行，其他的全部执行，这里onClick 没有执行，是因为onTouchEvent 返回了true，没有执行super,super.onTouchEvent会调用onClick
+1. ViewGroup.dispatchTouchEvent -> viewGroup.onInterceptTouchEvent -> view-dispatchTouchEvent -> view-onTouch -> view-onTouchEvent  按下
+2.ViewGroup.dispatchTouchEvent -> viewGroup.onInterceptTouchEvent -> view-dispatchTouchEvent -> view-onTouch -> view-onTouchEvent   滑动
+3.ViewGroup.dispatchTouchEvent -> viewGroup.onInterceptTouchEvent -> view-dispatchTouchEvent -> view-onTouch -> view-onTouchEvent   抬起
+
+现象4：
+view 是因为onTouchEvent方法返回true，ViewGroup onInterceptTouchEvent返回 true拦截
+结果是：
+12-11 14:30:47.788 8185-8185/com.lll.beizertest E/TAG: viewGroup-dispatchTouchEvent-2:0
+12-11 14:30:47.788 8185-8185/com.lll.beizertest E/TAG: viewGroup-onInterceptTouchEvent-2:0
+12-11 14:30:47.788 8185-8185/com.lll.beizertest E/TAG: viewGroup-onTouchEvent-2:0
+只执行了ViewGroup的三个按下方法，子View 没有执行。
+
+按照上述方法的执行顺序，从ViewGroup.dispatchTouchEvent 开始看源码
+从上面可以知道：
+如果我们的子类的上述两个方法和ViewGroup的上述三个方法都没有返回true，则事件只会执行DOWN 的事件。代表不消费事件，如果想要执行MOVE 和UP事件，就要有一个地方
+返回true。
+对于ViewGroup如果我们想拦截ziView的事件，在ViewGroup中的onInterceptTouchEvent 中返回true。如果这个方法返回true，ViewGroup就会执行自己的onTouchEvent，自己消费。
+如果子View没有任何地方返回true，没有消费事件，也会调用ViewGroup的onTouchEvent 事件。

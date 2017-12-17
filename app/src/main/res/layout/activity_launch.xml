@@ -107,6 +107,37 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="OnTouch事件处理" />
+
+            <Button
+                android:id="@+id/btn_drawLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="侧滑布局" />
+            <Button
+                android:id="@+id/btn_roundImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="圆形图片" />
+            <Button
+                android:id="@+id/btn_logisticsProgress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="矿宝宝物流进度" />
+            <Button
+                android:id="@+id/btn_verticalDragView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="竖值拖拽View" />
+            <Button
+                android:id="@+id/btn_luckPatternView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="九宫格解锁" />
         </LinearLayout>
 
     </ScrollView>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lll.beizertest.view.VerticalDragListView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.lll.beizertest.activity.VerticalDragViewActivity">
+
+    <LinearLayout
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="200dp">
+
+        <Button
+            android:id="@+id/btn_menu"
+            android:text="菜单按键"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/tv_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:src="@mipmap/ic_launcher" />
+    </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/listView"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</com.lll.beizertest.view.VerticalDragListView>

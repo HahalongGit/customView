@@ -24,6 +24,8 @@ public class TagLayout extends ViewGroup {
 
     private List<List<View>> mChildViews = new ArrayList<>();
 
+    private BaseAdapter mBaseAdapter;
+
     public TagLayout(Context context) {
         super(context);
     }
@@ -132,6 +134,25 @@ public class TagLayout extends ViewGroup {
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new MarginLayoutParams(getContext(), attrs);
+    }
+
+
+    /**
+     * 添加适配器给TagLayout
+     * @param baseAdapter
+     */
+    public void setAdapter(BaseAdapter baseAdapter){
+
+        if(baseAdapter!=null){
+            mBaseAdapter = baseAdapter;
+            removeAllViews();
+            int count = mBaseAdapter.getCount();
+            for(int i=0;i<count;i++){
+                View view = mBaseAdapter.getView(i, this);
+                addView(view);
+            }
+        }
+
     }
 
 }

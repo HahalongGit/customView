@@ -1,0 +1,103 @@
+onTouch 事件分析:
+定义View的
+ onTouchEvent
+ setOnTouchListener
+ setOnClickListener
+ 都添加了是点击上述方法如何执行的？
+
+现象1：
+setOnTouchListener - onTouchEvent - setOnClickListener
+执行结果顺序是：
+12-11 11:05:25.520 14790-14790/com.lll.beizertest E/TAG: onTouch:0
+12-11 11:05:25.520 14790-14790/com.lll.beizertest E/TAG: onTouchEvent:0
+12-11 11:05:25.574 14790-14790/com.lll.beizertest E/TAG: onTouch:2
+12-11 11:05:25.574 14790-14790/com.lll.beizertest E/TAG: onTouchEvent:2
+12-11 11:05:25.575 14790-14790/com.lll.beizertest E/TAG: onTouch:1
+12-11 11:05:25.576 14790-14790/com.lll.beizertest E/TAG: onTouchEvent:1
+12-11 11:05:25.576 14790-14790/com.lll.beizertest E/TAG: onClick
+我们还知道：
+    MotionEvent.ACTION_DOWN = 0;
+    MotionEvent.ACTION_MOVE = 2;
+    MotionEvent.ACTION_UP = 1;
+也就是：
+先执行OnTouchListener 的onTouch方法，在执行onTouchEvent()方法，最后在nTouchEvent()方法的UP中执行了OnClickListener。
+OnTouchListener.DOWN - onTouchEvent.DOWM - OnTouchListener.MOVE - onTouchEvent.MOVE - OnTouchListener.UP - onTouchEvent.UP - OnClickListener
+现象2
+当OnTouchListener onTouch返回true的时候：
+touchView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.e("TAG","onTouch:"+event.getAction());
+                return true;//这里返回true
+            }
+        });
+返回true的时候只有setOnTouchListener 的onTouch方法执行
+
+View 中和时间分发有关的方法是：
+ @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        //Log.e("TAG","dispatchTouchEvent:"+event.getAction());
+        return super.dispatchTouchEvent(event);
+    }
+ 和
+ @Override
+     public boolean onTouchEvent(MotionEvent event) {
+         Log.e("TAG","onTouchEvent:"+event.getAction());
+         return super.onTouchEvent(event);
+     }
+ 我们一般重写onTouchEvent()这个方法。
+ 我们查看dispatchTouchEvent();的源码：
+ 首先有一个boolean result = false; 可以看到这是最后的返回值。
+
+ 这里有一个ListenerInfo 这个类，我们可以看到，这里源码是存放了几乎所有的Listener的对象。
+  ListenerInfo li = mListenerInfo;
+  可以看下setOnClickListener 的源码是这样的：
+    public void setOnClickListener(@Nullable OnClickListener l) {
+          if (!isClickable()) {
+              setClickable(true);
+          }
+          getListenerInfo().mOnClickListener = l;
+      }
+
+  下面看到：
+    if (li != null && li.mOnTouchListener != null
+                      && (mViewFlags & ENABLED_MASK) == ENABLED
+                      && li.mOnTouchListener.onTouch(this, event)) {
+                  result = true;
+              }
+
+     //ENABLED 这里的ENABLED 就是我们setEnable()的enable。正常表示可用。
+    这里li.mOnTouchListener.onTouch(this, event) 是true 则设置result是true，mOnTouchListener.onTouch(this, event) 是false 就返回是false
+
+    下面接着看：
+    if (!result && onTouchEvent(event)) {
+                result = true;
+            }
+     也就是：如果我们的result 是false，这里会执行onTouchEvent();,如果result是true就不会执行onTouchEvent()。
+
+     到目前我们没有看到onClick方法执行。我们去onTouchEvent看看源码。
+     我们在onTouchEvent方法的ACTION_UP 分支中看到了一个执行click的方法performClick();
+     然后我们可以看到这个方法中执行了onClick方法 li.mOnClickListener.onClick(this);
+         public boolean performClick() {
+             final boolean result;
+             final ListenerInfo li = mListenerInfo;
+             if (li != null && li.mOnClickListener != null) {
+                 playSoundEffect(SoundEffectConstants.CLICK);
+                 li.mOnClickListener.onClick(this);
+                 result = true;
+             } else {
+                 result = false;
+             }
+                  sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
+                 notifyEnterOrExitForAutoFillIfNeeded(true);
+             return result;
+         }
+
+     所以dispatchTouchEvent 方法返回true后边的就都不会执行。
+
+
+ViewGroup 事件分发分析：
+
+dispatchTouchEvent();
+onTouchEvent();
+onInterceptTouchEvent();//事件拦截

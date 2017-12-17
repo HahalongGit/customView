@@ -1,0 +1,74 @@
+系统提供了一些工具类，能够帮助我们实现一些效果。这里对前面使用的这些类做一个简单的说明。
+1.ViewCompat 用来兼容不同系统的工具，提供了再不同版本的sdk下的方法的实现，实现一些常用的动画效果等。
+避免在不同的设备上使用时出现项目崩溃。
+如下设置一个View缩放和缩放的中心：
+ViewCompat.setPivotX(mContentView, 0);//设置缩放点，默认是View的中心
+ViewCompat.setScaleY(mContentView, getMeasuredHeight() / 2);
+ViewCompat.setScaleX(mContentView, rightScale);
+ViewCompat.setScaleY(mContentView, rightScale);
+
+2.GestureDetector 手势检测工具，处理手指的快速滑动等一系列问题。GestureDetector对这些操作做了处理。
+view的onTouchEvent()方法中调用GestureDetector 的onTouchEvent方法。
+GestureDetector 使用：
+GestureDetector gestureDetector = new GestureDetector(context, onGestureListener);
+这里主要是处理回调：
+  private GestureDetector.SimpleOnGestureListener onGestureListener = new GestureDetector.SimpleOnGestureListener() {
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            //只关注快速滑动的方法,只要快速滑动就会有回调
+
+            //快速 velocityX 往左边滑动是一个负数，往右边滑动是一个正数
+            //通过这个velocityX 可以操作如何滑动
+            Log.e("TAG", "velocityX:" + velocityX);
+            return super.onFling(e1, e2, velocityX, velocityY);
+        }
+    };
+    SimpleOnGestureListener 中还有其他的动作处理方法：
+      @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            return super.onSingleTapUp(e);
+        }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+            super.onLongPress(e);
+        }
+
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            return super.onScroll(e1, e2, distanceX, distanceY);
+        }
+    等等
+
+3.ViewDragHelper
+  添加可以实现对View的任意拖动效果。如：实现卡片左右拖动消失的效果
+  案例：实现汽车之家的可以拖动的列表，下层View不能拖动，上层View拖动的距离是下层View的高度，松开拖动的时候要选择是否打开还是关闭。
+  ViewDragHelper: Ignoring pointerId=0 because ACTION_DOWN was not received for this pointer before ACTION_MOVE. It likely happened because
+  ViewDragHelper did not receive all the events in the event stream.(ListView 处理了DOWN 事件)
+
+ ViewDragHelper使用：
+ mViewDragHelper = ViewDragHelper.create(this, mDragCallBack);
+ mDragCallBack 是一个回调。这里主要是处理回调。
+ 然后在onTouchEvent中调用mViewDragHelper方法 mViewDragHelper.processTouchEvent(event);
+ 如：
+  //FrameLayout 怎么样拖动子View
+     private ViewDragHelper.Callback mDragCallBack = new ViewDragHelper.Callback() {
+         @Override
+         public boolean tryCaptureView(View child, int pointerId) {
+             //指定那个子View是否可以拖动，默认对所有的子View都会执行一边
+             return dragView == child;//是dragListView 就拖动
+         }
+
+        //指定拖动的方向和距离返回值是一个距离
+         @Override
+         public int clampViewPositionVertical(View child, int top, int dy) {
+             //垂直拖动移动的位置，返回值是一个top。不断处理top
+             if (top < 0) {
+                 top = 0;
+             }
+             if (top >= mMenuHeight) {//最大是菜单的高度
+                 top = mMenuHeight;
+             }
+             return top;//返回滑动的距离
+         }
+  这个回调中还有一些其他的方法，用来处理其他效果。
