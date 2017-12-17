@@ -39,4 +39,7 @@ public class TouchView extends View {
         Log.e("TAG","onTouchEvent:"+event.getAction());
         return super.onTouchEvent(event);
     }
+
+    //onClick 在onTouchEvent 的 MOVENT_UP中才执行，在onTouch 的最后执行
+
 }
