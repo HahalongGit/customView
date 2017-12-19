@@ -144,6 +144,14 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="九宫格解锁" />
+
+            <Button
+                android:id="@+id/btn_startBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="状态栏分析" />
+
         </LinearLayout>
 
     </ScrollView>

@@ -38,7 +38,10 @@
         <activity android:name=".activity.LogisticsProgressViewActivity" />
         <activity android:name=".activity.VerticalDragViewActivity" />
         <activity android:name=".activity.LuckPatternViewActivity" />
-        <activity android:name=".activity.SignaturePadActivity"></activity>
+        <activity android:name=".activity.SignaturePadActivity" />
+        <activity
+            android:theme="@style/NoAction"
+            android:name=".activity.StatusBarActivity"/>
     </application>
 
 </manifest>

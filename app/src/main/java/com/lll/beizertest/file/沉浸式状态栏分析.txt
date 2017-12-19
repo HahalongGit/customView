@@ -8,11 +8,11 @@
   然后获取DecorView，然后给DecorView 添加一个新的和状态栏一样高度的View充当状态栏，这个
   View可以任意的修改颜色。DecorView 是Activity上的第一个View.这个View以上才放置了我们的布局等View。
 
-  ViewGroup decorView = acyivity.getWindow().getDecorView();//DecorView 是一个LinearLayout，这个布局包含了一个R.layout.content用于设置setContentView();
+  ViewGroup decorView = acyivity.getWindow().getDecorView();//DecorView 是一个FrameLayout，这个布局包含了一个R.layout.content用于设置setContentView();
   View view = new View();
   LayoutParam param = new ViewGroup.LayoutParam(MATCH_PARENT,getStatusBarHeight());
   view.setLayoutParam(param);
-  decorView.addView();
+  decorView.addView();//添加View的时候添加到了FrameLayout
 
   设置完成一个View，这样会让我们Activity的布局被遮盖掉一个状态栏的高度，一般可以在布局中根布局下设置
   android:fitsSystemWindows="true"这样可以解决一个布局下的被状态栏被遮盖的问题。
@@ -36,4 +36,6 @@
 
   系统大于4.4小于5.0
   设置全屏:  getWindow().addFlag(WindowManager.LayoutParam.FLAG_TRANSLUCENT_STATUS);
-  实现QQ的滑动渐变效果,监听ScrollowView滑动，滑动到指定位置后设置ToolBar的颜色和透明度。
+
+4.实现QQ的滑动渐变效果,监听ScrollowView滑动，滑动到指定位置后设置ToolBar的颜色和透明度。
+  

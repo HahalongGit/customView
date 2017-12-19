@@ -45,6 +45,7 @@ public class SignaturePadActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(isSigned){
+                    // TODO: 2017/12/19 保存没有成功
                     Toast.makeText(SignaturePadActivity.this, "保存", Toast.LENGTH_SHORT).show();
                     addJpgSignatureToGallery(signatureView);
                     //signatureView.clear();
