@@ -41,11 +41,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){
-            //5.0以上设置全屏
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
+//        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){
+//            //5.0以上设置全屏
+//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+//            getWindow().setStatusBarColor(Color.TRANSPARENT);
+//        }
 
         findViewById(R.id.btn_signature).setOnClickListener(this);
         findViewById(R.id.btn_livePerform).setOnClickListener(this);

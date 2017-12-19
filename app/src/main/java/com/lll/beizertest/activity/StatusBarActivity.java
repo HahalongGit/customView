@@ -45,6 +45,7 @@ public class StatusBarActivity extends AppCompatActivity {
         tvTitile = findViewById(R.id.tv_titile);
         ivHeadImage = findViewById(R.id.iv_headImage);
         setSupportActionBar(toolBarStartBar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         //拿不到高度，onCreate中没有完成测量
         //imageHeight = ivHeadImage.getMeasuredHeight();
         ivHeadImage.post(new Runnable() {

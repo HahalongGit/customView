@@ -12,6 +12,9 @@ import android.widget.ScrollView;
  * @Date 2017/12/19
  */
 
+/**
+ * 添加滑动监听的ScrollView
+ */
 public class MyScrollView extends ScrollView {
 
     private OnScrollChangedListener onScrollChangedListener;
@@ -44,6 +47,13 @@ public class MyScrollView extends ScrollView {
      * 滑动监听
      */
     public interface OnScrollChangedListener{
+        /**
+         *
+         * @param l 左边
+         * @param t 顶部滑动距离
+         * @param oldl
+         * @param oldt
+         */
         void  onScrollChanged(int l, int t, int oldl, int oldt);
     }
 
