@@ -1,0 +1,39 @@
+沉浸式状态栏的实现：
+1.系统大于5.0
+  设置style
+  直接通过代码修改，activity.getWindow().setStatusBarColor();
+
+2.系统大于4.4小于5.0 的没有提供修改的办法可以设置状态栏，我们可以通过设置状态栏透明
+  getWindow().addFlag(WindowManager.LayoutParam.FLAG_TRANSLUCENT_STATUS);
+  然后获取DecorView，然后给DecorView 添加一个新的和状态栏一样高度的View充当状态栏，这个
+  View可以任意的修改颜色。DecorView 是Activity上的第一个View.这个View以上才放置了我们的布局等View。
+
+  ViewGroup decorView = acyivity.getWindow().getDecorView();//DecorView 是一个LinearLayout，这个布局包含了一个R.layout.content用于设置setContentView();
+  View view = new View();
+  LayoutParam param = new ViewGroup.LayoutParam(MATCH_PARENT,getStatusBarHeight());
+  view.setLayoutParam(param);
+  decorView.addView();
+
+  设置完成一个View，这样会让我们Activity的布局被遮盖掉一个状态栏的高度，一般可以在布局中根布局下设置
+  android:fitsSystemWindows="true"这样可以解决一个布局下的被状态栏被遮盖的问题。
+
+  但是在很多的Activity的情况下我们如何用代码设置？
+  通过源码我们知道，DecorView 是一个LinearLayout，这个布局包含了一个android.R.id.content用于设置setContentView();
+  我们可以在这个布局中获取我们的Activity布局然后设置fitsSystemWindows。
+   ViewGroup decorView = acyivity.getWindow().getDecorView();
+   ViewGroup contentView = activity.findViewById(android.R.id.content);
+   ViewGoup activityView = contentView.getChildView(0);
+   activityView.setFitsSystemWindows(true);//这样实现fitsSystemWindows 的布局效果(获取到activity后也可以设置padding实现)
+
+3.设置activity全屏
+  系统大于5.0,有些手机getWindow().addFlag(WindowManager.LayoutParam.FLAG_TRANSLUCENT_STATUS);不起作用，需要其他设置。
+  看源码setContentView的源码。
+    if(Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){
+              getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+              getWindow().setStatusBarColor(Color.TRANSPARENT);
+          }
+  这样设置全屏(页面内容会显示在StatusBar 下面)
+
+  系统大于4.4小于5.0
+  设置全屏:  getWindow().addFlag(WindowManager.LayoutParam.FLAG_TRANSLUCENT_STATUS);
+  实现QQ的滑动渐变效果,监听ScrollowView滑动，滑动到指定位置后设置ToolBar的颜色和透明度。

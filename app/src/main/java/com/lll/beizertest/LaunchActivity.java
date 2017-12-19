@@ -2,10 +2,13 @@ package com.lll.beizertest;
 
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ListView;
 
 import com.lll.beizertest.activity.AnimatorActivity;
@@ -30,11 +33,17 @@ import com.lll.beizertest.activity.VerticalDragViewActivity;
 public class LaunchActivity extends AppCompatActivity implements View.OnClickListener{
 
     //private ListView listView;;
-
+    private DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+
         findViewById(R.id.btn_livePerform).setOnClickListener(this);
         findViewById(R.id.btn_animator).setOnClickListener(this);
         findViewById(R.id.btn_qqBeizer).setOnClickListener(this);

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -342,6 +343,22 @@ public class LuckPatternView extends View {
         }
 
         drawLine(canvas);
+        drawArrows(canvas);
+    }
+
+    /**
+     * 绘制方向箭头
+     * @param canvas
+     */
+    private void drawArrows(Canvas canvas) {
+        float height = mDotRadius/5f;//三角形高
+        // TODO: 2017/12/18 计算三个点
+        Path path = new Path();
+//        path.moveTo();
+//        path.lineTo();
+//        path.lineTo();
+        path.close();
+        canvas.drawPath(path,mArrowsPaint);
 
     }
 
