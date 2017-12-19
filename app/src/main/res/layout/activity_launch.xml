@@ -152,6 +152,13 @@
                 android:padding="10dp"
                 android:text="状态栏分析" />
 
+            <Button
+                android:id="@+id/btn_behavior"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="CoordinatorLayout与Behavior 使用" />
+
         </LinearLayout>
 
     </ScrollView>

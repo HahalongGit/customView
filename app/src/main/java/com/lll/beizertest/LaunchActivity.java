@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.ListView;
 
 import com.lll.beizertest.activity.AnimatorActivity;
+import com.lll.beizertest.activity.BehaviorActivity;
 import com.lll.beizertest.activity.ColorTrackTextActivity;
 import com.lll.beizertest.activity.DefineProgressBarActivity;
 import com.lll.beizertest.activity.DrawLayoutActivity;
@@ -67,6 +68,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_verticalDragView).setOnClickListener(this);
         findViewById(R.id.btn_luckPatternView).setOnClickListener(this);
         findViewById(R.id.btn_startBar).setOnClickListener(this);
+        findViewById(R.id.btn_behavior).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
         valueAnimator.setDuration(500);
@@ -175,6 +177,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_startBar:{
                 Intent intent = new Intent(this,StatusBarActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_behavior:{
+                Intent intent = new Intent(this,BehaviorActivity.class);
                 startActivity(intent);
                 break;
             }

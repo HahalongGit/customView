@@ -40,8 +40,11 @@
         <activity android:name=".activity.LuckPatternViewActivity" />
         <activity android:name=".activity.SignaturePadActivity" />
         <activity
+            android:name=".activity.StatusBarActivity"
+            android:theme="@style/NoAction" />
+        <activity
             android:theme="@style/NoAction"
-            android:name=".activity.StatusBarActivity"/>
+            android:name=".activity.BehaviorActivity"></activity>
     </application>
 
 </manifest>

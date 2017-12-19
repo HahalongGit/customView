@@ -1,0 +1,17 @@
+自定义实现V7 design包中的Behavior 实现效果。主要在Material Design 设置的控件中，和CoordinatorLayout 实现联动效果。
+如：
+ <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_behaver"
+        android:layout_width="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="match_parent">
+
+ 中的：app:layout_behavior="@string/appbar_scrolling_view_behavior"
+ 对应的Behavior类是：
+ <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+
+ 自定义Behavior 然后采用全类名在layout_behavior 中使用，实现某个滑动的效果。
+
+ onStartNestedScroll();//返回是否需要滚动，在水平或者垂直方向滚动
+
+ onNestedScroll();//滚动的回调，滚动的时候要干什么，执行什么操作，这里可以处理。

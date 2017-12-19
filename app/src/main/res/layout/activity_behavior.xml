@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lll.beizertest.activity.BehaviorActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--app:layout_scrollFlags="scroll|enterAlwaysCollapsed"  AppBarLayout 级联滑动-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_behavior"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <!--  -layout_behavior appbar_scrolling_view_behavior 自适应到合适的位置-->
+    <!--<string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_behaver"
+        android:layout_width="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:src="@mipmap/ic_launcher"
+        android:layout_gravity="bottom|right"
+        app:layout_behavior="com.lll.beizertest.view.behaviors.TranslationBehavior"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="70dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="wrap_content" />
+
+</android.support.design.widget.CoordinatorLayout>
