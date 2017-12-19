@@ -16,6 +16,12 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <Button
+                android:id="@+id/btn_signature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="签名画板" />
 
             <Button
                 android:id="@+id/btn_qqBeizer"

@@ -37,7 +37,8 @@
         <activity android:name=".activity.RoundImageActivity" />
         <activity android:name=".activity.LogisticsProgressViewActivity" />
         <activity android:name=".activity.VerticalDragViewActivity" />
-        <activity android:name=".activity.LuckPatternViewActivity"></activity>
+        <activity android:name=".activity.LuckPatternViewActivity" />
+        <activity android:name=".activity.SignaturePadActivity"></activity>
     </application>
 
 </manifest>

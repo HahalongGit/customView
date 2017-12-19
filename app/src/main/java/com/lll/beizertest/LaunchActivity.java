@@ -26,6 +26,7 @@ import com.lll.beizertest.activity.OriginCodeAnalysisActivity;
 import com.lll.beizertest.activity.QQStepViewActivity;
 import com.lll.beizertest.activity.RatingBarActivity;
 import com.lll.beizertest.activity.RoundImageActivity;
+import com.lll.beizertest.activity.SignaturePadActivity;
 import com.lll.beizertest.activity.TagLayoutActivity;
 import com.lll.beizertest.activity.TouchViewActivity;
 import com.lll.beizertest.activity.VerticalDragViewActivity;
@@ -40,10 +41,12 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_launch);
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if(Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){
+            //5.0以上设置全屏
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
+        findViewById(R.id.btn_signature).setOnClickListener(this);
         findViewById(R.id.btn_livePerform).setOnClickListener(this);
         findViewById(R.id.btn_animator).setOnClickListener(this);
         findViewById(R.id.btn_qqBeizer).setOnClickListener(this);
@@ -74,6 +77,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.btn_signature:{
+                Intent intent = new Intent(this,SignaturePadActivity.class);
+                startActivity(intent);
+                break;
+            }
             case R.id.btn_qqBeizer:{
                 Intent intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
