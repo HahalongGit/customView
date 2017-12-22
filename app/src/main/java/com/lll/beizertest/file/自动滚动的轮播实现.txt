@@ -1,0 +1,29 @@
+1.设置一个handler，间隔时间发送一个handler（Handler封装了TimeHanlder,sendMessageDelayed()封装成了tick，handleMessage()方法封装了一个会的callback接口在使用时调用）
+
+2.接受到handler 后获取下一个position，如果position 是最后就返回0，循环。
+   final int curr = viewPager.getCurrentItem();
+            int nextPage = 0;
+            if (curr < viewPager.getAdapter().getCount() - 1) {
+                nextPage = curr + 1;
+            }
+            viewPager.setCurrentItem(nextPage, true);
+
+2.ViewPager 中通过setCurrentItem(position)方法设置一个新的页面显示。
+  setCurrentItem(item, smoothScroll)
+
+3.指示器的实现
+  指示器类实现了ViewPager 的OnPagerChangerListener接口，在创建指示器后传入一个ViewPager，用于获取Adapter数据条数。
+  给指示器设置参数，可以设置显示的位置，边距，margin padding等，可通过实现一个build接口采用build的链式编程实现
+  判断设置各个参数，创建画笔Paint设置画笔样式。通过循环绘制指示器。
+  重写OnPagerChangerListener 接口方法，在ViewPager 改变状态的时候回调，重新绘制indicator。
+
+4.轮播的实现
+  定义一个轮播的View，继承于RelativeLayout 中创建重写的ViewPager ，通过addView()方法添加到布局中，设置LayoutParam。
+  测量ViewPager View的大小设置测量参数。对应创建指示器，给Indicator 设置ViewPager，实现联动。添加Hanlder对象，根据参数实现是否循环滚动。
+  对外提供一些接口方法设置是否循环，时间，指示器的样式，图片位置参数等。在这个View中调用指示器的build链式方法，初始化Indicator设置样式和位置
+
+5.ViewPager 特效的实现，通过ViewPager的setPageTransformer(boolean reverseDrawingOrder,PageTransformer transformer);方法设置效果。
+  特殊效果主要是通过PageTransformer 这个接口的一个方法：public void transformPage(View page, float position);来实现
+  有关这个接口的实现参考：http://blog.csdn.net/lmj623565791/article/details/40411921/ 讲述
+
+
