@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 /**
  * Created by longlong on 2017/12/11.
  *
- * @ClassName: BaseAdapter
+ * @ClassName: BaseMenuAdapter
  * @Description: 自定义TagLayout 设置适配器
  * @Date 2017/12/11
  */

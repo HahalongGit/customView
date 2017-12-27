@@ -43,8 +43,9 @@
             android:name=".activity.StatusBarActivity"
             android:theme="@style/NoAction" />
         <activity
-            android:theme="@style/NoAction"
-            android:name=".activity.BehaviorActivity"></activity>
+            android:name=".activity.BehaviorActivity"
+            android:theme="@style/NoAction" />
+        <activity android:name=".activity.ScreenMenuViewActivity"></activity>
     </application>
 
 </manifest>

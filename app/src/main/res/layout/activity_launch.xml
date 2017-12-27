@@ -159,6 +159,13 @@
                 android:padding="10dp"
                 android:text="CoordinatorLayout与Behavior 使用" />
 
+            <Button
+                android:id="@+id/btn_screenView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="ScreenView 筛选" />
+
         </LinearLayout>
 
     </ScrollView>

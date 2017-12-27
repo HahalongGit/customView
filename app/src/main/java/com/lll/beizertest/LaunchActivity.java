@@ -2,16 +2,11 @@ package com.lll.beizertest;
 
 import android.animation.ValueAnimator;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.ListView;
 
 import com.lll.beizertest.activity.AnimatorActivity;
 import com.lll.beizertest.activity.BehaviorActivity;
@@ -29,6 +24,7 @@ import com.lll.beizertest.activity.OriginCodeAnalysisActivity;
 import com.lll.beizertest.activity.QQStepViewActivity;
 import com.lll.beizertest.activity.RatingBarActivity;
 import com.lll.beizertest.activity.RoundImageActivity;
+import com.lll.beizertest.activity.ScreenMenuViewActivity;
 import com.lll.beizertest.activity.SignaturePadActivity;
 import com.lll.beizertest.activity.StatusBarActivity;
 import com.lll.beizertest.activity.TagLayoutActivity;
@@ -74,6 +70,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_luckPatternView).setOnClickListener(this);
         findViewById(R.id.btn_startBar).setOnClickListener(this);
         findViewById(R.id.btn_behavior).setOnClickListener(this);
+        findViewById(R.id.btn_screenView).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
         valueAnimator.setDuration(500);
@@ -187,6 +184,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_behavior:{
                 Intent intent = new Intent(this,BehaviorActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_screenView:{
+                Intent intent = new Intent(this,ScreenMenuViewActivity.class);
                 startActivity(intent);
                 break;
             }
