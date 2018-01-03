@@ -8,6 +8,9 @@ import com.lll.beizertest.R;
 import com.lll.beizertest.adapter.CustomViewPagerAdapter;
 import com.lll.beizertest.transformer.ScaleTransformer;
 
+/**
+ * ViewpPager PagerTransformer 的使用
+ */
 public class CustomViewPagerActivity extends AppCompatActivity {
 
     private ViewPager customViewPager;
