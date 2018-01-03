@@ -11,6 +11,7 @@ import android.view.View;
 import com.lll.beizertest.activity.AnimatorActivity;
 import com.lll.beizertest.activity.BehaviorActivity;
 import com.lll.beizertest.activity.ColorTrackTextActivity;
+import com.lll.beizertest.activity.CustomViewPagerActivity;
 import com.lll.beizertest.activity.DefineProgressBarActivity;
 import com.lll.beizertest.activity.DrawLayoutActivity;
 import com.lll.beizertest.activity.DrawShapeActivity;
@@ -71,6 +72,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_startBar).setOnClickListener(this);
         findViewById(R.id.btn_behavior).setOnClickListener(this);
         findViewById(R.id.btn_screenView).setOnClickListener(this);
+        findViewById(R.id.btn_viewPager).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
         valueAnimator.setDuration(500);
@@ -189,6 +191,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_screenView:{
                 Intent intent = new Intent(this,ScreenMenuViewActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_viewPager:{
+                Intent intent = new Intent(this,CustomViewPagerActivity.class);
                 startActivity(intent);
                 break;
             }

@@ -45,7 +45,8 @@
         <activity
             android:name=".activity.BehaviorActivity"
             android:theme="@style/NoAction" />
-        <activity android:name=".activity.ScreenMenuViewActivity"></activity>
+        <activity android:name=".activity.ScreenMenuViewActivity" />
+        <activity android:name=".activity.CustomViewPagerActivity"></activity>
     </application>
 
 </manifest>

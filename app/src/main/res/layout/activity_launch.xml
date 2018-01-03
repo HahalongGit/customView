@@ -166,6 +166,13 @@
                 android:padding="10dp"
                 android:text="ScreenView 筛选" />
 
+            <Button
+                android:id="@+id/btn_viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="定义ViewPager" />
+
         </LinearLayout>
 
     </ScrollView>

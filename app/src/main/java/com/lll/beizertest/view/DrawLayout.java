@@ -208,7 +208,7 @@ public class DrawLayout extends HorizontalScrollView {
 
         //左右的缩放，移动，透明动画处理。(ViewCompat 是一个ViewCompat兼容处理)
         ViewCompat.setPivotX(mContentView, 0);//设置缩放点，默认是View的中心
-        ViewCompat.setScaleY(mContentView, getMeasuredHeight() / 2);
+        ViewCompat.setPivotY(mContentView, getMeasuredHeight() / 2);
         ViewCompat.setScaleX(mContentView, rightScale);
         ViewCompat.setScaleY(mContentView, rightScale);
 
