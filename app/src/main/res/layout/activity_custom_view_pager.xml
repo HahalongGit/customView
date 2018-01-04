@@ -4,17 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#b8aff5"
     android:clipChildren="false"
     tools:context="com.lll.beizertest.activity.CustomViewPagerActivity">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/customViewPager"
         android:layout_width="match_parent"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:clipChildren="false"
         android:layout_height="120dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:paddingLeft="48dp"
+        android:paddingRight="48dp"
+        android:clipToPadding="false"
+        android:clipChildren="false" />
+
+    <!--android:layout_marginLeft="50dp"-->
+    <!--android:layout_marginRight="50dp"-->
 
 </LinearLayout>

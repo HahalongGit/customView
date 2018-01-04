@@ -1,0 +1,39 @@
+ViewPager 实现一些复杂的效果，作为一个ViewGoup，ViewPager可以实现很多布局的效果，着主要取决于我们对一个属性和接口的使用。
+clipChildren和Transformer。ViewGoup 有一个属性clipChildren，用来实现子View进行绘制时不要去裁切它们的显示范围。
+（Defines whether a child is limited to draw inside of its bounds or not. ）
+ViewPager 提供了一个接口ViewPager.PageTransformer 这个接口用来在ViewPager滑动的时候调用。实现一些效果。接口有一个方法需要
+我们实现。abstract void	transformPage(View page, float position);方法中View 就是当前显示的ViewPager的页面，position是一个
+特殊的参数，不是我们当前看到的页面的下标值。而是一个正负变化的一个小数。这个小数可以理解为滑动的时候的偏移量。当一个页面从目前
+中间的位置像左边滑动的时候，这个position从0到-1逐渐变化，右边的一个页面对应从1到0开始变化 。这个position对应左右的页面是同时
+执行的。根据这个数据的变化，我们就可以设置一些参数，对当前的页面进行一系列的属性变化的操作。
+
+主要的代码：（设置最小的缩放比例是0.85）
+   @Override
+    public void transformPage(View page, float position) {
+        if (position < -1 || position > 1) {//两个边上的页面
+            page.setScaleX(MIN_SCALE);
+            page.setScaleY(MIN_SCALE);
+        } else if (position <= 1) { // [-1,1] //中间变化的页面
+            if (position < 0) {
+                Log.e("TAG","transformPage-position < 0="+position);
+                float scaleX = 1 + 0.15f * position;
+                page.setScaleX(scaleX);
+                page.setScaleY(scaleX);
+                ((CardView) page).setCardElevation((1 + position) * elevation);
+            } else {
+                Log.e("TAG","transformPage-position > 0="+position);
+                float scaleX = 1 - 0.15f * position;
+                page.setScaleX(scaleX);
+                page.setScaleY(scaleX);
+                ((CardView) page).setCardElevation((1 - position) * elevation);
+            }
+            //page.setAlpha(MIN_ALPHA + (scaleFactor - MIN_SCALE) / (1 - MIN_SCALE) * (1 - MIN_ALPHA));
+        }
+    }
+
+ 注意：
+ 1.在网络上有一些说法，需要设置ViewPager的 setOffscreenPageLimit(3);设置页面的加载个数。实际上在写的时候没有添加也可以。
+ 或者这个和sdk的版本有关系。要是出现了问题，我们可以在调整。
+ 2.有人说可以通过设置android:clipToPadding="false"  设置padding 在绘制的时候不裁剪也可以实现效果。使用clipChildren 需要设置marginLeft
+ 和marginRight。
+
