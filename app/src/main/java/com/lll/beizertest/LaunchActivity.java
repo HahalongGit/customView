@@ -17,6 +17,7 @@ import com.lll.beizertest.activity.DrawLayoutActivity;
 import com.lll.beizertest.activity.DrawShapeActivity;
 import com.lll.beizertest.activity.LetterSideBarActivity;
 import com.lll.beizertest.activity.LivePerformActivity;
+import com.lll.beizertest.activity.LoadViewActivity;
 import com.lll.beizertest.activity.LogisticsProgressViewActivity;
 import com.lll.beizertest.activity.LuckPatternViewActivity;
 import com.lll.beizertest.activity.MainActivity;
@@ -73,6 +74,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_behavior).setOnClickListener(this);
         findViewById(R.id.btn_screenView).setOnClickListener(this);
         findViewById(R.id.btn_viewPager).setOnClickListener(this);
+        findViewById(R.id.btn_loadingView).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
         valueAnimator.setDuration(500);
@@ -196,6 +198,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_viewPager:{
                 Intent intent = new Intent(this,CustomViewPagerActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_loadingView:{
+                Intent intent = new Intent(this,LoadViewActivity.class);
                 startActivity(intent);
                 break;
             }

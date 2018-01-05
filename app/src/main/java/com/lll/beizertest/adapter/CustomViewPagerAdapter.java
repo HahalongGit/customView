@@ -21,15 +21,21 @@ public class CustomViewPagerAdapter extends PagerAdapter {
 
     private Context context;
 
-    int[] imgRes = {R.mipmap.bg_blue, R.mipmap.bg_orange, R.mipmap.bg_pink,R.mipmap.bg_puple};
+    private int MAX_VALUE = 1000;
+
+    int[] imgRes = {R.mipmap.bg_blue, R.mipmap.bg_orange, R.mipmap.bg_pink, R.mipmap.bg_puple};
 
     public CustomViewPagerAdapter(Context context) {
         this.context = context;
     }
 
+    public int getRealCount() {
+        return imgRes.length;
+    }
+
     @Override
     public int getCount() {
-        return imgRes.length;
+        return imgRes.length * MAX_VALUE;
     }
 
     @Override
@@ -37,9 +43,10 @@ public class CustomViewPagerAdapter extends PagerAdapter {
 //        ImageView view = new ImageView(context);
 //        view.setScaleType(ImageView.ScaleType.FIT_XY);
 //        view.setImageResource(imgRes[position]);
-        View view1 = LayoutInflater.from(context).inflate(R.layout.list_transformer_adapter_layout,container,false);
+        View view1 = LayoutInflater.from(context).inflate(R.layout.list_transformer_adapter_layout, container, false);
         ImageView imageView = view1.findViewById(R.id.imageView);
-        imageView.setImageResource(imgRes[position]);
+        int realPosition = (position % getCount()) % 4;
+        imageView.setImageResource(imgRes[realPosition]);
         container.addView(view1);
         return view1;
     }
@@ -52,6 +59,6 @@ public class CustomViewPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view==object;
+        return view == object;
     }
 }
