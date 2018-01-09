@@ -1,0 +1,13 @@
+Window 的三个类型（type），系统Window应用Window、子Window对应不同的参数。
+系统Window 2000以上：输入法，Toast（关闭Activity还有显示），电量提示
+应用Window 1-99 Activity
+子Window  Dialog、PopupWindow
+Window.LayoutParam 参数中有一个type在Activity启动的ActivityThread 中通过属性赋值。
+handleResumeActivity方法执行启动的过程。
+WindowManager.LayoutParams l = r.window.getAttributes();
+a.mDecor = decor;
+l.type = WindowManager.LayoutParams.TYPE_BASE_APPLICATION;类型是TYPE_BASE_APPLICATION值是1.
+如果是PopuopWindow 则类型的值会不一样，系统根据这个值去区别。
+
+WindowManagerService 和Window应用端进行IPC通信
+
