@@ -25,6 +25,7 @@ import com.lll.beizertest.activity.MyTextViewActivity;
 import com.lll.beizertest.activity.OriginCodeAnalysisActivity;
 import com.lll.beizertest.activity.QQStepViewActivity;
 import com.lll.beizertest.activity.RatingBarActivity;
+import com.lll.beizertest.activity.RecycleViewHeaderFooterActivity;
 import com.lll.beizertest.activity.RoundImageActivity;
 import com.lll.beizertest.activity.ScreenMenuViewActivity;
 import com.lll.beizertest.activity.SignaturePadActivity;
@@ -75,6 +76,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_screenView).setOnClickListener(this);
         findViewById(R.id.btn_viewPager).setOnClickListener(this);
         findViewById(R.id.btn_loadingView).setOnClickListener(this);
+        findViewById(R.id.btn_recyclerHeader).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
         valueAnimator.setDuration(500);
@@ -203,6 +205,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_loadingView:{
                 Intent intent = new Intent(this,LoadViewActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_recyclerHeader:{
+                Intent intent = new Intent(this,RecycleViewHeaderFooterActivity.class);
                 startActivity(intent);
                 break;
             }

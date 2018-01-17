@@ -180,6 +180,13 @@
                 android:padding="10dp"
                 android:text="定义ViewPager" />
 
+            <Button
+                android:id="@+id/btn_recyclerHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="RecyclerView添加头尾" />
+
         </LinearLayout>
 
     </ScrollView>
