@@ -48,7 +48,8 @@
         <activity android:name=".activity.ScreenMenuViewActivity" />
         <activity android:name=".activity.CustomViewPagerActivity" />
         <activity android:name=".activity.LoadViewActivity" />
-        <activity android:name=".activity.RecycleViewHeaderFooterActivity"></activity>
+        <activity android:name=".activity.RecycleViewHeaderFooterActivity" />
+        <activity android:name=".activity.BannerViewPagerActivity"></activity>
     </application>
 
 </manifest>

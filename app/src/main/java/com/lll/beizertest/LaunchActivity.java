@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.lll.beizertest.activity.AnimatorActivity;
+import com.lll.beizertest.activity.BannerViewPagerActivity;
 import com.lll.beizertest.activity.BehaviorActivity;
 import com.lll.beizertest.activity.ColorTrackTextActivity;
 import com.lll.beizertest.activity.CustomViewPagerActivity;
@@ -77,6 +78,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_viewPager).setOnClickListener(this);
         findViewById(R.id.btn_loadingView).setOnClickListener(this);
         findViewById(R.id.btn_recyclerHeader).setOnClickListener(this);
+        findViewById(R.id.btn_bannerViewPager).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
         valueAnimator.setDuration(500);
@@ -210,6 +212,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_recyclerHeader:{
                 Intent intent = new Intent(this,RecycleViewHeaderFooterActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_bannerViewPager:{
+                Intent intent = new Intent(this,BannerViewPagerActivity.class);
                 startActivity(intent);
                 break;
             }

@@ -38,6 +38,8 @@ public class RecycleViewHeaderFooterActivity extends AppCompatActivity {
         recycleView.setLayoutManager(layoutManager);
         WrapAdapter adapter = new WrapAdapter(this) ;
         recycleView.setAdapter(adapter);
+        View view1 = LayoutInflater.from(this).inflate(R.layout.header_view_layout,recycleView,false);
+        recycleView.addHeadView(view1);
     }
 
     @OnClick({R.id.btn_addHeaderView, R.id.btn_addFooterView})
