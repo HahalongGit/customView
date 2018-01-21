@@ -63,5 +63,18 @@
         <attr name="clearOnDoubleClick" format="boolean"/>
     </declare-styleable>
 
+    <!--自定义BannerView 属性-->
+    <declare-styleable name="BannerView">
+        <attr name="dotIndicatorFocus" format="color|reference"/>
+        <attr name="dotIndicatorNormal" format="color|reference"></attr>
+        <attr name="dotSize" format="dimension"></attr>
+        <attr name="dotDistance" format="dimension"></attr>
+        <attr name="dotGravity" format="enum">
+            <enum name="center" value="0"></enum>
+            <enum name="right" value="1"></enum>
+            <enum name="left" value="-1"></enum>
+        </attr>
+        <attr name="bottomColor" format="color"></attr>
+    </declare-styleable>
 
 </resources>

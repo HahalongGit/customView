@@ -35,7 +35,7 @@ public class CustomViewPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return imgRes.length * MAX_VALUE;
+        return Integer.MAX_VALUE;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class CustomViewPagerAdapter extends PagerAdapter {
 //        view.setImageResource(imgRes[position]);
         View view1 = LayoutInflater.from(context).inflate(R.layout.list_transformer_adapter_layout, container, false);
         ImageView imageView = view1.findViewById(R.id.imageView);
-        int realPosition = (position % getCount()) % 4;
+        int realPosition = position % 4;
         imageView.setImageResource(imgRes[realPosition]);
         container.addView(view1);
         return view1;

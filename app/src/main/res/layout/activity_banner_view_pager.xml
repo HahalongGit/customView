@@ -9,6 +9,12 @@
 
     <com.lll.beizertest.view.bannerViewPager.BannerView
         android:id="@+id/bannerView"
+        app:dotIndicatorFocus="@color/colorAccent"
+        app:dotIndicatorNormal="@color/drawColor"
+        app:bottomColor="@color/color_grayEEE"
+        app:dotDistance="7dp"
+        app:dotGravity="center"
+        app:dotSize="7dp"
         android:layout_width="match_parent"
         android:layout_height="150dp"/>
 

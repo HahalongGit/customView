@@ -43,13 +43,13 @@ public class ScaleTransformer implements ViewPager.PageTransformer {
                 float scaleX = 1 + 0.15f * position;
                 page.setScaleX(scaleX);
                 page.setScaleY(scaleX);
-                ((CardView) page).setCardElevation((1 + position) * elevation);
+                //((CardView) page).setCardElevation((1 + position) * elevation);
             } else {
                 Log.e("TAG","transformPage-position > 0="+position);
                 float scaleX = 1 - 0.15f * position;
                 page.setScaleX(scaleX);
                 page.setScaleY(scaleX);
-                ((CardView) page).setCardElevation((1 - position) * elevation);
+                //((CardView) page).setCardElevation((1 - position) * elevation);
             }
             //page.setAlpha(MIN_ALPHA + (scaleFactor - MIN_SCALE) / (1 - MIN_SCALE) * (1 - MIN_ALPHA));
         }

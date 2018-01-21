@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.lll.beizertest.R;
+import com.lll.beizertest.transformer.ScaleTransformer;
 import com.lll.beizertest.view.bannerViewPager.BannerAdapter;
 import com.lll.beizertest.view.bannerViewPager.BannerView;
 import com.lll.beizertest.view.bannerViewPager.BannerViewPager;
@@ -44,8 +45,17 @@ public class BannerViewPagerActivity extends AppCompatActivity {
             public int getCount() {
                 return 5;
             }
+
+            @Override
+            public String getBannerDescribe(int mCurrentPosition) {
+                return "banner Text";
+            }
         });
+
+        bannerView.setPageTransformer(false,new ScaleTransformer(this));
+
     }
+
 
     @OnClick(R.id.btn_starRoll)
     public void onViewClicked() {

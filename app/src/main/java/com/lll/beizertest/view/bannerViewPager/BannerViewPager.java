@@ -6,6 +6,7 @@ import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -39,18 +40,25 @@ public class BannerViewPager extends ViewPager {
      */
     private BannerScroller mScroller;
 
-    private Handler mHander = new Handler(){
+    /**
+     * 是否按下
+     */
+    private boolean isPressed;
+
+    private Handler mHander = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            setCurrentItem(getCurrentItem()+1);
-            startRoll();
+            if(!isPressed){
+                setCurrentItem(getCurrentItem() + 1);
+                startRoll();
+            }
         }
     };
 
 
     public BannerViewPager(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public BannerViewPager(Context context, AttributeSet attrs) {
@@ -64,22 +72,47 @@ public class BannerViewPager extends ViewPager {
             scroller.setAccessible(true);
             //当前属性在那个类，第二个参数表示参数是什么值
             mScroller = new BannerScroller(context);
-            scroller.set(this,mScroller);
+            scroller.set(this, mScroller);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_MOVE: {
+                isPressed = true;
+                break;
+            }
+            case MotionEvent.ACTION_UP:{
+                isPressed = false;
+                startRoll();
+                break;
+            }
+        }
+        return super.onTouchEvent(ev);
+    }
+
+
+    @Override
+    public void setOffscreenPageLimit(int limit) {
+        super.setOffscreenPageLimit(limit);
+    }
+
     /**
      * 设置页面切换时间
+     *
      * @param scrollerDuration
      */
-    public void setBannerScrolleTime(int scrollerDuration){
+    public void setBannerScrolleTime(int scrollerDuration) {
         mScroller.setScrollerDuration(scrollerDuration);
     }
 
     /**
      * 设置自定义BannerAdapter
+     *
      * @param adapter
      */
     public void setAdapter(BannerAdapter adapter) {
@@ -91,9 +124,9 @@ public class BannerViewPager extends ViewPager {
     /**
      * 开始自动滚动
      */
-    public void startRoll(){
+    public void startRoll() {
         mHander.removeMessages(SCROLL_MESSAGE);//防止调用多次startRoll
-        mHander.sendEmptyMessageDelayed(SCROLL_MESSAGE,myCutDownTime);
+        mHander.sendEmptyMessageDelayed(SCROLL_MESSAGE, myCutDownTime);
     }
 
 
@@ -107,7 +140,7 @@ public class BannerViewPager extends ViewPager {
         mHander = null;
     }
 
-    public class BannerPagerAdapter extends PagerAdapter{
+    public class BannerPagerAdapter extends PagerAdapter {
 
         @Override
         public int getCount() {

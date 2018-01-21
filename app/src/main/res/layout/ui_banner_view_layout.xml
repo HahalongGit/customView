@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:layout_height="match_parent">
 
     <com.lll.beizertest.view.bannerViewPager.BannerViewPager
         android:id="@+id/bannerVp"
         android:layout_width="wrap_content"
+        android:clipChildren="false"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:layout_height="match_parent">
     </com.lll.beizertest.view.bannerViewPager.BannerViewPager>
 
     <RelativeLayout
+        android:id="@+id/bannerBottomLayout"
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
-        android:background="#66eeeeee"
         android:paddingBottom="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
@@ -22,7 +27,8 @@
         <TextView
             android:id="@+id/tv_bannerDescribe"
             android:text="广告的描述"
-            android:textColor="#ffffff"
+            android:layout_centerVertical="true"
+            android:textColor="#FFFFFF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -30,6 +36,7 @@
             android:id="@+id/doinContainer"
             android:orientation="horizontal"
             android:gravity="center"
+            android:layout_centerVertical="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
