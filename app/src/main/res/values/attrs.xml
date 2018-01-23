@@ -75,6 +75,9 @@
             <enum name="left" value="-1"></enum>
         </attr>
         <attr name="bottomColor" format="color"></attr>
+        <!--设置宽高比的参数-->
+        <attr name="widthProportion" format="float"></attr>
+        <attr name="hightProportion" format="float"></attr>
     </declare-styleable>
 
 </resources>

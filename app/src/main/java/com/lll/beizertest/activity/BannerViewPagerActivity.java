@@ -37,7 +37,7 @@ public class BannerViewPagerActivity extends AppCompatActivity {
             public View getView(int position) {
                 View view = LayoutInflater.from(BannerViewPagerActivity.this).inflate(R.layout.recycler_bannerview_layout,null);
                 ImageView bannerIv = view.findViewById(R.id.iv_bannerImage);
-                bannerIv.setScaleType(ImageView.ScaleType.FIT_XY);
+                //bannerIv.setScaleType(ImageView.ScaleType.FIT_XY);
                 //int a = position%2;
                 bannerIv.setImageResource(ImageRes[position%ImageRes.length]);//这里设置没问题，不影响速度
                 return view;

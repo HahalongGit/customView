@@ -13,13 +13,16 @@
         app:dotIndicatorNormal="@color/drawColor"
         app:dotDistance="7dp"
         app:dotGravity="center"
+        app:hightProportion="3"
+        app:widthProportion="8"
         app:dotSize="7dp"
         android:layout_width="match_parent"
-        android:layout_height="150dp"/>
+        android:layout_height="0dp"/>
 
     <Button
         android:id="@+id/btn_starRoll"
         android:text="开始滚动"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
