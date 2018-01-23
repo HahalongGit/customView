@@ -2,6 +2,7 @@ package com.lll.beizertest.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -34,11 +35,12 @@ public class BannerViewPagerActivity extends AppCompatActivity {
         bannerView.setBannerAdapter(new BannerAdapter() {
             @Override
             public View getView(int position) {
-                ImageView bannerIv = new ImageView(BannerViewPagerActivity.this);
+                View view = LayoutInflater.from(BannerViewPagerActivity.this).inflate(R.layout.recycle_item_bannerview_layout,null);
+                ImageView bannerIv =view.findViewById(R.id.ivBannerView);
                 bannerIv.setScaleType(ImageView.ScaleType.FIT_XY);
                 //int a = position%2;
                 bannerIv.setImageResource(ImageRes[position%ImageRes.length]);//这里设置没问题，不影响速度
-                return bannerIv;
+                return view;
             }
 
             @Override
@@ -46,10 +48,6 @@ public class BannerViewPagerActivity extends AppCompatActivity {
                 return 5;
             }
 
-            @Override
-            public String getBannerDescribe(int mCurrentPosition) {
-                return "banner Text";
-            }
         });
 
         bannerView.setPageTransformer(false,new ScaleTransformer(this));

@@ -104,7 +104,7 @@ public class BannerView extends RelativeLayout {
         if(mDotIndicatorNormalDrawable == null){
             mDotIndicatorNormalDrawable = new ColorDrawable(Color.WHITE);
         }
-        bottomColor = a.getColor(R.styleable.BannerView_bottomColor,Color.GRAY);
+        bottomColor = a.getColor(R.styleable.BannerView_bottomColor,Color.TRANSPARENT);
         dotDistance = (int) a.getDimension(R.styleable.BannerView_dotDistance,dp2px(10));
         dotSize = (int) a.getDimension(R.styleable.BannerView_dotSize,dp2px(10));
         dotGravity = a.getInt(R.styleable.BannerView_dotGravity,dotGravity);
