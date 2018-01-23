@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -45,6 +47,13 @@ public class BannerViewPager extends ViewPager {
      */
     private boolean isPressed;
 
+    private View convertView;
+
+    /**
+     * 复用的View 集合
+     */
+    private List<View> converViews;
+
     private Handler mHander = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -76,6 +85,7 @@ public class BannerViewPager extends ViewPager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        converViews = new ArrayList<>();
     }
 
     @Override
@@ -154,7 +164,7 @@ public class BannerViewPager extends ViewPager {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            View bannerView = mBannerAdpter.getView(position);
+            View bannerView = mBannerAdpter.getView(position,getConvertView());
             //position/mBannerAdpter.getCount() 计算实际位置，设置这个导致Pager切换变慢
             container.addView(bannerView);
             return bannerView;
@@ -164,8 +174,22 @@ public class BannerViewPager extends ViewPager {
         public void destroyItem(ViewGroup container, int position, Object object) {
             //super.destroyItem(container, position, object);
             container.removeView((View) object);
-            object = null;
+//            object = null;
+            converViews.add((View) object);//模拟ListView 把移除的View 添加复用View
         }
+    }
+
+    /**
+     * 获取一个复用的View
+     * @return
+     */
+    private View getConvertView() {
+        for (int i = 0; i < converViews.size(); i++) {
+            if(converViews.get(i).getParent()==null){//复用的时候判断是不是已经从父布局移除了
+                return converViews.get(i);
+            }
+        }
+        return null;
     }
 
 }

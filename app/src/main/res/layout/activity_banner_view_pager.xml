@@ -21,8 +21,7 @@
 
     <Button
         android:id="@+id/btn_starRoll"
-        android:text="开始滚动"
-        android:layout_marginTop="15dp"
+        android:text="开始滚动（点击动，出来）"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

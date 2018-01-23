@@ -2,6 +2,7 @@ package com.lll.beizertest.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -34,12 +35,20 @@ public class BannerViewPagerActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         bannerView.setBannerAdapter(new BannerAdapter() {
             @Override
-            public View getView(int position) {
-                View view = LayoutInflater.from(BannerViewPagerActivity.this).inflate(R.layout.recycler_bannerview_layout,null);
-                ImageView bannerIv = view.findViewById(R.id.iv_bannerImage);
-                //bannerIv.setScaleType(ImageView.ScaleType.FIT_XY);
-                //int a = position%2;
-                bannerIv.setImageResource(ImageRes[position%ImageRes.length]);//这里设置没问题，不影响速度
+            public View getView(int position,View convertView) {
+                View view = null;
+                if(convertView==null){
+                    view = LayoutInflater.from(BannerViewPagerActivity.this).inflate(R.layout.recycler_bannerview_layout,null);
+                    ImageView bannerIv = view.findViewById(R.id.iv_bannerImage);
+                    //bannerIv.setScaleType(ImageView.ScaleType.FIT_XY);
+                    //int a = position%2;
+                    bannerIv.setImageResource(ImageRes[position%ImageRes.length]);//这里设置没问题，不影响速度
+                }else {
+                    view = convertView;
+                    ImageView bannerIv = view.findViewById(R.id.iv_bannerImage);
+                    bannerIv.setImageResource(ImageRes[position%ImageRes.length]);//这里设置没问题，不影响速度
+                    Log.e("TAG","convertView复用："+view);
+                }
                 return view;
             }
 

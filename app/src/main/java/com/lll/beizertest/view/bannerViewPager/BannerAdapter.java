@@ -17,7 +17,7 @@ public abstract class BannerAdapter {
      * @param position
      * @return
      */
-    public abstract View getView(int position);
+    public abstract View getView(int position,View convertView);
 
     /**
      * 获取数量
