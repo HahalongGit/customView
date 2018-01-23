@@ -35,8 +35,8 @@ public class BannerViewPagerActivity extends AppCompatActivity {
         bannerView.setBannerAdapter(new BannerAdapter() {
             @Override
             public View getView(int position) {
-                View view = LayoutInflater.from(BannerViewPagerActivity.this).inflate(R.layout.recycle_item_bannerview_layout,null);
-                ImageView bannerIv =view.findViewById(R.id.ivBannerView);
+                View view = LayoutInflater.from(BannerViewPagerActivity.this).inflate(R.layout.recycler_bannerview_layout,null);
+                ImageView bannerIv = view.findViewById(R.id.iv_bannerImage);
                 bannerIv.setScaleType(ImageView.ScaleType.FIT_XY);
                 //int a = position%2;
                 bannerIv.setImageResource(ImageRes[position%ImageRes.length]);//这里设置没问题，不影响速度
@@ -48,6 +48,10 @@ public class BannerViewPagerActivity extends AppCompatActivity {
                 return 5;
             }
 
+            @Override
+            public String getBannerDescribe(int mCurrentPosition) {
+                return "banner Text";
+            }
         });
 
         bannerView.setPageTransformer(false,new ScaleTransformer(this));
