@@ -11,16 +11,17 @@
         android:id="@+id/bannerView"
         app:dotIndicatorFocus="@color/colorAccent"
         app:dotIndicatorNormal="@color/drawColor"
-        app:bottomColor="@color/color_grayEEE"
         app:dotDistance="7dp"
         app:dotGravity="center"
+        app:hightProportion="3"
+        app:widthProportion="8"
         app:dotSize="7dp"
         android:layout_width="match_parent"
-        android:layout_height="150dp"/>
+        android:layout_height="0dp"/>
 
     <Button
         android:id="@+id/btn_starRoll"
-        android:text="开始滚动"
+        android:text="开始滚动（点击动，出来）"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
