@@ -4,14 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:clipChildren="false"
     tools:context="com.lll.beizertest.activity.CustomViewPagerActivity">
+
+    <com.lll.beizertest.view.customviewpager.BannerViewpager
+        android:id="@+id/bannerViewPager"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:paddingLeft="48dp"
+        android:paddingRight="48dp"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:layout_height="140dp"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/customViewPager"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_gravity="center"
+        android:visibility="gone"
         android:paddingLeft="48dp"
         android:paddingRight="48dp"
         android:clipToPadding="false"

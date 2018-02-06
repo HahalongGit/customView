@@ -139,7 +139,6 @@ public class BannerViewPager extends ViewPager {
         mHander.sendEmptyMessageDelayed(SCROLL_MESSAGE, myCutDownTime);
     }
 
-
     /**
      * 解决内存泄露的问题
      */

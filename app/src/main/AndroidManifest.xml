@@ -45,7 +45,9 @@
             android:name=".activity.BehaviorActivity"
             android:theme="@style/NoAction" />
         <activity android:name=".activity.ScreenMenuViewActivity" />
-        <activity android:name=".activity.CustomViewPagerActivity" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".activity.CustomViewPagerActivity" />
         <activity android:name=".activity.LoadViewActivity" />
         <activity android:name=".activity.RecycleViewHeaderFooterActivity" />
         <activity android:name=".activity.BannerViewPagerActivity"></activity>

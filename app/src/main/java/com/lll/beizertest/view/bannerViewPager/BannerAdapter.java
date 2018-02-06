@@ -5,7 +5,7 @@ import android.view.View;
 /**
  * Created by longlong on 2018/1/19.
  *
- * @ClassName: BannerAdapter
+ * @ClassName: BannerViewAdapter
  * @Description:
  * @Date 2018/1/19
  */
