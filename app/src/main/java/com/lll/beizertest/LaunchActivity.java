@@ -24,6 +24,7 @@ import com.lll.beizertest.activity.LogisticsProgressViewActivity;
 import com.lll.beizertest.activity.LuckPatternViewActivity;
 import com.lll.beizertest.activity.MainActivity;
 import com.lll.beizertest.activity.MyTextViewActivity;
+import com.lll.beizertest.activity.NavigationBarActivity;
 import com.lll.beizertest.activity.OriginCodeAnalysisActivity;
 import com.lll.beizertest.activity.QQStepViewActivity;
 import com.lll.beizertest.activity.RatingBarActivity;
@@ -81,6 +82,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_recyclerHeader).setOnClickListener(this);
         findViewById(R.id.btn_bannerViewPager).setOnClickListener(this);
         findViewById(R.id.btn_expandText).setOnClickListener(this);
+        findViewById(R.id.btn_navigationBar).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
         valueAnimator.setDuration(500);
@@ -224,6 +226,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_expandText:{
                 Intent intent = new Intent(this,ExpendTextViewActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_navigationBar:{
+                Intent intent = new Intent(this,NavigationBarActivity.class);
                 startActivity(intent);
                 break;
             }

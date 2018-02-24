@@ -10,8 +10,15 @@ package com.lll.beizertest.view.toolbar;
 
 public interface INavigationBar {
 
+    /**
+     * 绑定布局
+     * @return
+     */
     public int bindLayoutId();
 
+    /**
+     * 绑定View 数据
+     */
     public void applyView();
 
 }

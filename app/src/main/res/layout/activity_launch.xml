@@ -201,6 +201,13 @@
                 android:padding="10dp"
                 android:text="Expand TextView" />
 
+            <Button
+                android:id="@+id/btn_navigationBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="navigationBar导航" />
+
         </LinearLayout>
 
     </ScrollView>
