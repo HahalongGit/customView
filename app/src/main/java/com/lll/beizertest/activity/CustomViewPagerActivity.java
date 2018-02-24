@@ -6,9 +6,11 @@ import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.lll.beizertest.R;
 import com.lll.beizertest.adapter.CustomViewPagerAdapter;
@@ -17,6 +19,7 @@ import com.lll.beizertest.view.bannerViewPager.BannerAdapter;
 import com.lll.beizertest.view.bannerViewPager.BannerViewPager;
 import com.lll.beizertest.view.customviewpager.BannerViewAdapter;
 import com.lll.beizertest.view.customviewpager.BannerViewpager;
+import com.lll.beizertest.view.customviewpager.MyBannerAdapter;
 
 /**
  * ViewpPager PagerTransformer 的使用
@@ -63,8 +66,29 @@ public class CustomViewPagerActivity extends AppCompatActivity {
 //        });
 
 
+
+        bannerViewPager.setAdapter(new BannerViewAdapter() {
+            @Override
+            public View getView(int position, ViewGroup convertView) {
+                View view1 = LayoutInflater.from(CustomViewPagerActivity.this).inflate(R.layout.list_transformer_adapter_layout, convertView, false);
+                ImageView imageView = view1.findViewById(R.id.imageView);
+                imageView.setImageResource(imgRes[position]);
+                view1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(CustomViewPagerActivity.this, "点击", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return view1;
+            }
+
+            @Override
+            public int getCount() {
+                return imgRes.length;
+            }
+        });
         bannerViewPager.setPageTransformer(false, new ScaleTransformer(this));
-        bannerViewPager.setAdapter(adapter);
+       // bannerViewPager.setAdapter(adapter);
         bannerViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
             @Override
             public void onPageSelected(int position) {

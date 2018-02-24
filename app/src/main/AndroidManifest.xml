@@ -11,8 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
-        </activity>
+        <activity android:name=".activity.MainActivity"></activity>
         <activity android:name=".LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,11 +45,12 @@
             android:theme="@style/NoAction" />
         <activity android:name=".activity.ScreenMenuViewActivity" />
         <activity
-            android:screenOrientation="portrait"
-            android:name=".activity.CustomViewPagerActivity" />
+            android:name=".activity.CustomViewPagerActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".activity.LoadViewActivity" />
         <activity android:name=".activity.RecycleViewHeaderFooterActivity" />
-        <activity android:name=".activity.BannerViewPagerActivity"></activity>
+        <activity android:name=".activity.BannerViewPagerActivity" />
+        <activity android:name=".activity.ExpendTextViewActivity"></activity>
     </application>
 
 </manifest>

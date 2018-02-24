@@ -27,6 +27,11 @@ public class BannerViewpager extends ViewPager {
 
     private BannerViewAdapter mBannerAdapter;
 
+    /**
+     * 是否用户设置开始轮播
+     */
+    private boolean isStartScroll = false;
+
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -51,6 +56,7 @@ public class BannerViewpager extends ViewPager {
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         switch (ev.getAction()){
+            //如果子View设置了onTouch 这个ACTION_DOWN 被拦截
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_MOVE:{
                 isOnTouch = true;
@@ -60,7 +66,9 @@ public class BannerViewpager extends ViewPager {
             case MotionEvent.ACTION_UP:{
                 isOnTouch = false;
                 Log.e("TAG","isOnTouch-ACTION_UP:"+isOnTouch);
-                startScroll();
+                if(isStartScroll){
+                    startScroll();
+                }
                 break;
             }
         }
@@ -68,12 +76,13 @@ public class BannerViewpager extends ViewPager {
     }
 
 
-//    public void setAdapter(BannerViewAdapter bannerAdapter ){
-//        this.mBannerAdapter = bannerAdapter;
-//       // super.setAdapter(new BannerAdapter());
-//    }
+    public void setAdapter(BannerViewAdapter bannerAdapter ){
+        this.mBannerAdapter = bannerAdapter;
+        super.setAdapter(new BannerAdapter());
+    }
 
     public void startScroll(){
+        isStartScroll = true;
         mHandler.removeMessages(SCROLL_MESSAGE);
         Log.e("TAG","isOnTouch-startScroll");
         mHandler.sendEmptyMessageDelayed(SCROLL_MESSAGE, 1000);
@@ -82,7 +91,7 @@ public class BannerViewpager extends ViewPager {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        //mHandler.removeMessages(SCROLL_MESSAGE);
+        mHandler.removeMessages(SCROLL_MESSAGE);
     }
 
     public class BannerAdapter extends PagerAdapter{

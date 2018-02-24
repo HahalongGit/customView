@@ -16,6 +16,7 @@ import com.lll.beizertest.activity.CustomViewPagerActivity;
 import com.lll.beizertest.activity.DefineProgressBarActivity;
 import com.lll.beizertest.activity.DrawLayoutActivity;
 import com.lll.beizertest.activity.DrawShapeActivity;
+import com.lll.beizertest.activity.ExpendTextViewActivity;
 import com.lll.beizertest.activity.LetterSideBarActivity;
 import com.lll.beizertest.activity.LivePerformActivity;
 import com.lll.beizertest.activity.LoadViewActivity;
@@ -79,6 +80,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_loadingView).setOnClickListener(this);
         findViewById(R.id.btn_recyclerHeader).setOnClickListener(this);
         findViewById(R.id.btn_bannerViewPager).setOnClickListener(this);
+        findViewById(R.id.btn_expandText).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
         valueAnimator.setDuration(500);
@@ -217,6 +219,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_bannerViewPager:{
                 Intent intent = new Intent(this,BannerViewPagerActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_expandText:{
+                Intent intent = new Intent(this,ExpendTextViewActivity.class);
                 startActivity(intent);
                 break;
             }
