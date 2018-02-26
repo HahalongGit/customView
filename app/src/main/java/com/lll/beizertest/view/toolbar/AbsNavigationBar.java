@@ -12,7 +12,7 @@ import android.widget.TextView;
  * Created by longlong on 2018/2/24.
  *
  * @ClassName: AbsNavigationBar
- * @Description:
+ * @Description: 导航栏
  * @Date 2018/2/24
  */
 
