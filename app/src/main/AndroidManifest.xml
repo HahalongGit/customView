@@ -3,6 +3,9 @@
     package="com.lll.beizertest">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -51,7 +54,8 @@
         <activity android:name=".activity.RecycleViewHeaderFooterActivity" />
         <activity android:name=".activity.BannerViewPagerActivity" />
         <activity android:name=".activity.ExpendTextViewActivity" />
-        <activity android:name=".activity.NavigationBarActivity"></activity>
+        <activity android:name=".activity.NavigationBarActivity" />
+        <activity android:name=".activity.HttpTestActivity"></activity>
     </application>
 
 </manifest>

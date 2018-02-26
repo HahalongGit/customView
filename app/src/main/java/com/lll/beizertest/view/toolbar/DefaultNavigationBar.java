@@ -13,6 +13,11 @@ import com.lll.beizertest.R;
  *
  * @ClassName: DefaultNavigationBar
  * @Description: 设置默认实现的导航栏（业务不一样，样子不一样）
+ * Builder 设置模式的实现思路：
+ * 1.调用子类Builder--> .Builder(this) 的时候创建封装参数的内部类，
+ * 2.调用Builder 内部类的方法给参数类对象设置 参数值，如setText(),setOnClickListener()等。
+ * 3.调用内部类的builder()方法，调用这个方法，这个方法创建NavigationBar导航栏类对象，这个类对象创建过程加载布局，findViewById View 最后设置View数据
+ * 4.其他方法处理，findViewById 在加载布局View之后操作，需要的时候调用。
  * @Date 2018/2/24
  */
 
@@ -48,28 +53,48 @@ public class DefaultNavigationBar extends AbsNavigationBar<DefaultNavigationBar.
 
         //1.设置所有的效果
 
+        /**
+         * 设置title
+         * @param title
+         * @return
+         */
         public Builder setTitle(String title){
             P.mTitle = title;
             return this;
         }
 
+        /**
+         * 设置右边文字
+         * @param rightText
+         * @return
+         */
         public Builder setRightText(String rightText){
             P.mRightText = rightText;
             return this;
         }
 
+        /**
+         * 设置右边View 的点击事件
+         * @param onClickListener
+         * @return
+         */
         public Builder setRightClickListener(View.OnClickListener onClickListener){
             P.mRightClickListener = onClickListener;
             return this;
         }
 
+        /**
+         * 设置左边View的点击事件
+         * @param onClickListener
+         * @return
+         */
         public Builder setLeftClickListener(View.OnClickListener onClickListener){
             P.mRightClickListener = onClickListener;
             return this;
         }
 
         /**
-         * 构造Builder
+         * 构造Builder 两个参数
          * @param context
          * @param parent 添加导航到 一个指定布局之前
          */
@@ -89,6 +114,7 @@ public class DefaultNavigationBar extends AbsNavigationBar<DefaultNavigationBar.
 
         @Override
         public DefaultNavigationBar builder() {
+            //创建导航栏
             DefaultNavigationBar defaultNavigationBar = new DefaultNavigationBar(P);
             return defaultNavigationBar;
         }

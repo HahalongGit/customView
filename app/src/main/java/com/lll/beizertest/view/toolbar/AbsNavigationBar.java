@@ -67,7 +67,8 @@ public  abstract class AbsNavigationBar<P extends AbsNavigationBar.Bulider.AbsNa
         //加载布局
         if(mParams.mParent==null){//用户不设置根布局的id时，通过获取系统布局添加这个导航栏
             Activity activity = (Activity) mParams.mContenxt;
-            ViewGroup viewGroup = activity.findViewById(android.R.id.content);
+            ViewGroup viewGroup = (ViewGroup) activity.getWindow().getDecorView();//获取DecorView 添加到Decorade上
+//            ViewGroup viewGroup = activity.findViewById(android.R.id.content);//对于RelativeView NavigationBar 不能垂直排开。
            mParams.mParent = (ViewGroup) viewGroup.getChildAt(0);
         }
         if(mParams.mParent==null){//如果还是null 直接返回
