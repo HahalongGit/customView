@@ -13,7 +13,7 @@ import java.util.List;
  * Created by longlong on 2017/12/8.
  *
  * @ClassName: TagLayout
- * @Description:
+ * @Description: 流式布局 示例：https://github.com/hongyangAndroid/FlowLayout
  * @Date 2017/12/8
  */
 
