@@ -1,5 +1,7 @@
 package com.lll.beizertest.http;
 
+import android.content.Context;
+
 import java.util.Map;
 
 /**
@@ -12,9 +14,9 @@ import java.util.Map;
 
 public interface IHttpEngine {
 
-    void get(String url, Map<String,Object> param,EngineCallback engineCallback);
+    void get(Context context,String url, Map<String,Object> param, EngineCallback engineCallback);
 
-    void post(String url, Map<String,Object> param,EngineCallback engineCallback);
+    void post(Context context,String url, Map<String,Object> param,EngineCallback engineCallback);
 
     //上传文件
     //下载文件
