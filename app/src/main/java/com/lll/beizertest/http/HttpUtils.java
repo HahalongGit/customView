@@ -3,6 +3,8 @@ package com.lll.beizertest.http;
 import android.content.Context;
 import android.util.ArrayMap;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -121,9 +123,13 @@ public class HttpUtils implements IHttpEngine {
      * @param callback
      */
     public void execute(EngineCallback callback){
+        //不能中间添加参数，影响其他地方业务调用。
+        //如何处理调用前公共的一些参数？
         if(callback==null){
            callback = EngineCallback.DEFAULT_CALLBACK;
         }
+        //调用预处理的方法，处理每个业务处理的公用参数
+        callback.onPreExecute(mContext,mParam);
         if(mType==POST){
             mIhttpEngine.post(mContext,mUrl,mParam,callback);
         }else if(mType==GET){
@@ -170,5 +176,17 @@ public class HttpUtils implements IHttpEngine {
     }
 
     //其他的处理，可能有Delete 、UploadFile方法等，根据需求添加。
+
+
+    /**
+     * 解析一个类上的Class信息  ？？？
+     * @param object
+     * @return
+     */
+    public static Class<?> analysisClazzInfo(Object object){
+        Type genType = object.getClass().getGenericSuperclass();
+        Type params[] = ((ParameterizedType)genType).getActualTypeArguments();
+        return (Class<?>) params[0];
+    }
 
 }

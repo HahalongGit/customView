@@ -14,8 +14,22 @@ import java.util.Map;
 
 public interface IHttpEngine {
 
+    /**
+     * get 请求
+     * @param context
+     * @param url
+     * @param param
+     * @param engineCallback
+     */
     void get(Context context,String url, Map<String,Object> param, EngineCallback engineCallback);
 
+    /**
+     * post 请求
+     * @param context
+     * @param url
+     * @param param
+     * @param engineCallback
+     */
     void post(Context context,String url, Map<String,Object> param,EngineCallback engineCallback);
 
     //上传文件

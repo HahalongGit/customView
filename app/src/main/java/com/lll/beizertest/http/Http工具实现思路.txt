@@ -15,3 +15,66 @@
   定义的链式调用，简化了调用方式。
 
 6.对于Retrofit2 这种网络操作，改如何封装 HttpEngine 引擎？
+
+
+Http工具中容易出现的问题：
+
+1.如何处理公用的参数？分层的baseLisbrary 中不能包含业务处理数据？
+
+  在回调中添加一个onPreExecute(Context context ,Map<String,Object> parans);方法。做预处理的问题。
+  Http中的接口，属于底层内容，不直接用在业务处理的模块中。我们在业务处理的时候从新写一个类实现这个回调，在这个业务回调中
+  处理每个不同的业务的公共的通用的参数问题。然后这个实现的抽象类提供一个非抽象方法，共业务中以便使用。
+   /**
+       * 执行方法
+       * @param callback
+       */
+      public void execute(EngineCallback callback){
+          //不能中间添加参数，影响其他地方业务调用。
+          //如何处理调用前公共的一些参数？
+          if(callback==null){
+             callback = EngineCallback.DEFAULT_CALLBACK;
+          }
+          //调用预处理的方法，处理每个业务处理的公用参数
+          callback.onPreExecute(mContext,mParam);
+          if(mType==POST){
+              mIhttpEngine.post(mContext,mUrl,mParam,callback);
+          }else if(mType==GET){
+              mIhttpEngine.get(mContext,mUrl,mParam,callback);
+          }
+      }
+    上述代码在执行GET或者POST方法之前执行onPreExecute(mContext,mParam);方法。
+    具体的Activity的业务中添加需要的特殊参数，使用实现的抽象类：
+     HttpUtils.with(this)
+                    .url("")
+                    .addParam("","")  //添加特殊的参数
+                    .execute(new HttpCallback() {
+                        @Override
+                        protected void onPreExecute() {
+                            super.onPreExecute();
+                            //可预处理的方法
+                        }
+
+                        @Override
+                        public void onError(Exception message) {
+
+                        }
+
+                        @Override
+                        public void onSuccess(String result) {
+
+                        }
+                    });
+
+   2.如何处理json转换问题？请求成功后直接转换成对应的JAVA 对象？
+
+     正常处理回调，回调中是返回一个String类型的json。这样我们还需要在操作一个json转换成Java，比较麻烦。
+     现在添加一个泛型，通过泛型的方式直接返回java对象。
+     泛型不在底层的回调中添加，因为有的后台返回的数据不一致，有的是对象，有的是String，不好处理。
+     在业务层的回调中添加一个泛型，重写onSccuess(String result); 在这里处理使用Gson把String转换成目标的Java对象
+     然后重写一个抽象方法回调到Activity的处理中。
+     重要的一点，获取泛型的类型（解析获取泛型的类型）：
+      public static Class<?> analysisClazzInfo(Object object){
+             Type genType = object.getClass().getGenericSuperclass();
+             Type params[] = ((ParameterizedType)genType).getActualTypeArguments();
+             return (Class<?>) params[0];
+         }

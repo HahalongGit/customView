@@ -22,7 +22,7 @@ public class OkHttpEngine implements IHttpEngine {
     private OkHttpClient mOkHttpClient = new OkHttpClient();
 
     //问题：
-    //1.处理公用的参数
+    //1.如何处理公用的参数？分层的baseLisbrary 中不能包含业务处理数据？
     //2.每次回调要用json回调，怎么处理
     //3.
 
