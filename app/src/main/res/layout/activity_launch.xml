@@ -208,6 +208,13 @@
                 android:padding="10dp"
                 android:text="navigationBar导航" />
 
+            <Button
+                android:id="@+id/btn_database"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="数据库操作工具" />
+
         </LinearLayout>
 
     </ScrollView>

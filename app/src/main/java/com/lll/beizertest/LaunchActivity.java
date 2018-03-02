@@ -13,6 +13,7 @@ import com.lll.beizertest.activity.BannerViewPagerActivity;
 import com.lll.beizertest.activity.BehaviorActivity;
 import com.lll.beizertest.activity.ColorTrackTextActivity;
 import com.lll.beizertest.activity.CustomViewPagerActivity;
+import com.lll.beizertest.activity.DatabaseActivity;
 import com.lll.beizertest.activity.DefineProgressBarActivity;
 import com.lll.beizertest.activity.DrawLayoutActivity;
 import com.lll.beizertest.activity.DrawShapeActivity;
@@ -83,6 +84,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_bannerViewPager).setOnClickListener(this);
         findViewById(R.id.btn_expandText).setOnClickListener(this);
         findViewById(R.id.btn_navigationBar).setOnClickListener(this);
+        findViewById( R.id.btn_database).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
         valueAnimator.setDuration(500);
@@ -231,6 +233,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_navigationBar:{
                 Intent intent = new Intent(this,NavigationBarActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_database:{
+                Intent intent = new Intent(this,DatabaseActivity.class);
                 startActivity(intent);
                 break;
             }

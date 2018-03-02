@@ -1,0 +1,53 @@
+对数据库的封装处理，SQLiteDatabase 操作android 数据库，对数据库的创建，表的创建以及增删改查进行处理，简化处理方式。
+主要要明白的是如何封装，SQLiteDatabase 的操作。一般的底层封装都要通过反射的方式获取数据和类。
+
+从头开始封装数据库：
+1.创建一个接口的规则，封装数据库的各个操作，增删改查。
+public interface IDaoSupport<T> {
+    /**
+     * 插入数据库
+     * @param t
+     * @return
+     */
+    public int  insert(T t);
+    /**
+     * 初始化参数
+     * @param sqLiteDatabase
+     * @param clazz
+     */
+    void init(SQLiteDatabase sqLiteDatabase, Class<T> clazz);
+}
+
+2.创建一个实现类，传入SQLiteDatabase，init()初始化，创建数据库表，实现对增删改查的封装处理。
+  这里要注意的是创建数据库以及增删改查处理的时候对sql语句的动态添加。
+  首先反射获取传入的类Class的字段，获取全部字段名，同时获取字段类型，对java的数据类型进行转换，转换成sqlite
+  的数据库字段类型。然后把字段拼接成sql创建表。
+   @Override
+      public void init(SQLiteDatabase sqLiteDatabase, Class<T> clazz){
+          this.mSqLiteDatabase = sqLiteDatabase;
+          this.mClazz = clazz;
+          //创建表
+          StringBuffer ss = new StringBuffer();
+          ss.append("create table if not exists ")
+                  .append(DaoUtil.getTableName(clazz))
+                  .append("(id integer primary key autoincrement ,");
+          Field[] fields = clazz.getDeclaredFields();
+          for (Field field : fields) {
+              field.setAccessible(true);
+              String name = field.getName();
+              ss.append(name);
+              String simpleName = field.getType().getSimpleName();// int String boolean
+              // type 有三种类型，需要转换 成 数据库的类型
+              String type = DaoUtil.getColumnType(simpleName);
+              ss.append(type);
+              ss.append(", ");
+          }
+          ss.replace(ss.length()-2,ss.length(),")");
+          Log.e(TAG,"DaoSupport-sql:"+ss.toString());
+          mSqLiteDatabase.execSQL(ss.toString());
+      }
+
+
+   3.创建一个工具类，实现对工具的操作
+
+
