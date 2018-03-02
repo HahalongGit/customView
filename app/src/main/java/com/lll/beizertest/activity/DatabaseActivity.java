@@ -44,12 +44,26 @@ public class DatabaseActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,permissions,1);
         }else{
             IDaoSupport<Person> iDaoSupport = DaoSupportFactory.getInstance().getDao(Person.class);
-
             Log.e("TAG","person:"+person);
-            iDaoSupport.insert(person);
+            //iDaoSupport.insert(person);
             Log.e("TAG","currentTime-start:"+System.currentTimeMillis());
-            iDaoSupport.insert(list);
+            //iDaoSupport.insert(list);
+            Log.e("TAG","currentTime-end:"+System.currentTimeMillis());
 
+            //查询所有
+            List<Person> persons = iDaoSupport.query();
+            Log.e("TAG","persons:"+persons.size());
+            for (Person person : persons) {
+                Log.e("TAG","person-name:"+person.getName()+",age:"+person.getAge());
+            }
+
+            //删除
+            int delete = iDaoSupport.delete("age > ?",new String[]{"99"});
+            Log.e("TAG","persons-delete:"+delete);
+
+            //更新
+            int update = iDaoSupport.update(new Person("kbb-公司",999),"id=?",new String[]{"10"});
+            Log.e("TAG","persons-update:"+update);
         }
 
     }

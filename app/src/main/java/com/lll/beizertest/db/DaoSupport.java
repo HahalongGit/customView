@@ -1,16 +1,15 @@
 package com.lll.beizertest.db;
 
 import android.content.ContentValues;
-import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.util.ArrayMap;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -88,6 +87,110 @@ public class DaoSupport<T> implements IDaoSupport<T> {
         return mSqLiteDatabase.insert(DaoUtil.getTableName(mClazz), null, contentValues);
     }
 
+    @Override
+    public List<T> query() { //查询，重点在于反射获取实例，设置数据
+        Cursor cursor = mSqLiteDatabase.query(DaoUtil.getTableName(mClazz),null,null,null,null,null,null);
+        return cursorToList(cursor);
+    }
+
+    @Override
+    public int delete(String whereClause,String[] whereArgs){//删除
+        return mSqLiteDatabase.delete(DaoUtil.getTableName(mClazz),whereClause,whereArgs);
+    }
+
+    @Override
+    public int update(T obj,String whereCause,String ... whereArgs ){//跟新
+        ContentValues value = contentValuesByObj(obj);
+        return mSqLiteDatabase.update(DaoUtil.getTableName(mClazz),value,whereCause,whereArgs);
+    }
+
+    /**
+     * 转换Cursor to List
+     * @param cursor
+     * @return
+     */
+    private List<T> cursorToList(Cursor cursor) {
+        List<T> list = new ArrayList<>();
+        if(cursor!=null && cursor.moveToFirst()){
+            do{
+                try {
+                    //反射创建实例，设置数据
+                    T instance = mClazz.newInstance();//创建对象
+                    Field[] fields = mClazz.getDeclaredFields();//获取字段
+                    for (Field field : fields) {
+                        field.setAccessible(true);
+                        String name = field.getName();
+                        //获取字段在数据库的那一列
+                        int index = cursor.getColumnIndex(name);
+                        if(index ==-1){
+                            continue;
+                        }
+                        Method cursorMethod = createMethod(field.getType());//根据字段类型获取方法(对象中字段的get/set 方法)
+                        if(cursorMethod!=null){
+                            //反射获取value
+                            Object value = cursorMethod.invoke(cursor,index);
+                            if(value==null){
+                                continue;
+                            }
+                            //注入值（给对象设置数据）
+                            field.set(instance,value);
+                        }
+                    }
+                    list.add(instance);//添加集合
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
+
+    /**
+     * 根据字段类型获取字段方法
+     * @param type
+     * @return
+     * @throws NoSuchMethodException
+     */
+    private Method createMethod(Class<?> type) throws NoSuchMethodException {
+        String methodName = getColumnMethodName(type);
+        //转换 type--> String getString(index),int getInt(index),boolean getBoolean(index),
+        Method method = Cursor.class.getMethod(methodName,int.class);
+        return method;
+    }
+
+    /**
+     * 根据字段类型获取cursor 的列方法
+     * @param type
+     * @return
+     */
+    private String getColumnMethodName(Class<?> type) {
+        String typeName;
+        if(type.isPrimitive()){//是否是java基础数据类型
+            typeName = DaoUtil.capitalize(type.getName());
+        }else {
+            typeName = type.getSimpleName();
+        }
+        String methodName = "get"+typeName;
+        if("getBoolean".equals(methodName)){
+            methodName = "getInt";
+        }else if("getChar".equals(methodName)||"getCharacter".equals(methodName)){
+            methodName = "getString";
+        }else if("getDate".equals(methodName)){
+            methodName = "getLong";
+        } else if ("getInteger".equals(methodName)) {
+            methodName = "getInt";
+        }
+        return methodName;
+    }
+
 
     /**
      * obj 转换成ContentValues
@@ -104,10 +207,10 @@ public class DaoSupport<T> implements IDaoSupport<T> {
                 String key = field.getName();//获取字段名
                 Log.e(TAG, "contentValuesByObj-key:" + key);
                 mPutMethodArgs[0] = key;
-                Object value = field.get(obj);//获取值，类型是Object // 转换类型\
+                Object value = field.get(obj);//获取值，类型是Object // 转换类型
                 mPutMethodArgs[1] = value;
                 Log.e(TAG, "contentValuesByObj-value:" + value);
-                String fieldMethod = field.getType().getName();//获取参数类型
+                String fieldMethod = field.getType().getName();//获取参数类型名称
                 Method method = mMethod.get(fieldMethod);
                 if (method == null) {
                     //contentValues.put(name,);//需要一个字段类型 ,优化，提高云心效率：缓存方法
@@ -124,4 +227,7 @@ public class DaoSupport<T> implements IDaoSupport<T> {
         }
         return contentValues;
     }
+
+
+
 }

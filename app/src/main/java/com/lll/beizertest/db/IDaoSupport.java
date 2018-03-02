@@ -34,4 +34,27 @@ public interface IDaoSupport<T> {
      */
     long insert(List<T> list);
 
+    /**
+     * 查询所有
+     * @return
+     */
+    List<T> query();
+
+    /**
+     * 删除 delete
+     * @param whereClause
+     * @param whereArgs
+     * @return
+     */
+    int delete(String whereClause,String[] whereArgs);
+
+    /**
+     * update
+     * @param obj
+     * @param whereCause
+     * @param whereArgs
+     * @return
+     */
+    public int update(T obj,String whereCause,String... whereArgs );
+
 }
