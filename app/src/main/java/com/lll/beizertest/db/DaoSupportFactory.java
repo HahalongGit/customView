@@ -10,7 +10,7 @@ import java.io.File;
  * Created by longlong on 2018/3/1.
  *
  * @ClassName: DaoSupportFactory
- * @Description: 数据库 Dao 工厂
+ * @Description: 数据库 Dao 工厂  为什么使用工厂：使用工厂返回不同的实现，设置数据库保存的位置
  * @Date 2018/3/1
  */
 
@@ -18,7 +18,7 @@ public class DaoSupportFactory {
 
     private SQLiteDatabase mSQLiteDatabase;
 
-    private static   DaoSupportFactory mDaoSupportFactory;
+    private static  DaoSupportFactory mDaoSupportFactory;
 
     private DaoSupportFactory() {
         //把数据库放到内存卡中，不是应用的空间，防止卸载的时候删除数据库。
@@ -33,7 +33,6 @@ public class DaoSupportFactory {
         mSQLiteDatabase = SQLiteDatabase.openOrCreateDatabase(file,null);
 
     }
-
 
     public static  DaoSupportFactory getInstance(){
         if(mDaoSupportFactory==null){

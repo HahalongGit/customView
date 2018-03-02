@@ -8,7 +8,7 @@ import java.util.List;
  * Created by longlong on 2018/3/1.
  *
  * @ClassName: IDaoSupport
- * @Description: 面向接口编程
+ * @Description: 面向接口编程 为什么使用接口：1.使用的时候不关心实现，2.便于后期扩展
  * @Date 2018/3/1
  */
 
