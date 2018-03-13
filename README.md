@@ -23,6 +23,7 @@
 8. TagLayout View绘制流程分析，定义ViewGroup实现一个简单的流式布局。
 9. ProgressView 简单物流进度条
 10. RoundImageView 仿圆形图片实现
+11. 其他的测试，可以看启动页的点击名称
 
 ### 说明：demo搜集自网络，代码自己书写整理
 
