@@ -51,6 +51,11 @@ public class HttpUtils implements IHttpEngine {
     private Context mContext;
 
     /**
+     * 是否缓存
+     */
+    private boolean mCache = false;
+
+    /**
      * 私有 构造方法
      * @param context
      */
@@ -119,6 +124,19 @@ public class HttpUtils implements IHttpEngine {
     }
 
     /**
+     * 是否缓存
+     * @param cache
+     * @return
+     */
+    public HttpUtils cache(boolean cache){
+        //两个地方可以缓存
+        //1.回调中
+        //1.引擎中
+        mCache = cache;
+        return this;
+    }
+
+    /**
      * 执行方法
      * @param callback
      */
@@ -131,9 +149,9 @@ public class HttpUtils implements IHttpEngine {
         //调用预处理的方法，处理每个业务处理的公用参数
         callback.onPreExecute(mContext,mParam);
         if(mType==POST){
-            mIhttpEngine.post(mContext,mUrl,mParam,callback);
+            mIhttpEngine.post(mCache,mContext,mUrl,mParam,callback);
         }else if(mType==GET){
-            mIhttpEngine.get(mContext,mUrl,mParam,callback);
+            mIhttpEngine.get(mCache,mContext,mUrl,mParam,callback);
         }
     }
 
@@ -164,15 +182,15 @@ public class HttpUtils implements IHttpEngine {
     }
 
     @Override
-    public void get(Context context,String url, Map<String, Object> param, EngineCallback engineCallback) {
+    public void get(boolean cache,Context context,String url, Map<String, Object> param, EngineCallback engineCallback) {
         //调用引擎的GET方法
-        mIhttpEngine.get(context,url,param,engineCallback);
+        mIhttpEngine.get(cache,context,url,param,engineCallback);
     }
 
     @Override
-    public void post(Context context,String url, Map<String, Object> param, EngineCallback engineCallback) {
+    public void post(boolean cache,Context context,String url, Map<String, Object> param, EngineCallback engineCallback) {
         //调用引擎的POST方法
-        mIhttpEngine.post(context,url,param,engineCallback);
+        mIhttpEngine.post(cache,context,url,param,engineCallback);
     }
 
     //其他的处理，可能有Delete 、UploadFile方法等，根据需求添加。

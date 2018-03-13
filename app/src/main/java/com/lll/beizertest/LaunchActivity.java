@@ -27,6 +27,7 @@ import com.lll.beizertest.activity.MainActivity;
 import com.lll.beizertest.activity.MyTextViewActivity;
 import com.lll.beizertest.activity.NavigationBarActivity;
 import com.lll.beizertest.activity.OriginCodeAnalysisActivity;
+import com.lll.beizertest.activity.PictureSelectorActivity;
 import com.lll.beizertest.activity.QQStepViewActivity;
 import com.lll.beizertest.activity.RatingBarActivity;
 import com.lll.beizertest.activity.RecycleViewHeaderFooterActivity;
@@ -85,6 +86,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_expandText).setOnClickListener(this);
         findViewById(R.id.btn_navigationBar).setOnClickListener(this);
         findViewById( R.id.btn_database).setOnClickListener(this);
+        findViewById( R.id.btn_pictureSelector).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
         valueAnimator.setDuration(500);
@@ -238,6 +240,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_database:{
                 Intent intent = new Intent(this,DatabaseActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_pictureSelector:{
+                Intent intent = new Intent(this,PictureSelectorActivity.class);
                 startActivity(intent);
                 break;
             }

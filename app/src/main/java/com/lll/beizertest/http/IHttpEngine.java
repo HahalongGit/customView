@@ -21,7 +21,7 @@ public interface IHttpEngine {
      * @param param
      * @param engineCallback
      */
-    void get(Context context,String url, Map<String,Object> param, EngineCallback engineCallback);
+    void get(boolean cache,Context context,String url, Map<String,Object> param, EngineCallback engineCallback);
 
     /**
      * post 请求
@@ -30,7 +30,7 @@ public interface IHttpEngine {
      * @param param
      * @param engineCallback
      */
-    void post(Context context,String url, Map<String,Object> param,EngineCallback engineCallback);
+    void post(boolean cache,Context context,String url, Map<String,Object> param,EngineCallback engineCallback);
 
     //上传文件
     //下载文件

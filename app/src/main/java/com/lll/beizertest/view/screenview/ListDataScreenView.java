@@ -94,7 +94,6 @@ public class ListDataScreenView extends LinearLayout implements View.OnClickList
     }
 
     private void setTabClick(final View tabView, final int position) {
-
         tabView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

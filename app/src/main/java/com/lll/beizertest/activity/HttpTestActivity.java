@@ -23,6 +23,7 @@ public class HttpTestActivity extends AppCompatActivity {
         HttpUtils.with(this)
                 .url("")
                 .addParam("","")
+                .cache(true)
                 .execute(new HttpCallback<Student>() {
                     @Override
                     public void onSuccess(Student result) {

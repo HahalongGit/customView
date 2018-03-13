@@ -215,6 +215,13 @@
                 android:padding="10dp"
                 android:text="数据库操作工具" />
 
+            <Button
+                android:id="@+id/btn_pictureSelector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="图片选择库 PictureSelector" />
+
         </LinearLayout>
 
     </ScrollView>
