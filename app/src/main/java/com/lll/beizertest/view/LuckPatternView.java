@@ -3,6 +3,7 @@ package com.lll.beizertest.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Handler;
@@ -130,6 +131,9 @@ public class LuckPatternView extends View {
 
     private OnDrawPasswordListener onDrawPasswordListener;
 
+    private Path trianglePath;
+    private Matrix triangleMatrix;
+
     /**
      * 保存的密码
      */
@@ -146,6 +150,8 @@ public class LuckPatternView extends View {
      * 密码错误码
      */
     private final int MESSAGE_ERROR_CODE = 1001;
+
+    private static final double CONSTANT_COS_30 = Math.cos(Math.toRadians(30));
 
     /**
      * 延时重置九宫格
@@ -220,8 +226,12 @@ public class LuckPatternView extends View {
         mArrowsPaint = new Paint();
         mArrowsPaint.setAntiAlias(true);
         mArrowsPaint.setColor(NormalLineColor);
-        mArrowsPaint.setStyle(Paint.Style.STROKE);
+        mArrowsPaint.setStyle(Paint.Style.FILL);
         mArrowsPaint.setStrokeWidth(mDotRadius / 9f);
+
+        triangleMatrix = new Matrix();
+        trianglePath = new Path();
+
     }
 
 
@@ -307,6 +317,105 @@ public class LuckPatternView extends View {
         return true;
     }
 
+//    /**
+//     * draw new triangle
+//     * @param preCell
+//     * @param nextCell
+//     * @param canvas
+//     * @param paint
+//     */
+//    private void drawNewTriangle(Point preCell, Point nextCell, Canvas canvas, Paint paint) {
+//        float innerRadius = (int) (mDotRadius/3f);
+//        float distance = (float) MathUtil.distance(preCell.getPointX(), preCell.getPointY(), nextCell.getPointX(), nextCell.getPointY());
+//        float x = preCell.getPointX();
+////        float y = preCell.getPointY() - this.cellInnerRadius * 2;
+//        float y = preCell.getPointY() - mDotRadius*2;
+//
+//        float x1 = x - innerRadius / 2;
+//        float y1 = y + (float)(innerRadius * CONSTANT_COS_30);
+//        float x2 = x + innerRadius / 2 ;
+//        float y2 = y1;
+//
+//        float angleX = getAngleLineIntersectX(
+//                preCell.getPointX(), preCell.getPointY(), nextCell.getPointX(), nextCell.getPointY(), distance);
+//        float angleY = getAngleLineIntersectY(
+//                preCell.getPointX(), preCell.getPointY(), nextCell.getPointX(), nextCell.getPointY(), distance);
+//
+//        trianglePath.reset();
+//        trianglePath.moveTo(x, y);
+//        trianglePath.lineTo(x1, y1);
+//        trianglePath.lineTo(x2, y2);
+//        trianglePath.close();
+//        //slide right down and right up
+//        if (angleX >= 0 && angleX <= 90 ) {
+//            triangleMatrix.setRotate(180 - angleY, preCell.getPointX(), preCell.getPointY());
+//        }
+//        //slide left up and left down
+//        else {
+//            triangleMatrix.setRotate(angleY - 180, preCell.getPointX(), preCell.getPointY());
+//        }
+//        trianglePath.transform(triangleMatrix);
+//        canvas.drawPath(trianglePath, paint);
+//    }
+
+    /**
+     * draw new triangle
+     * @param preCell
+     * @param nextCell
+     * @param canvas
+     * @param paint
+     */
+    private void drawNewTriangle(Point preCell, Point nextCell, Canvas canvas, Paint paint) {
+        float innerRadius = (int) (mDotRadius/3f);
+        float distance = (float) MathUtil.distance(preCell.getPointX(), preCell.getPointY(), nextCell.getPointX(), nextCell.getPointY());
+        float x = preCell.getPointX();
+        float y = preCell.getPointY()-2*innerRadius;//移动开始位置（最后会旋转）
+
+        float x1 = x - innerRadius/2;//除以2 就是sin30°
+        float y1 = y + (float)(innerRadius * CONSTANT_COS_30); //三角形的边取值mRadius，两个点的Y值增大边的cos30°
+        float x2 = x + innerRadius/2;
+        float y2 = y1;
+        //一个以第一个点为起始点，以mRadius 为三角形的边的正三角形，（Android中的X轴向右，Y轴向下为正）
+        float angleX = getAngleLineIntersectX(
+                preCell.getPointX(), preCell.getPointY(), nextCell.getPointX(), nextCell.getPointY(), distance);
+        float angleY = getAngleLineIntersectY(
+                preCell.getPointX(), preCell.getPointY(), nextCell.getPointX(), nextCell.getPointY(), distance);
+
+        trianglePath.reset();
+        trianglePath.moveTo(x, y);
+        trianglePath.lineTo(x1, y1);
+        trianglePath.lineTo(x2, y2);
+        trianglePath.close();
+        //slide right down and right up
+        if (angleX >= 0 && angleX <= 90 ) {//矩阵 顺时针旋转
+            triangleMatrix.setRotate(180 - angleY, preCell.getPointX(), preCell.getPointY());
+        }
+        //slide left up and left down
+        else {//矩阵 逆时针旋转
+            triangleMatrix.setRotate(angleY - 180, preCell.getPointX(), preCell.getPointY());
+        }
+        trianglePath.transform(triangleMatrix);//变换Path 上 矩阵的点
+        canvas.drawPath(trianglePath, paint);
+    }
+
+    /**
+     * get the angle which the line intersect x axis
+     *
+     * @param fpX
+     * @param fpY
+     * @param spX
+     * @param spY
+     * @param distance
+     * @return degrees
+     */
+    public float getAngleLineIntersectX(float fpX, float fpY, float spX, float spY, float distance) {
+        return (float) Math.toDegrees(Math.acos((spX - fpX) / distance));
+    }
+
+    public static float getAngleLineIntersectY(float fpX, float fpY, float spX, float spY, float distance) {
+        return (float) Math.toDegrees(Math.acos((spY - fpY) / distance));
+    }
+
     /**
      * onTouch 时检测设置点的状态
      */
@@ -343,7 +452,8 @@ public class LuckPatternView extends View {
         }
 
         drawLine(canvas);
-        drawArrows(canvas);
+        //drawArrows(canvas);
+        drawNewTriangle(canvas);
     }
 
     /**
@@ -377,6 +487,28 @@ public class LuckPatternView extends View {
             }
             if (isTouched) {
                 drawLine(canvas, lastPoint, new Point(moveX, moveY, -1));
+            }
+        }
+
+    }
+
+    /**
+     * 绘制三角
+     * @param canvas
+     */
+    private void drawNewTriangle(Canvas canvas) {
+        if (mSelectedPoints.size() >=1) {
+            Point lastPoint = mSelectedPoints.get(0);
+            Log.e("TAG","drawNewTriangle-status:"+lastPoint.getCurrentStatus());
+            for (int i = 1; i < mSelectedPoints.size(); i++) {
+                Point point = mSelectedPoints.get(i);
+                if(lastPoint.getCurrentStatus()==Point.PRESSED_STATUS){
+                    mArrowsPaint.setColor(NormalLineColor);
+                }else if(lastPoint.getCurrentStatus()==Point.ERROR_STATUS){
+                    mArrowsPaint.setColor(ErrorLineColor);
+                }
+                drawNewTriangle(lastPoint,point,canvas,mArrowsPaint);
+                lastPoint = point;
             }
         }
 
@@ -456,6 +588,27 @@ public class LuckPatternView extends View {
 
         private float pointX;
         private float pointY;
+
+        public float getPointX() {
+            return pointX;
+        }
+
+        public void setPointX(float pointX) {
+            this.pointX = pointX;
+        }
+
+        public float getPointY() {
+            return pointY;
+        }
+
+        public void setPointY(float pointY) {
+            this.pointY = pointY;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
         /**
          * index 作为密码
          */
