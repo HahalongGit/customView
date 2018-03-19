@@ -28,6 +28,8 @@ import butterknife.OnClick;
 
 /**
  * 图片选择库 PictureSelector 测试
+ * 参考：https://github.com/LuckSiege/PictureSelector
+ * 参考项目中图片裁剪使用了：https://github.com/Yalantis/uCrop
  */
 public class PictureSelectorActivity extends AppCompatActivity {
 
