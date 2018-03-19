@@ -7,6 +7,7 @@ import com.lll.beizertest.R;
 
 /**
  * 九宫格解锁
+ * 部分代码可以参考 https://github.com/sym900728/LockPattern
  */
 public class LuckPatternViewActivity extends AppCompatActivity {
 
