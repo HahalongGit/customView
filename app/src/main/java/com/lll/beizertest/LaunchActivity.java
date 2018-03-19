@@ -11,6 +11,7 @@ import android.view.View;
 import com.lll.beizertest.activity.AnimatorActivity;
 import com.lll.beizertest.activity.BannerViewPagerActivity;
 import com.lll.beizertest.activity.BehaviorActivity;
+import com.lll.beizertest.activity.CodeInputViewActivity;
 import com.lll.beizertest.activity.ColorTrackTextActivity;
 import com.lll.beizertest.activity.CustomViewPagerActivity;
 import com.lll.beizertest.activity.DatabaseActivity;
@@ -39,7 +40,7 @@ import com.lll.beizertest.activity.TagLayoutActivity;
 import com.lll.beizertest.activity.TouchViewActivity;
 import com.lll.beizertest.activity.VerticalDragViewActivity;
 
-public class LaunchActivity extends AppCompatActivity implements View.OnClickListener{
+public class LaunchActivity extends AppCompatActivity implements View.OnClickListener {
 
     //private ListView listView;;
     private DrawerLayout drawerLayout;
@@ -85,10 +86,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_bannerViewPager).setOnClickListener(this);
         findViewById(R.id.btn_expandText).setOnClickListener(this);
         findViewById(R.id.btn_navigationBar).setOnClickListener(this);
-        findViewById( R.id.btn_database).setOnClickListener(this);
-        findViewById( R.id.btn_pictureSelector).setOnClickListener(this);
+        findViewById(R.id.btn_database).setOnClickListener(this);
+        findViewById(R.id.btn_pictureSelector).setOnClickListener(this);
+        findViewById(R.id.btn_verificationCode).setOnClickListener(this);
 
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,0.6f,0.2f,1f);
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 0.6f, 0.2f, 1f);
         valueAnimator.setDuration(500);
         valueAnimator.start();
 
@@ -98,153 +100,159 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btn_signature:{
-                Intent intent = new Intent(this,SignaturePadActivity.class);
+        switch (view.getId()) {
+            case R.id.btn_signature: {
+                Intent intent = new Intent(this, SignaturePadActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_qqBeizer:{
-                Intent intent = new Intent(this,MainActivity.class);
+            case R.id.btn_qqBeizer: {
+                Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_animator:{
-                Intent intent = new Intent(this,AnimatorActivity.class);
+            case R.id.btn_animator: {
+                Intent intent = new Intent(this, AnimatorActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_livePerform:{
-                Intent intent = new Intent(this,LivePerformActivity.class);
+            case R.id.btn_livePerform: {
+                Intent intent = new Intent(this, LivePerformActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_defineText:{
-                Intent intent = new Intent(this,MyTextViewActivity.class);
+            case R.id.btn_defineText: {
+                Intent intent = new Intent(this, MyTextViewActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_qqStepView:{
-                Intent intent = new Intent(this,QQStepViewActivity.class);
+            case R.id.btn_qqStepView: {
+                Intent intent = new Intent(this, QQStepViewActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_trackText:{
-                Intent intent = new Intent(this,ColorTrackTextActivity.class);
+            case R.id.btn_trackText: {
+                Intent intent = new Intent(this, ColorTrackTextActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_progressBar:{
-                Intent intent = new Intent(this,DefineProgressBarActivity.class);
+            case R.id.btn_progressBar: {
+                Intent intent = new Intent(this, DefineProgressBarActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_shapeView:{
-                Intent intent = new Intent(this,DrawShapeActivity.class);
+            case R.id.btn_shapeView: {
+                Intent intent = new Intent(this, DrawShapeActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_ratingBar:{
-                Intent intent = new Intent(this,RatingBarActivity.class);
+            case R.id.btn_ratingBar: {
+                Intent intent = new Intent(this, RatingBarActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_letterSideBar:{
-                Intent intent = new Intent(this,LetterSideBarActivity.class);
+            case R.id.btn_letterSideBar: {
+                Intent intent = new Intent(this, LetterSideBarActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_originCode:{
-                Intent intent = new Intent(this,OriginCodeAnalysisActivity.class);
+            case R.id.btn_originCode: {
+                Intent intent = new Intent(this, OriginCodeAnalysisActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_customViewGroup:{
-                Intent intent = new Intent(this,TagLayoutActivity.class);
+            case R.id.btn_customViewGroup: {
+                Intent intent = new Intent(this, TagLayoutActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_touchView:{
-                Intent intent = new Intent(this,TouchViewActivity.class);
-                startActivity(intent);
-                break;
-            }case R.id.btn_drawLayout:{
-                Intent intent = new Intent(this,DrawLayoutActivity.class);
+            case R.id.btn_touchView: {
+                Intent intent = new Intent(this, TouchViewActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_roundImage:{
-                Intent intent = new Intent(this,RoundImageActivity.class);
+            case R.id.btn_drawLayout: {
+                Intent intent = new Intent(this, DrawLayoutActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_logisticsProgress:{
-                Intent intent = new Intent(this,LogisticsProgressViewActivity.class);
+            case R.id.btn_roundImage: {
+                Intent intent = new Intent(this, RoundImageActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_verticalDragView:{
-                Intent intent = new Intent(this,VerticalDragViewActivity.class);
+            case R.id.btn_logisticsProgress: {
+                Intent intent = new Intent(this, LogisticsProgressViewActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_luckPatternView:{
-                Intent intent = new Intent(this,LuckPatternViewActivity.class);
+            case R.id.btn_verticalDragView: {
+                Intent intent = new Intent(this, VerticalDragViewActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_startBar:{
-                Intent intent = new Intent(this,StatusBarActivity.class);
+            case R.id.btn_luckPatternView: {
+                Intent intent = new Intent(this, LuckPatternViewActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_behavior:{
-                Intent intent = new Intent(this,BehaviorActivity.class);
+            case R.id.btn_startBar: {
+                Intent intent = new Intent(this, StatusBarActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_screenView:{
-                Intent intent = new Intent(this,ScreenMenuViewActivity.class);
+            case R.id.btn_behavior: {
+                Intent intent = new Intent(this, BehaviorActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_viewPager:{
-                Intent intent = new Intent(this,CustomViewPagerActivity.class);
+            case R.id.btn_screenView: {
+                Intent intent = new Intent(this, ScreenMenuViewActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_loadingView:{
-                Intent intent = new Intent(this,LoadViewActivity.class);
+            case R.id.btn_viewPager: {
+                Intent intent = new Intent(this, CustomViewPagerActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_recyclerHeader:{
-                Intent intent = new Intent(this,RecycleViewHeaderFooterActivity.class);
+            case R.id.btn_loadingView: {
+                Intent intent = new Intent(this, LoadViewActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_bannerViewPager:{
-                Intent intent = new Intent(this,BannerViewPagerActivity.class);
+            case R.id.btn_recyclerHeader: {
+                Intent intent = new Intent(this, RecycleViewHeaderFooterActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_expandText:{
-                Intent intent = new Intent(this,ExpendTextViewActivity.class);
+            case R.id.btn_bannerViewPager: {
+                Intent intent = new Intent(this, BannerViewPagerActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_navigationBar:{
-                Intent intent = new Intent(this,NavigationBarActivity.class);
+            case R.id.btn_expandText: {
+                Intent intent = new Intent(this, ExpendTextViewActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_database:{
-                Intent intent = new Intent(this,DatabaseActivity.class);
+            case R.id.btn_navigationBar: {
+                Intent intent = new Intent(this, NavigationBarActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_pictureSelector:{
-                Intent intent = new Intent(this,PictureSelectorActivity.class);
+            case R.id.btn_database: {
+                Intent intent = new Intent(this, DatabaseActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_pictureSelector: {
+                Intent intent = new Intent(this, PictureSelectorActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_verificationCode: {
+                Intent intent = new Intent(this, CodeInputViewActivity.class);
                 startActivity(intent);
                 break;
             }
