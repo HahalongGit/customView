@@ -29,7 +29,11 @@ public class OkHttpEngine implements IHttpEngine {
     //问题：
     //1.如何处理公用的参数？分层的baseLisbrary 中不能包含业务处理数据？
     //2.每次回调要用json回调，怎么处理
-    //3.
+    //3. 结合数据库实现缓存
+    // 如果cache 时true ，每次执行的时候查询数据库，看有没有缓存，有缓存直接读取数据，然后返回，
+    //然后请求网络数据，获取到数据后和保存在数据库中的进行比较，一致则不用保存新的。
+    //不一致的保存新的数据，并且把新的数据跟新到界面。刷新。
+    //注意的地方：以url作为要给key保存数据苦如果有问题，可以把url做一个类似MD5 加密的处理，然后保存，反正都是唯一的key。
 
     @Override
     public void get(boolean cache,Context context, String url, Map<String, Object> param, EngineCallback engineCallback) {
