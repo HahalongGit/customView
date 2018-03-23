@@ -72,7 +72,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activity.CodeInputViewActivity"></activity>
+        <activity android:name=".activity.CodeInputViewActivity" />
+        <activity android:name=".activity.SkinActivity"></activity>
     </application>
 
 </manifest>

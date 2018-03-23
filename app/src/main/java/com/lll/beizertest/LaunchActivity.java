@@ -7,6 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.lll.beizertest.activity.AnimatorActivity;
 import com.lll.beizertest.activity.BannerViewPagerActivity;
@@ -42,6 +43,8 @@ import com.lll.beizertest.activity.VerticalDragViewActivity;
 
 public class LaunchActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private ImageView imageView;
+
     //private ListView listView;;
     private DrawerLayout drawerLayout;
 
@@ -57,7 +60,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
 //            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 //            getWindow().setStatusBarColor(Color.TRANSPARENT);
 //        }
-
+        getResources().getDisplayMetrics();
         findViewById(R.id.btn_signature).setOnClickListener(this);
         findViewById(R.id.btn_livePerform).setOnClickListener(this);
         findViewById(R.id.btn_animator).setOnClickListener(this);

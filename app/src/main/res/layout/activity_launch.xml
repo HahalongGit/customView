@@ -229,6 +229,7 @@
                 android:padding="10dp"
                 android:text="验证码1" />
 
+
         </LinearLayout>
 
     </ScrollView>
