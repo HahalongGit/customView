@@ -1,0 +1,74 @@
+进程间通讯的学习
+AIDL- 进程间通讯的协议 。编译自动生成一个Stub 的java文件。
+
+
+注意：
+IActivityManager 的子类不是 ActivityManager 而是 ActivityManagerService
+
+IApplicationThread 的实现类在ActivityThread 的内部。作为内部类。
+
+如何让一个服务端和客户端联系起来?
+怎么样通过  bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);方法就调用了Service 的onBinde()?
+(查看源码要关注重点，不需要的就不要去看。)
+在bindService()的源码中我找，最后在ActivityThread类中找到了最后的调用，这里获取了Service(Service 都会被提前注册)，
+Service s = mServices.get(data.token);
+并且调用了Service的onBind()方法，最后返回那个mBinder
+ IBinder binder = s.onBind(data.intent);
+
+private void handleBindService(BindServiceData data) {
+        Service s = mServices.get(data.token);
+        if (DEBUG_SERVICE)
+            Slog.v(TAG, "handleBindService s=" + s + " rebind=" + data.rebind);
+        if (s != null) {
+            try {
+                data.intent.setExtrasClassLoader(s.getClassLoader());
+                data.intent.prepareToEnterProcess();
+                try {
+                    if (!data.rebind) {
+                        IBinder binder = s.onBind(data.intent);
+                        ActivityManager.getService().publishService(
+                                data.token, data.intent, binder);
+                    } else {
+                        s.onRebind(data.intent);
+                        ActivityManager.getService().serviceDoneExecuting(
+                                data.token, SERVICE_DONE_EXECUTING_ANON, 0, 0);
+                    }
+                    ensureJitEnabled();
+                } catch (RemoteException ex) {
+                    throw ex.rethrowFromSystemServer();
+                }
+            } catch (Exception e) {
+                if (!mInstrumentation.onException(s, e)) {
+                    throw new RuntimeException(
+                            "Unable to bind to service " + s
+                            + " with " + data.intent + ": " + e.toString(), e);
+                }
+            }
+        }
+    }
+
+    最后通过源码看到LoadedApk 类中调到了 mConnection.onServiceConnected(name, service);和
+      mConnection.onServiceDisconnected(name);
+    (主要涉及了ContextImpl ActiviyThread ActivityManagerService LoadedApk 几个类)
+     public void doConnected(ComponentName name, IBinder service, boolean dead) {
+                ServiceDispatcher.ConnectionInfo old;
+                ServiceDispatcher.ConnectionInfo info;
+
+                synchronized (this) {
+                ......
+                // If there was an old service, it is now disconnected.
+                if (old != null) {
+                    mConnection.onServiceDisconnected(name);
+                }
+                if (dead) {
+                    mConnection.onBindingDied(name);
+                }
+                // If there is a new service, it is now connected.
+                if (service != null) {
+                    mConnection.onServiceConnected(name, service);
+                }
+            }
+            ......
+                mConnection.onServiceDisconnected(name);
+            }
+

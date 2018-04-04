@@ -18,4 +18,224 @@ apk打包会生成两个文件：一个是R 文件 一个是resources.arse(压�
 一般从apk打包开始-到安装到手机上都干了什么？？Application - 怎么启动，怎么实例化View,Service 启动流程，Actiivty启动流程等。steContextView 是怎么实例化的。
 
 
+android activity启动View创建加载流程：
+Activity中的PhoneWindow->DecorView->FrameLayout->android.R.id.content（这里判断加载不同的样式的布局）->我们的布局
 
+AppCompatActivity setContentView 方法源码我们发现，在onCreate方法调用的时候，最后在AppCompatDelegate 的onCreate方法中
+  private static AppCompatDelegate create(Context context, Window window,
+            AppCompatCallback callback) {
+        if (Build.VERSION.SDK_INT >= 24) {
+            return new AppCompatDelegateImplN(context, window, callback);
+        } else if (Build.VERSION.SDK_INT >= 23) {
+            return new AppCompatDelegateImplV23(context, window, callback);
+        } else if (Build.VERSION.SDK_INT >= 14) {
+            return new AppCompatDelegateImplV14(context, window, callback);
+        } else if (Build.VERSION.SDK_INT >= 11) {
+            return new AppCompatDelegateImplV11(context, window, callback);
+        } else {
+            return new AppCompatDelegateImplV9(context, window, callback);
+        }
+    }
+
+各个不同版本的支持类，最终都会继承一个 AppCompatDelegateImplV9(不同版本的源码不一样，肯能是V7的)
+这个类实现了加载的一个接口 LayoutInflater.Factory2，在创建View的时候对View 进行处理。
+    public final View createView(View parent, final String name, @NonNull Context context,
+            @NonNull AttributeSet attrs, boolean inheritContext,
+            boolean readAndroidTheme, boolean readAppTheme, boolean wrapContext) {
+        final Context originalContext = context;
+
+        ......
+        View view = null;
+
+        // We need to 'inject' our tint aware Views in place of the standard framework versions
+        switch (name) {
+            case "TextView":
+                view = new AppCompatTextView(context, attrs);
+                break;
+            case "ImageView":
+                view = new AppCompatImageView(context, attrs);
+                break;
+            case "Button":
+                view = new AppCompatButton(context, attrs);
+                break;
+            case "EditText":
+                view = new AppCompatEditText(context, attrs);
+                break;
+            case "Spinner":
+                view = new AppCompatSpinner(context, attrs);
+                break;
+            case "ImageButton":
+                view = new AppCompatImageButton(context, attrs);
+                break;
+            case "CheckBox":
+                view = new AppCompatCheckBox(context, attrs);
+                break;
+            case "RadioButton":
+                view = new AppCompatRadioButton(context, attrs);
+                break;
+            case "CheckedTextView":
+                view = new AppCompatCheckedTextView(context, attrs);
+                break;
+            case "AutoCompleteTextView":
+                view = new AppCompatAutoCompleteTextView(context, attrs);
+                break;
+            case "MultiAutoCompleteTextView":
+                view = new AppCompatMultiAutoCompleteTextView(context, attrs);
+                break;
+            case "RatingBar":
+                view = new AppCompatRatingBar(context, attrs);
+                break;
+            case "SeekBar":
+                view = new AppCompatSeekBar(context, attrs);
+                break;
+        }
+        ......
+        return view;
+    }
+
+    由于这里的AppCompat 的问题以及原始 View的区别，有时候使用换肤可能会出现问题，在做换肤的时候要处理到这一点问题。
+    AppCompatActivity 中创建View的时候会被拦截，执行兼容的onCreate方法吗，这样就不会走系统创建View的LayoutInflater流程了,会被替换成特定的View。
+
+
+    ****三种加载View的方式***：
+    View.inflater(this,layout,null);
+    LayoutInflater.from(this).inflate(R.layout.recycler_bannerview_layout,null,false);
+    LayoutInflater.from(this).inflate(R.layout.recycler_bannerview_layout,null);
+    实际上 上面三个最终都调用了第三个方法，三个参数的。
+
+    ** from()方法：
+     /**
+         * Obtains the LayoutInflater from the given context.
+         */
+        public static LayoutInflater from(Context context) {
+            LayoutInflater LayoutInflater =
+                    (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            if (LayoutInflater == null) {
+                throw new AssertionError("LayoutInflater not found.");
+            }
+            return LayoutInflater;
+        }
+
+      实际上是调用了系统的Service（这里的Service都是一个个的单例，其他地方修改也是修改同一个）;
+      源码可是得知，在Context类中写了getSystemService，而Context 的实现类是ContextImpl。
+      在Context的实现类ContextImpl 中查看 方法getSystemService ：
+        @Override
+          public Object getSystemService(String name) {
+              return SystemServiceRegistry.getSystemService(this, name);
+          }
+
+      SystemServiceRegistry 这个类就是处理了很多的系统的服务，注册到系统。然后我们在使用的就会获取到这个服务。
+
+     ** inflater()方法：
+     首先获取一个XML解析器： final XmlResourceParser parser = res.getLayout(resource);传入inflater方法解析布局的XML.
+     inflate(parser, root, attachToRoot);
+     然后可能根据参数执行不同的创建，mFactory2不为null的时候执行这个，其他的执行其他：
+     final View temp = createViewFromTag(root, name, inflaterContext, attrs);
+     内部会调用其他的创建：
+     View view;
+        if (mFactory2 != null) {
+            view = mFactory2.onCreateView(parent, name, context, attrs);
+        } else if (mFactory != null) {
+            view = mFactory.onCreateView(name, context, attrs);
+        } else {
+            view = null;
+        }
+        if (view == null && mPrivateFactory != null) {
+            view = mPrivateFactory.onCreateView(parent, name, context, attrs);
+        }
+     根据不同的参数执行不同的创建View的过程。
+
+     注意：在兼容的AppCompatActivty中我们知道创建View会执行自己的兼容的方法，AppCompatActivity,在onCreate方法中调用了设置新的Factory2初始化
+
+      @Override
+         protected void onCreate(@Nullable Bundle savedInstanceState) {
+             final AppCompatDelegate delegate = getDelegate();
+             delegate.installViewFactory(); //设置新的Factory2 AppCompatDelegateImplV9 的子类中都有实现
+             delegate.onCreate(savedInstanceState);
+             if (delegate.applyDayNight() && mThemeId != 0) {
+                 // If DayNight has been applied, we need to re-apply the theme for
+                 // the changes to take effect. On API 23+, we should bypass
+                 // setTheme(), which will no-op if the theme ID is identical to the
+                 // current theme ID.
+                 if (Build.VERSION.SDK_INT >= 23) {
+                     onApplyThemeResource(getTheme(), mThemeId, false);
+                 } else {
+                     setTheme(mThemeId);
+                 }
+             }
+             super.onCreate(savedInstanceState);
+         }
+
+
+     因为设置了一个新的Factory2，AppCompat兼容类这个实现了Factory2接口
+     而系统的Service是单例，所以就修改了。
+
+      @Override
+         public void installViewFactory() {
+             LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+             if (layoutInflater.getFactory() == null) {
+                 LayoutInflaterCompat.setFactory2(layoutInflater, this);
+             } else {
+                 if (!(layoutInflater.getFactory2() instanceof AppCompatDelegateImplV9)) {
+                     Log.i(TAG, "The Activity's LayoutInflater already has a Factory installed"
+                             + " so we can not install AppCompat's");
+                 }
+             }
+         }
+
+       也就是会执行兼容的Activity的创建View的过程。
+
+
+      创建系统View的方法：
+      参数：
+      static final Class<?>[] mConstructorSignature = new Class[] {
+                  Context.class, AttributeSet.class};
+
+       public final View createView(String name, String prefix, AttributeSet attrs)
+                  throws ClassNotFoundException, InflateException {
+              Constructor<? extends View> constructor = sConstructorMap.get(name);
+              if (constructor != null && !verifyClassLoader(constructor)) {
+                  constructor = null;
+                  sConstructorMap.remove(name);
+              }
+              Class<? extends View> clazz = null;
+
+              try {
+                  Trace.traceBegin(Trace.TRACE_TAG_VIEW, name);
+
+                  if (constructor == null) {
+                      ...
+                      //注意：创建的时候反射调用两个参数的构造方法
+                      constructor = clazz.getConstructor(mConstructorSignature);
+                      constructor.setAccessible(true);
+                      sConstructorMap.put(name, constructor);
+                  } else {
+                     ...
+                  }
+                  return view;
+                 ...
+              } catch (Exception e) {
+                  final InflateException ie = new InflateException(
+                          attrs.getPositionDescription() + ": Error inflating class "
+                                  + (clazz == null ? "<unknown>" : clazz.getName()), e);
+                  ie.setStackTrace(EMPTY_STACK_TRACE);
+                  throw ie;
+              } finally {
+                  Trace.traceEnd(Trace.TRACE_TAG_VIEW);
+              }
+          }
+        创建View的代码都是在LayoutInflater 这个类型实现的。
+
+
+        所以:
+        我们可以自己设置一个Factory 从来拦截View的创建。在换肤的操作这里，可以这样去处理。
+
+        换肤的实现分析：(换肤的时候可能要换背景，还要换颜色其他的属性)
+        1.打开的所有界面都有换肤
+        2.以后打开的activity如果换肤了是一套新皮肤
+        3.每次进来都应该是上次选择的皮肤
+
+        这是一个多个类的库，最好使用UML作出类图。
+        SkinManager.java
+        SkinResource.java
+        SkinSupport.java

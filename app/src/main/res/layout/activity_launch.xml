@@ -229,6 +229,19 @@
                 android:padding="10dp"
                 android:text="验证码1" />
 
+            <Button
+                android:id="@+id/btn_skin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="换肤框架" />
+
+            <Button
+                android:id="@+id/btn_icp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="进程间通讯" />
 
         </LinearLayout>
 
