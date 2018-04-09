@@ -17,7 +17,7 @@ import com.lll.beizertest.ProcessConnection;
  * Created by longlong on 2018/4/9.
  *
  * @ClassName: QQMessageService
- * @Description:  比如：QQ 聊天通讯中    代码需要轻
+ * @Description:  比如：一个默认的 QQ 聊天通讯中 Service   代码需要轻
  * @Date 2018/4/9
  */
 
