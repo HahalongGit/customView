@@ -19,6 +19,7 @@ import java.util.List;
  *
  * @ClassName: JobWakeupService
  * @Description: 设置一个定时任务，一定时间过来检查。 Android 7.0 上默认的最短时间15min .没有低于7.0的手机没法测试
+ * 需要配置两个权限
  * @Date 2018/4/9
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
