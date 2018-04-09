@@ -43,6 +43,7 @@ import com.lll.beizertest.activity.TagLayoutActivity;
 import com.lll.beizertest.activity.TouchViewActivity;
 import com.lll.beizertest.activity.VerticalDragViewActivity;
 import com.lll.beizertest.ipc.IPCActivity;
+import com.lll.beizertest.ipc.ServiceTestActivity;
 
 public class LaunchActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -98,6 +99,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_verificationCode).setOnClickListener(this);
         findViewById(R.id.btn_skin).setOnClickListener(this);
         findViewById(R.id.btn_icp).setOnClickListener(this);
+        findViewById(R.id.btn_serviceTest).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 0.6f, 0.2f, 1f);
         valueAnimator.setDuration(500);
@@ -272,6 +274,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_icp: {
                 Intent intent = new Intent(this, IPCActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_serviceTest: {
+                Intent intent = new Intent(this, ServiceTestActivity.class);
                 startActivity(intent);
                 break;
             }

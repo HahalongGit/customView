@@ -243,6 +243,13 @@
                 android:padding="10dp"
                 android:text="进程间通讯" />
 
+            <Button
+                android:id="@+id/btn_serviceTest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="进程优先级测试" />
+
         </LinearLayout>
 
     </ScrollView>
