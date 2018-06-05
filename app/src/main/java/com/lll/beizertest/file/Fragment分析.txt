@@ -1,0 +1,83 @@
+Fragment 相关分析：
+Fragment 的添加替换的方法replace(),add(),hide();等方法有什么区别？
+从add(),replace(),hide(),show()的源码中查看进去，我们会在FragmentManager 中 找到一个实现类FragmentManagerImpl
+这个类中有相关的实现，我们发现：
+BackStackRecord 这个类中实现了这些方法，
+add(),replace()方法最终将一个Fragment添加到了一个ArrayList集合中。replace()方法是判断有没有旧的Fragment，没有在add();
+hide()和show()源码发现没有操作Fragment，而是修改了一个状态值。
+每次操作有一个状态：
+最终在commit()方法中执行了，moveToState(Fragment f, int newState, int transit, int transitionStyle,boolean keepActive)，方法中有实现过程。
+其实就是对Fragment的创建，加载的生命周期处理。
+
+-->>
+add()方法：
+ @Override
+    public FragmentTransaction add(Fragment fragment, String tag) {
+        doAddOp(0, fragment, tag, OP_ADD);
+        return this;
+    }
+
+ //内部处理：
+ private void doAddOp(int containerViewId, Fragment fragment, String tag, int opcmd) {
+     ...
+     addOp(new Op(opcmd, fragment));
+ }
+
+ //mOps 就是一个集合
+ （ ArrayList<Op> mOps = new ArrayList<>();）
+
+ void addOp(Op op) {
+     mOps.add(op);
+     op.enterAnim = mEnterAnim;
+     op.exitAnim = mExitAnim;
+     op.popEnterAnim = mPopEnterAnim;
+     op.popExitAnim = mPopExitAnim;
+ }
+
+ hide()方法：
+   @Override
+     public FragmentTransaction hide(Fragment fragment) {
+         addOp(new Op(OP_HIDE, fragment));
+
+         return this;
+     }
+
+  不同方法不同的参数对应的操作是：
+   add()方法：
+   case OP_ADD:
+      f.setNextAnim(op.enterAnim);
+      mManager.addFragment(f, false);
+      break;
+          public void addFragment(Fragment fragment, boolean moveToStateNow) {
+             ...
+              if (!fragment.mDetached) {
+                  if (mAdded.contains(fragment)) {
+                      throw new IllegalStateException("Fragment already added: " + fragment);
+                  }
+                  synchronized (mAdded) {
+                      mAdded.add(fragment);
+                  }
+                  ...
+                  if (moveToStateNow) {
+                      moveToState(fragment);
+                  }
+              }
+          }
+ 把Fragment添加到指定的集合
+
+  hide()方法：
+  OP_HIDE-->
+   case OP_HIDE:
+      f.setNextAnim(op.exitAnim);
+      mManager.hideFragment(f);
+      break;
+
+  public void hideFragment(Fragment fragment) {
+        if (DEBUG) Log.v(TAG, "hide: " + fragment);
+        if (!fragment.mHidden) {
+            fragment.mHidden = true;
+            // Toggle hidden changed so that if a fragment goes through show/hide/show
+            // it doesn't go through the animation.
+            fragment.mHiddenChanged = !fragment.mHiddenChanged;
+        }
+    }
