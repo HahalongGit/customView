@@ -38,3 +38,38 @@ Proxy.newProxyInstance();调用方法返回一个代理的对象，用来处理�
 
 JDK 动态代理源码分析：
 Proxy.newProxyInstance()
+
+插件化开发中需要知道的 Activity 的启动流程：（需要自己研究几次启动的流程掌握源码的大概逻辑）
+
+从startActivty开始，到 ActivityManagerService 的startActivty(); 然后到..
+校验启动模式等，启动一个新的Activity前调用当前Activity的onPause方法。最后通过app.thread 获取到一个ActivityThread 对象操作启动Activity
+ScheduleResumeXXX
+在ActivityThread 和 ActivityStack 中执行了一些Activity的生命周期方法如onPause、onCreate.等。
+
+最后调用了ActivityThread：scheduleLaunchAchicity()
+ActivityThread 类
+handleLaunchActivity()启动，activity的 onCreate方法调用
+//Activity a = performLaunchActivity(r, customIntent); 创建
+什么地方判断在AndroidManifest.xml 中注册？
+
+Hook IActivityManager接口 ，用它的代理去过Activity检测，最后创建Activity的时候在换回来，
+
+绕过AndroidManifest.xml 检测，启动没有注册的apk的Activity 并且传递参数到对应的Activity 中。
+1.启动一个Activity，这个Activity没有被注册
+2.类还需要加载，插件的Activity的类是在插件中。
+3.还需要再加资源
+
+如果Hook,要基于一个接口，在这里就要找一个接口。我们Hook IActivityManager,做一个自己的实现。
+要获取一个IActivityManager 的实现，源码中 getDefault().getXXX返回一个实现
+
+拦截启动：（api 25 以上没有IActivityManager 接口，也没有其他对应的代码）
+1.获取ActivityManagerNative里面的gDefault
+2.获取gDefault 中的mInstance属性
+3.报错是因为这个Activity没有注册，用一个注册的Activity占坑去检测，新建一个ProxyActiivty去处理
+4.换回来Intent hookActivityManager 里面的mH是一个handler
+5.获取ActivityThread
+6.获取ActivityThread中mH
+7.hook handleLaunchActivity();
+
+8.Activity 继承 AppCompatActivity 会异常退出！怎么处理？
+

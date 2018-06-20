@@ -34,6 +34,17 @@ mTextView.post(new Runnable() {
 
 ####
 Activity 启动流程：
+从startActivty开始，到 ActivityManagerService 的startActivty(); 然后到..
+校验启动模式等，启动一个新的Activity前调用当前Activity的onPause方法。最后通过app.thread 获取到一个ActivityThread 对象操作启动Activity
+ScheduleResumeXXX
+在ActivityThread 和 ActivityStack 中执行了一些Activity的生命周期方法如onPause、onCreate.等。
+
+最后调用了ActivityThread：scheduleLaunchAchicity()
+
+什么地方判断在AndroidManifest.xml 中注册？
+Hook IActivityManager接口 ，用它的代理去过Activity检测，最后创建Activity的时候在换回来，
+
+
 ActivityThread 类
 handleLaunchActivity()启动，activity的 onCreate方法调用
 //Activity a = performLaunchActivity(r, customIntent); 创建

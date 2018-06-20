@@ -101,7 +101,8 @@
 
         <activity android:name=".ipc.ServiceTestActivity" />
         <activity android:name=".activity.ImageSelectTestActivity" />
-        <activity android:name=".activity.JNITestActivity"></activity>
+        <activity android:name=".activity.JNITestActivity" />
+        <activity android:name=".activity.ProxyActivity"></activity>
     </application>
 
 </manifest>

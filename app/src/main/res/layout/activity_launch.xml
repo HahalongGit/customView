@@ -257,6 +257,13 @@
                 android:padding="10dp"
                 android:text="Jni 简单测试" />
 
+            <Button
+                android:id="@+id/btn_notRegist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="绕过AndroidManifest.xml检测" />
+
         </LinearLayout>
 
     </ScrollView>

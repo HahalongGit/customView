@@ -30,6 +30,7 @@ import com.lll.beizertest.activity.LuckPatternViewActivity;
 import com.lll.beizertest.activity.MainActivity;
 import com.lll.beizertest.activity.MyTextViewActivity;
 import com.lll.beizertest.activity.NavigationBarActivity;
+import com.lll.beizertest.activity.NotRegistedActivity;
 import com.lll.beizertest.activity.OriginCodeAnalysisActivity;
 import com.lll.beizertest.activity.PictureSelectorActivity;
 import com.lll.beizertest.activity.QQStepViewActivity;
@@ -61,7 +62,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
-        LayoutInflater.from(this).inflate(R.layout.recycler_bannerview_layout,null,false);
+        LayoutInflater.from(this).inflate(R.layout.recycler_bannerview_layout, null, false);
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 //        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){
 //            //5.0以上设置全屏
@@ -104,6 +105,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_icp).setOnClickListener(this);
         findViewById(R.id.btn_serviceTest).setOnClickListener(this);
         findViewById(R.id.btn_jni).setOnClickListener(this);
+        findViewById(R.id.btn_notRegist).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 0.6f, 0.2f, 1f);
         valueAnimator.setDuration(500);
@@ -286,8 +288,14 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_jni:{
+            case R.id.btn_jni: {
                 Intent intent = new Intent(this, JNITestActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_notRegist: {
+                //如果设置点击的时候绕过检测启动一个没有注册的Activity
+                Intent intent = new Intent(this, NotRegistedActivity.class);
                 startActivity(intent);
                 break;
             }
