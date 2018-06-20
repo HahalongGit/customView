@@ -1,0 +1,34 @@
+采用NDK对图片进行压缩，可以达到图片压缩但是不失真的效果。
+开源的C/C++ JPEG 库
+网上资源libjpeg-turbo 是一个 libjpeg 的增强版，可以下载编译在这个基础上做开发。
+
+编译第三方C库的套路：
+1.下载编译.so ,也可以选择copy第三方开源的C和C++ 文件
+2.copy 到app 的jni 目录下面 不光要copy  .so 还要copy 头文件 .h
+3.开始写java层的native方法，生成头文件。
+4.把生成好的头文件也copy到C++目录下面（具体可以查看网上Android studio第一次编辑C++）
+
+使用过程：
+sdk tools 中添加NDK编译和调试工具CMake 和LLDB
+同时在gradle.properties 中添加 android.useDeprecatedNdk = true;
+然后创建java 类用来加载和调用jni的native方法的名称。
+如：
+public class JNIUtils{
+       //加载 native-jni
+       static{
+            System.loadLibrary("native-jni");
+       }
+       //java 中声明native 的方法 ，这个方法和C代码的方法名称一致。
+       public native String stringFromJNI();
+}
+
+java 生成 native 方法的头文件：
+Android studio 中的Terminal 可以直接命令生成
+
+输入命令：javah -d jni -classpath 自己编译后的class文件的绝对路径
+
+App做图片压缩，一般上传的时候后台有一定的宽高要求，比如800宽，或者微信的960宽。
+所以我们在采用ndk进行图片压缩前先用BitmapFactory 对图片压缩设置新的宽高。采用BitmapFactory.Option 参数设置
+inJustDecodeBound = true 这个时候不会加载图片到内存中，只会去读图片的宽高。我们这通过自己定设置的图片的宽高如800的宽和
+图片原来的宽高设置比例参数inSampleSize 这个参数这样完成一次宽高的压缩。这样操作也防止了图片太大直接解析成Bitmap的时候内存溢出。
+这样处理后再设置Ndk压缩就会有更好的效果。

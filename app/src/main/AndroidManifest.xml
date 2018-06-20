@@ -100,7 +100,8 @@
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <activity android:name=".ipc.ServiceTestActivity" />
-        <activity android:name=".activity.ImageSelectTestActivity"></activity>
+        <activity android:name=".activity.ImageSelectTestActivity" />
+        <activity android:name=".activity.JNITestActivity"></activity>
     </application>
 
 </manifest>

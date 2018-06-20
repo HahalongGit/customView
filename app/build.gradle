@@ -5,16 +5,38 @@ android {
     defaultConfig {
         applicationId "com.lll.beizertest"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//        ndk {
+//            moduleName "native-lib"         //生成的so名字
+//            abiFilters "armeabi", "armeabi-v7a", "x86"  //输出指定三种abi体系结构下的so库。
+//        }
     }
+    //设置jni 代码 编译
+//    sourceSets {
+//        main {
+//            jni.srcDirs = []  // [] 中是c 库的路径 不能生成.so 文件？？
+//            jniLibs.srcDirs = ['libs']
+//        }
+//    }
+
+//    task ndkBuild(type: Exec){
+//        commandLine "F:\\sdktools\\sdk\\ndk-bundle\\dk-bundle.cmd",
+//                'NDK_PROJECT_PATH=build/intermediates/ndk',
+//                'NDK_LIBS_OUT=libs'
+//    }
+//    tasks.withType(JavaCompile){
+//        compileTeak -> compileTask.dependsOn ndkBuild
+//    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
     }
 
     allprojects {

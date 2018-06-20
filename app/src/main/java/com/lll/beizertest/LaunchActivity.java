@@ -21,6 +21,7 @@ import com.lll.beizertest.activity.DefineProgressBarActivity;
 import com.lll.beizertest.activity.DrawLayoutActivity;
 import com.lll.beizertest.activity.DrawShapeActivity;
 import com.lll.beizertest.activity.ExpendTextViewActivity;
+import com.lll.beizertest.activity.JNITestActivity;
 import com.lll.beizertest.activity.LetterSideBarActivity;
 import com.lll.beizertest.activity.LivePerformActivity;
 import com.lll.beizertest.activity.LoadViewActivity;
@@ -44,6 +45,8 @@ import com.lll.beizertest.activity.TouchViewActivity;
 import com.lll.beizertest.activity.VerticalDragViewActivity;
 import com.lll.beizertest.ipc.IPCActivity;
 import com.lll.beizertest.ipc.ServiceTestActivity;
+
+import java.lang.reflect.Proxy;
 
 public class LaunchActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -100,6 +103,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_skin).setOnClickListener(this);
         findViewById(R.id.btn_icp).setOnClickListener(this);
         findViewById(R.id.btn_serviceTest).setOnClickListener(this);
+        findViewById(R.id.btn_jni).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 0.6f, 0.2f, 1f);
         valueAnimator.setDuration(500);
@@ -279,6 +283,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_serviceTest: {
                 Intent intent = new Intent(this, ServiceTestActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_jni:{
+                Intent intent = new Intent(this, JNITestActivity.class);
                 startActivity(intent);
                 break;
             }
