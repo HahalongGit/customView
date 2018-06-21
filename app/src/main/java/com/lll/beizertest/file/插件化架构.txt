@@ -73,3 +73,5 @@ Hook IActivityManager接口 ，用它的代理去过Activity检测，最后创�
 
 8.Activity 继承 AppCompatActivity 会异常退出！怎么处理？
 
+9.启动后加载资源，和热修复一样，查看系统是如何加载资源的。
+
