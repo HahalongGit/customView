@@ -1,0 +1,92 @@
+Handler 使用分析和源码分析：
+
+Handler 中使用了消息队列来保存消息，这个消息队列是一个链表，方便Message的插入。每次发送消息会根据Message的when 值来插入到不同的
+位置中。
+Handler 不能直接在一个子线程中直接创建使用。需要添加Looper.prepare()、和Looper.looper();
+我们在主线程中没有主动去添加一个Looper 是因为主线程默认会添加一个MainLooper 。
+在Android的源码中我们可以找到Activity启动的入口ActivityThread的public static void main(String[] args) {}方法中添加Looper的代码。
+  ...
+  Looper.prepareMainLooper();
+    ActivityThread thread = new ActivityThread();
+    thread.attach(false);
+    if (sMainThreadHandler == null) {
+        sMainThreadHandler = thread.getHandler();
+    }
+    if (false) {
+        Looper.myLooper().setMessageLogging(new
+                LogPrinter(Log.DEBUG, "ActivityThread"));
+    }
+    // End of event ActivityThreadMain.
+    Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);
+    Looper.loop();
+    ...
+
+  我们可以在Looper的方法prepare()和prepareMainLooper(); 中发现内部是获取一个Looper
+  Looper.prepareMainLooper();
+
+private static void prepare(boolean quitAllowed) {
+      if (sThreadLocal.get() != null) {
+          throw new RuntimeException("Only one Looper may be created per thread");
+      }
+      sThreadLocal.set(new Looper(quitAllowed));
+  }
+
+public static void prepareMainLooper() {
+    prepare(false);
+    synchronized (Looper.class) {
+        if (sMainLooper != null) {
+            throw new IllegalStateException("The main Looper has already been prepared.");
+        }
+        sMainLooper = myLooper();
+    }
+}
+同时sMainLooper = myLooper(); 获取了这个Looper
+  public static @Nullable Looper myLooper() {
+        return sThreadLocal.get();
+    }
+
+  Handler 是如何保证一个线程只有一个looper对象的。
+  在调用Looper的Prepare()方法的时候，根据线程的名称去获取一个ThreadLocalMap，根据线程的名称
+  set了一个Looper对象如：sThreadLocal.set(new Looper(quitAllowed));获取Looper的时候也是根据当前线程的名称去获取的。这样保证了
+  一个线程只有一个Looper对象。
+
+  在调用looper()方法的时候获取保存的Looper对象，然后拿到一个MessageQueue队列，一个for的死循环，
+  获取队列中的Message然后dispatchMessage();当Message对象为null的时候跳出循环。
+  msg.target.dispatchMessage(msg);
+  在创建Looper对象的过程中已经保存了一个Handler 对象到Target中
+  dispatchMessage(Message msg);调用的时候会调用Handler 的handlerMessage方法处理消息
+
+总结：
+1.我们在使用Handler的时候ActivityThread 已经调用帮我们创建了一个MainThread 的 Looper对象，
+2.我们在Activity中调用sendEmptyMessageDelayed();这些方法发送消息的时候就会去获取这个ActivityThread中
+创建的Looper 并获取他的MessageQueue对象来存储消息Message。
+也就是调用MessageQueue的方法boolean enqueueMessage(Message msg, long when);把消息存在一个链表中。
+3.looper();方法调用处理消息。
+looper()方法中不断循环，取出队列中的消息，然后调用Handler的方法handlerMessage();处理。这个过程中由于保存消息和取消息处理
+已经是一个不再线程中的操作了，所以我们使用Hander也就可以处理多线程中更新UI的问题。
+（保存消息在队列和线程无关，取出消息处理也和线程无关）
+每个消息发送给给handlerMessage处理后会回收处理，调用Message的方法：recycleUnchecked();
+void recycleUnchecked() {
+        // Mark the message as in use while it remains in the recycled object pool.
+        // Clear out all other details.
+        flags = FLAG_IN_USE;
+        what = 0;
+        arg1 = 0;
+        arg2 = 0;
+        obj = null;
+        replyTo = null;
+        sendingUid = -1;
+        when = 0;
+        target = null;
+        callback = null;
+        data = null;
+        synchronized (sPoolSync) {
+            if (sPoolSize < MAX_POOL_SIZE) {
+                next = sPool;
+                sPool = this;
+                sPoolSize++;
+            }
+        }
+    }
+    主要是一些参数置空。
+4.我们自己在线程中new Handler 的时候 就需要自己天际Looper.prepare();和Looper.looper();方法来创建一个自己的Looper对象了。

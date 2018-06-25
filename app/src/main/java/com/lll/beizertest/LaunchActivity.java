@@ -2,12 +2,14 @@ package com.lll.beizertest;
 
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.PixelFormat;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.lll.beizertest.activity.AnimatorActivity;
@@ -61,7 +63,15 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_launch);
+//        setContentView(R.layout.activity_launch);
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT,
+                1,
+                0,
+                PixelFormat.TRANSPARENT);
+        getWindowManager().addView(LayoutInflater.from(this).inflate(R.layout.activity_launch,null),params);
+
         LayoutInflater.from(this).inflate(R.layout.recycler_bannerview_layout, null, false);
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 //        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){
@@ -70,6 +80,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
 //            getWindow().setStatusBarColor(Color.TRANSPARENT);
 //        }
         getResources().getDisplayMetrics();
+
         findViewById(R.id.btn_signature).setOnClickListener(this);
         findViewById(R.id.btn_livePerform).setOnClickListener(this);
         findViewById(R.id.btn_animator).setOnClickListener(this);
