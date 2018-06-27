@@ -103,7 +103,8 @@
         <activity android:name=".activity.ImageSelectTestActivity" />
         <activity android:name=".activity.JNITestActivity" />
         <activity android:name=".activity.ProxyActivity" />
-        <activity android:name=".activity.HandlerActivity"></activity>
+        <activity android:name=".activity.HandlerActivity" />
+        <activity android:name=".activity.RxjavaActivity"></activity>
     </application>
 
 </manifest>
