@@ -104,7 +104,8 @@
         <activity android:name=".activity.JNITestActivity" />
         <activity android:name=".activity.ProxyActivity" />
         <activity android:name=".activity.HandlerActivity" />
-        <activity android:name=".activity.RxjavaActivity"></activity>
+        <activity android:name=".activity.RxjavaActivity" />
+        <activity android:name=".activity.Retrofit2TestActivity"></activity>
     </application>
 
 </manifest>

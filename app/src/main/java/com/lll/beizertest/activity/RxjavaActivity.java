@@ -1,11 +1,13 @@
 package com.lll.beizertest.activity;
 
+import android.Manifest;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.lll.beizertest.R;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.Iterator;
 
@@ -53,6 +55,20 @@ public class RxjavaActivity extends AppCompatActivity {
 
                     }
                 });
+
+
+        //使用RxPermission
+        RxPermissions permissions = new RxPermissions(this);
+        permissions.request(Manifest.permission.CAMERA)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean granded) throws Exception {
+                        if(granded){
+
+                        }
+                    }
+                });
+
     }
 
 

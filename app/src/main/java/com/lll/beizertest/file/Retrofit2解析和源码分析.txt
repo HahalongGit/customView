@@ -1,0 +1,39 @@
+对Retrofit2使用已经一些问题做以梳理：
+Retrofit2 通过注解给Api添加请求方法，在创建Api对象的时候获取注解并解析出注解方法
+如：ServiceApi serviceApi = retrofit.create(ServiceApi.class);
+****通过动态代理生成一个代理对象，调用代理对象的方法
+
+  if (validateEagerly) {
+      eagerlyValidateMethods(service);
+    }
+
+ 解析方法：
+  private void eagerlyValidateMethods(Class<?> service) {
+     Platform platform = Platform.get();
+     for (Method method : service.getDeclaredMethods()) {
+       if (!platform.isDefaultMethod(method)) {
+         loadServiceMethod(method);
+       }
+     }
+   }
+  解析出来后和ServiceMethod类中和Base Url拼接。创建请求对象。
+  // relativeUrl 相对Url,BaseUrl 就是基类的url
+   Request toRequest(@Nullable Object... args) throws IOException {
+      RequestBuilder requestBuilder = new RequestBuilder(httpMethod, baseUrl, relativeUrl, headers,
+          contentType, hasBody, isFormEncoded, isMultipart);
+
+      @SuppressWarnings("unchecked") // It is an error to invoke a method with the wrong arg types.
+      ParameterHandler<Object>[] handlers = (ParameterHandler<Object>[]) parameterHandlers;
+
+      int argumentCount = args != null ? args.length : 0;
+      if (argumentCount != handlers.length) {
+        throw new IllegalArgumentException("Argument count (" + argumentCount
+            + ") doesn't match expected count (" + handlers.length + ")");
+      }
+
+      for (int p = 0; p < argumentCount; p++) {
+        handlers[p].apply(requestBuilder, args[p]);
+      }
+
+      return requestBuilder.build();
+    }
