@@ -61,8 +61,13 @@ public static void prepareMainLooper() {
 2.我们在Activity中调用sendEmptyMessageDelayed();这些方法发送消息的时候就会去获取这个ActivityThread中
 创建的Looper 并获取他的MessageQueue对象来存储消息Message。
 也就是调用MessageQueue的方法boolean enqueueMessage(Message msg, long when);把消息存在一个链表中。
+保存消息的时候根据消息的when 也就是延迟的时间处理，是插入链表的头部还是尾部，when 是0的时候直接插入头部，when >0的时候根据前几个消息的when插入合适的位置
+这样处理，提高效率，减小执行带来的时间误差。
+*** 这里的插入操作具体可以举例画图，设置几个消息when不同查看插入的位置关系。
+
 3.looper();方法调用处理消息。
-looper()方法中不断循环，取出队列中的消息，然后调用Handler的方法handlerMessage();处理。这个过程中由于保存消息和取消息处理
+looper()方法中不断循环，用当前的时候判断是否大于消息的延迟时间when，大于的时候取出队列中的消息，把消息next设置null.
+然后调用Handler的方法handlerMessage();处理。这个过程中由于保存消息和取消息处理
 已经是一个不再线程中的操作了，所以我们使用Hander也就可以处理多线程中更新UI的问题。
 （保存消息在队列和线程无关，取出消息处理也和线程无关）
 每个消息发送给给handlerMessage处理后会回收处理，调用Message的方法：recycleUnchecked();
