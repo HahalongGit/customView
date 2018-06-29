@@ -38,6 +38,7 @@ import com.lll.beizertest.activity.PictureSelectorActivity;
 import com.lll.beizertest.activity.QQStepViewActivity;
 import com.lll.beizertest.activity.RatingBarActivity;
 import com.lll.beizertest.activity.RecycleViewHeaderFooterActivity;
+import com.lll.beizertest.activity.Retrofit2TestActivity;
 import com.lll.beizertest.activity.RoundImageActivity;
 import com.lll.beizertest.activity.ScreenMenuViewActivity;
 import com.lll.beizertest.activity.SignaturePadActivity;
@@ -63,14 +64,14 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_launch);
-        WindowManager.LayoutParams params = new WindowManager.LayoutParams(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT,
-                1,
-                0,
-                PixelFormat.TRANSPARENT);
-        getWindowManager().addView(LayoutInflater.from(this).inflate(R.layout.activity_launch,null),params);
+        setContentView(R.layout.activity_launch);
+//        WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+//                WindowManager.LayoutParams.MATCH_PARENT,
+//                WindowManager.LayoutParams.MATCH_PARENT,
+//                1,
+//                0,
+//                PixelFormat.TRANSPARENT);
+//        getWindowManager().addView(LayoutInflater.from(this).inflate(R.layout.activity_launch,null),params);
 
         LayoutInflater.from(this).inflate(R.layout.recycler_bannerview_layout, null, false);
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -117,6 +118,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_serviceTest).setOnClickListener(this);
         findViewById(R.id.btn_jni).setOnClickListener(this);
         findViewById(R.id.btn_notRegist).setOnClickListener(this);
+        findViewById(R.id.btn_retrofit2).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 0.6f, 0.2f, 1f);
         valueAnimator.setDuration(500);
@@ -307,6 +309,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn_notRegist: {
                 //如果设置点击的时候绕过检测启动一个没有注册的Activity
                 Intent intent = new Intent(this, NotRegistedActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_retrofit2: {
+                Intent intent = new Intent(this, Retrofit2TestActivity.class);
                 startActivity(intent);
                 break;
             }

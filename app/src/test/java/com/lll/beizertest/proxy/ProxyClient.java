@@ -47,16 +47,24 @@ public class ProxyClient {
     }
 
     @Test
-    public void Client3(){
+    public void Client3() {
         System.out.println("*************test3************");
         LogHandler logHandler = new LogHandler();
         // Retrofit2 创建对象的时候直接传入 Api接口
         //如代码：Retrofit2TestActivity 中查看 retrofit.create(ServiceApi.class);源码结果
         //示例：ServiceApi serviceApi = retrofit.create(ServiceApi.class);
         // 为什么这里是错误的？Retrofit2 是怎么实现的
-        UserManager userManager = (UserManager) logHandler.newProxyInstance(new Class<?>[] { UserManager.class });
+        UserManager userManager = (UserManager) logHandler.newProxyInstance(UserManager.class);
 //        UserManager userManager = (UserManager) logHandler.newProxyInstance(UserManager.class);//代理UserManager
         userManager.addUser("20180628", "奔跑的地瓜");
+    }
+
+    @Test
+    public void Client4() {
+        System.out.println("*****************test4****************");
+        LogHandler2 logHandler2 = new LogHandler2();
+        UserManager userManager = logHandler2.newProxyInstance(UserManager.class);
+        userManager.addUser("20180829", "奔跑的地瓜2");
     }
 
 }

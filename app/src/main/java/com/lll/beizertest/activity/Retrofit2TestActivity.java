@@ -53,6 +53,8 @@ public class Retrofit2TestActivity extends AppCompatActivity {
 
                     }
                 });
+//        serviceApi.login()
+//                .execute();
     }
 
     private void rxjaveRetrofit2Use(ServiceApi serviceApi) {

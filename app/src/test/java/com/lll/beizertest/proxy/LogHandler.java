@@ -24,6 +24,7 @@ public class LogHandler implements InvocationHandler {
         return Proxy.newProxyInstance(objectTarget.getClass().getClassLoader(),objectTarget.getClass().getInterfaces(),this);
     }
 
+
     /**
      *
      * @param proxy 代理对象

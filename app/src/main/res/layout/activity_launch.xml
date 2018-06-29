@@ -264,6 +264,13 @@
                 android:padding="10dp"
                 android:text="绕过AndroidManifest.xml检测" />
 
+            <Button
+                android:id="@+id/btn_retrofit2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Retrofit2" />
+
         </LinearLayout>
 
     </ScrollView>

@@ -37,3 +37,148 @@ Retrofit2 通过注解给Api添加请求方法，在创建Api对象的时候获�
 
       return requestBuilder.build();
     }
+
+
+
+   代码分析：
+   1.从Retrofit2 创建对象开始，首先build()方法中
+    Executor callbackExecutor = this.callbackExecutor;
+         if (callbackExecutor == null) {
+           callbackExecutor = platform.defaultCallbackExecutor();
+         }
+    创建一个callBack 把回调转发到UI线程。内部通过Handler 相关的代码实现
+    接下来是adapterFactories，这个对象主要用于对Call进行转化，基本上不需要我们自己去自定义。
+    adapterFactories.add(platform.defaultCallAdapterFactory(callbackExecutor));
+    //这里添加一个默认的CallAdapterFactor ExecutorCallAdapterFactory
+    ExecutorCallAdapterFactory 中get方法返回了一个CallAdapter 也就是一个ExecutorCallbackCall
+    ****  也就是 Retrofit 默认情况create()方法最后返回一个Call<T> 对象。
+
+          @Override
+           public CallAdapter<?, ?> get(Type returnType, Annotation[] annotations, Retrofit retrofit) {
+             if (getRawType(returnType) != Call.class) {
+               return null;
+             }
+             final Type responseType = Utils.getCallResponseType(returnType);
+             return new CallAdapter<Object, Call<?>>() {
+               @Override public Type responseType() {
+                 return responseType;
+               }
+
+               @Override public Call<Object> adapt(Call<Object> call) {
+                 return new ExecutorCallbackCall<>(callbackExecutor, call);
+               }
+             };
+           }
+
+     new ExecutorCallbackCall 传递一个OkhttpCall();
+
+    最后是converterFactories
+    List<Converter.Factory> converterFactories = new ArrayList<>(this.converterFactories);
+    添加一个默认的
+     Builder(Platform platform) {
+          this.platform = platform;
+          // Add the built-in converter factory first. This prevents overriding its behavior but also
+          // ensures correct behavior when using converters that consume all types.
+          converterFactories.add(new BuiltInConverters()); //添加默认的转换器
+        }
+
+  最后在调用Retrofit 的equeue()方法的时候执行，并通过 callbackExecutor 对象切换到UI线程，这个callbackExecutor 就是
+  build()方法中默认切换线程的工具。
+  最后代码中执行call()方法调用
+   @Override public void enqueue(final Callback<T> callback) {
+      checkNotNull(callback, "callback == null");
+
+      delegate.enqueue(new Callback<T>() {
+        @Override public void onResponse(Call<T> call, final Response<T> response) {
+          callbackExecutor.execute(new Runnable() {
+            @Override public void run() {
+              if (delegate.isCanceled()) {
+                // Emulate OkHttp's behavior of throwing/delivering an IOException on cancellation.
+                callback.onFailure(ExecutorCallbackCall.this, new IOException("Canceled"));
+              } else {
+                callback.onResponse(ExecutorCallbackCall.this, response);
+              }
+            }
+          });
+        }
+     调用了delegate 的enqueue();其实就是默认的okHttpCall()的方法
+     源码中创建了对应的OkHttp 的Request等对象。最后又调用了OkHttp3的call()方法处理。
+     OkHttpCall 的创建方法：
+     private okhttp3.Call createRawCall() throws IOException {
+         Request request = serviceMethod.toRequest(args);
+         okhttp3.Call call = serviceMethod.callFactory.newCall(request);
+         if (call == null) {
+           throw new NullPointerException("Call.Factory returned null.");
+         }
+         return call;
+       }
+
+     最后执行okhttp3.Call call = serviceMethod.callFactory.newCall(request);
+     这个callFactory就是Retrofit build()方法中创建的OkHttpClient对象。
+     在OkHttpClient代码中执行：
+      @Override public Call newCall(Request request) {
+         return new RealCall(this, request, false /* for web socket */);
+       }
+
+       解析返回结果：
+       response = parseResponse(rawResponse);
+       最后会调用 T body = serviceMethod.toResponse(catchingBody);
+       R toResponse(ResponseBody body) throws IOException {
+           return responseConverter.convert(body);
+       }
+       也就是调用ServiceMethod build()方法中添加的Converter 对象
+        responseConverter = createResponseConverter();
+
+          private Converter<ResponseBody, T> createResponseConverter() {
+             Annotation[] annotations = method.getAnnotations();
+             try {
+               return retrofit.responseBodyConverter(responseType, annotations);
+             } catch (RuntimeException e) { // Wide exception range because factories are user code.
+               throw methodError(e, "Unable to create converter for %s", responseType);
+             }
+           }
+           然后执行：retrofit.responseBodyConverter(responseType, annotations);
+           其实最终执行了：
+           public <T> Converter<ResponseBody, T> nextResponseBodyConverter(
+                 @Nullable Converter.Factory skipPast, Type type, Annotation[] annotations) {
+               checkNotNull(type, "type == null");
+               checkNotNull(annotations, "annotations == null");
+
+               int start = converterFactories.indexOf(skipPast) + 1;
+               for (int i = start, count = converterFactories.size(); i < count; i++) {
+                 Converter<ResponseBody, ?> converter =
+                     converterFactories.get(i).responseBodyConverter(type, annotations, this);
+                 if (converter != null) {
+                   //noinspection unchecked
+                   return (Converter<ResponseBody, T>) converter;
+                 }
+               }
+           从converterFactories 中获取一个converterFactor.
+           也就是在build创建的时候添加的Factory.
+             /** Add converter factory for serialization and deserialization of objects. */
+               public Builder addConverterFactory(Converter.Factory factory) {
+                 converterFactories.add(checkNotNull(factory, "factory == null"));
+                 return this;
+               }
+            这样直接使用Retroift2 调用原理流程就基本走完了。
+
+      最终都执行到OkHttp3相关的代码中。
+
+   2.Retrofit2 create()方法中创建Api示例.通过代理主要执行：
+    ServiceMethod<Object, Object> serviceMethod =
+           (ServiceMethod<Object, Object>) loadServiceMethod(method);
+       OkHttpCall<Object> okHttpCall = new OkHttpCall<>(serviceMethod, args);
+       return serviceMethod.callAdapter.adapt(okHttpCall);
+    把method 封装成ServiceMethod 并且构造OkHttpCall 对象。最后通过serviceMethod.callAdapter.adapt();对okHttpCall
+    进行代理包装。
+
+    1.ServiceMethod 解析我们的注解方法，把注解的方法转换成Request对象。对返回结果类型解析确认convertFactory,获取url占位符，解析方法参数获取构建RequestBody
+    的参数。最终调用toRequest（ServiceMethod 中的toReequest()方法）的方法完成Request的构建。
+    private okhttp3.Call createRawCall() throws IOException {
+        Request request = serviceMethod.toRequest(args);//最终在OkHttpCall 中调用创建Request
+        okhttp3.Call call = serviceMethod.callFactory.newCall(request);
+        if (call == null) {
+          throw new NullPointerException("Call.Factory returned null.");
+        }
+        return call;
+      }
