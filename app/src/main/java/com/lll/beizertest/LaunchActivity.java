@@ -30,6 +30,7 @@ import com.lll.beizertest.activity.LoadViewActivity;
 import com.lll.beizertest.activity.LogisticsProgressViewActivity;
 import com.lll.beizertest.activity.LuckPatternViewActivity;
 import com.lll.beizertest.activity.MainActivity;
+import com.lll.beizertest.activity.MoveViewActivity;
 import com.lll.beizertest.activity.MyTextViewActivity;
 import com.lll.beizertest.activity.NavigationBarActivity;
 import com.lll.beizertest.activity.NotRegistedActivity;
@@ -119,6 +120,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_jni).setOnClickListener(this);
         findViewById(R.id.btn_notRegist).setOnClickListener(this);
         findViewById(R.id.btn_retrofit2).setOnClickListener(this);
+        findViewById(R.id.btn_moveView).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 0.6f, 0.2f, 1f);
         valueAnimator.setDuration(500);
@@ -314,6 +316,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_retrofit2: {
                 Intent intent = new Intent(this, Retrofit2TestActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_moveView: {
+                Intent intent = new Intent(this, MoveViewActivity.class);
                 startActivity(intent);
                 break;
             }

@@ -106,7 +106,8 @@
         <activity android:name=".activity.HandlerActivity" />
         <activity android:name=".activity.RxjavaActivity" />
         <activity android:name=".activity.Retrofit2TestActivity" />
-        <activity android:name=".activity.ActivityManagerTestActivity"></activity>
+        <activity android:name=".activity.ActivityManagerTestActivity" />
+        <activity android:name=".activity.MoveViewActivity"></activity>
     </application>
 
 </manifest>
