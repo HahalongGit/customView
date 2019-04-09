@@ -38,6 +38,12 @@ public class RatingBar extends View {
      */
     private int mFocusNumber = 0;
 
+    private OnClickStarListener onClickStarListener;
+
+    public void setOnClickStarListener(OnClickStarListener onClickStarListener) {
+        this.onClickStarListener = onClickStarListener;
+    }
+
     public RatingBar(Context context) {
         this(context,null);
     }
@@ -108,7 +114,26 @@ public class RatingBar extends View {
                 Log.e("TAG","onTouchEvent-X2:"+moveX+",NUM:"+number+",mFocusNumber:"+mFocusNumber);
                 break;
             }
+            case MotionEvent.ACTION_UP:{
+                if(onClickStarListener!=null){
+                    onClickStarListener.onClickStar(mFocusNumber);
+                }
+                break;
+            }
         }
         return true;
     }
+
+    /**
+     * 点击星星
+     */
+    public interface OnClickStarListener{
+        /**
+         * 选中的位置
+         * @param star
+         */
+        void onClickStar(int star);
+
+    }
+
 }

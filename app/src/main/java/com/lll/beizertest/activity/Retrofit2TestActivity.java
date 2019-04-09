@@ -6,9 +6,15 @@ import android.os.Bundle;
 import com.lll.beizertest.R;
 import com.lll.beizertest.api.ServiceApi;
 
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,6 +40,58 @@ public class Retrofit2TestActivity extends AppCompatActivity {
 
         rxjaveRetrofit2Use(serviceApi);
         retrofit2Used(serviceApi);
+
+        OkHttpClient client1 = new OkHttpClient.Builder()
+                .addNetworkInterceptor(new Interceptor() {
+                    @Override
+                    public okhttp3.Response intercept(Chain chain) throws IOException {
+                        return null;
+                    }
+                })
+                .connectTimeout(10000, TimeUnit.MICROSECONDS)
+                .build();
+
+        OkHttpClient client  = new OkHttpClient();
+        client.networkInterceptors().add(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+                okhttp3.Request req  = chain.request();
+                req.url();
+                req.headers("");
+
+                return null;
+            }
+        });
+        Request request = new Request.Builder()
+                .url("")
+                .get()
+                .addHeader("","")
+                .build();
+
+        //异步方式获取数据
+        client.newCall(request).enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+
+            }
+        });
+
+        //同步方式获取数据
+        try {
+            okhttp3.Response response = client.newCall(request)
+                    .execute();
+            if(response.isSuccessful()){
+                String result = response.body().toString();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
