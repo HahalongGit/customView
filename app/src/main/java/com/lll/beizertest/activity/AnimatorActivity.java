@@ -5,6 +5,7 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,7 +26,12 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
         imageView = findViewById(R.id.iv_animator);
         findViewById(R.id.btn_start).setOnClickListener(this);
         imageView.setOnClickListener(this);
+
         //animator1();
+//        BitmapFactory.Options options = new  BitmapFactory.Options();
+//        options.inJustDecodeBounds = true;
+//        options.inSampleSize = 2;
+//        options.inJustDecodeBounds = false;
 
     }
 
@@ -34,6 +40,10 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
      */
     private void animator1() {
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,5f,0f);
+
+
+        ObjectAnimator o = ObjectAnimator.ofFloat(valueAnimator,"translationX",3,4);
+        o.start();
         valueAnimator.setDuration(1000);
         valueAnimator.start();
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

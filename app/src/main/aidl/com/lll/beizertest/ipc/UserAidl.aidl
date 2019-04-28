@@ -10,4 +10,7 @@ interface UserAidl {
 
    String getUserPassword();
 
+//   void addUser(User userInfo);
+//   User getUserInfo(String id);
+
 }

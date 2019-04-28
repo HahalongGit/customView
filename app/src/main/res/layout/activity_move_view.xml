@@ -22,6 +22,13 @@
 
         <include layout="@layout/view_group_layout2" />
 
+        <com.lll.beizertest.view.TouchView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/blue" />
+
     </com.lll.beizertest.view.MoveViewGroup>
 
 </LinearLayout>

@@ -136,15 +136,27 @@ public class MoveViewGroup extends FrameLayout {
         mFirstViewWidth = mFirstView.getMeasuredWidth();
     }
 
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        Log.e(TAG, "test-onInterceptTouchEvent11:" + ev.getAction());
+        Log.e(TAG, "onInterceptTouchEvent22:" + super.onInterceptTouchEvent(ev));
         return viewDragHelper.shouldInterceptTouchEvent(ev);// 拦截事件
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.e(TAG, "test-onTouchEvent11:" + event.getAction());
+        Log.e(TAG, "test-onTouchEvent22:" + super.onTouchEvent(event));
         viewDragHelper.processTouchEvent(event);// 传递事件给ViewDrawHelper
         return true;
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.e(TAG, "test-dispatchTouchEvent11" + ev.getAction());
+        Log.e(TAG, "test-dispatchTouchEvent22" + super.dispatchTouchEvent(ev));
+        return super.dispatchTouchEvent(ev);
     }
 
     @Override

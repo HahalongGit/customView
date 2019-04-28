@@ -1,10 +1,14 @@
 package com.lll.beizertest.ipc;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 
 import com.lll.beizertest.R;
@@ -18,11 +22,15 @@ public class ServiceTestActivity extends AppCompatActivity {
     @BindView(R.id.btn_serviceTest)
     Button btnServiceTest;
 
+    private WebView webView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_test);
         ButterKnife.bind(this);
+
+
     }
 
     @OnClick(R.id.btn_serviceTest)

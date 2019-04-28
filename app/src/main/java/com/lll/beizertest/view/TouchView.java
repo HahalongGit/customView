@@ -16,6 +16,7 @@ import android.view.View;
  */
 
 public class TouchView extends View {
+    private static final String TAG = "TouchView";
     public TouchView(Context context) {
         super(context);
     }
@@ -30,14 +31,17 @@ public class TouchView extends View {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        Log.e("TAG","view-dispatchTouchEvent-1:"+event.getAction());
+        Log.e(TAG, "view-test-dispatchTouchEvent-11:" + event.getAction());
+        Log.e(TAG, "view-test-dispatchTouchEvent-22:" + super.dispatchTouchEvent(event));
         return super.dispatchTouchEvent(event);
     }
 
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.e("TAG","view-onTouchEvent-1:"+event.getAction());
-        return true;
+        Log.e(TAG, "view-test-onTouchEvent-1:" + event.getAction());
+        Log.e(TAG, "view-test-onTouchEvent-2:" + super.onTouchEvent(event));
+        return super.onTouchEvent(event);
     }
 
     //onClick 在onTouchEvent 的 MOVENT_UP中才执行，在onTouch 的最后执行

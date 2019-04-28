@@ -50,6 +50,7 @@ import com.lll.beizertest.activity.TouchViewActivity;
 import com.lll.beizertest.activity.VerticalDragViewActivity;
 import com.lll.beizertest.ipc.IPCActivity;
 import com.lll.beizertest.ipc.ServiceTestActivity;
+import com.lll.beizertest.note_reflect.NoteReflectActivity;
 
 import java.lang.reflect.Proxy;
 
@@ -121,6 +122,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_notRegist).setOnClickListener(this);
         findViewById(R.id.btn_retrofit2).setOnClickListener(this);
         findViewById(R.id.btn_moveView).setOnClickListener(this);
+        findViewById(R.id.btn_noteReflect).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 0.6f, 0.2f, 1f);
         valueAnimator.setDuration(500);
@@ -150,6 +152,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_livePerform: {
                 Intent intent = new Intent(this, LivePerformActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_noteReflect: {// 自定义注解和反射
+                Intent intent = new Intent(this, NoteReflectActivity.class);
                 startActivity(intent);
                 break;
             }

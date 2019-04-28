@@ -107,7 +107,8 @@
         <activity android:name=".activity.RxjavaActivity" />
         <activity android:name=".activity.Retrofit2TestActivity" />
         <activity android:name=".activity.ActivityManagerTestActivity" />
-        <activity android:name=".activity.MoveViewActivity"></activity>
+        <activity android:name=".activity.MoveViewActivity" />
+        <activity android:name=".note_reflect.NoteReflectActivity"></activity>
     </application>
 
 </manifest>

@@ -162,4 +162,6 @@ public class LoveLayout extends RelativeLayout {
        return new PointF(random.nextInt(mWidth)-mDrawableWidth,random.nextInt(mHeight/2)+mHeight*(i-1)/2);
     }
 
+
+
 }

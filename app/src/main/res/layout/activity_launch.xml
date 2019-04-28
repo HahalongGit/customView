@@ -45,6 +45,13 @@
                 android:text="直播效果" />
 
             <Button
+                android:id="@+id/btn_noteReflect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="自定义注解和反射" />
+
+            <Button
                 android:id="@+id/btn_defineText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
