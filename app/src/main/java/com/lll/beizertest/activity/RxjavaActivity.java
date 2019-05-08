@@ -30,7 +30,7 @@ public class RxjavaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rxjava);
-        Observable.just("")
+        Observable.just("","")
                 .map(new Function<String, Bitmap>() {
                     @Override
                     public Bitmap apply(String s) throws Exception {

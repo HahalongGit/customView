@@ -1,6 +1,7 @@
 package com.lll.beizertest.http;
 
 import android.content.Context;
+import android.renderscript.Element;
 
 import java.util.Map;
 
@@ -12,7 +13,8 @@ import java.util.Map;
  * @Date 2018/2/26
  */
 
-public interface IHttpEngine {
+public interface IHttpEngine  {
+
 
     /**
      * get 请求

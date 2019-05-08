@@ -1,5 +1,7 @@
 package com.lll.beizertest.model;
 
+import android.util.Log;
+
 /**
  * Created by longlong on 2018/2/28.
  *
@@ -30,4 +32,9 @@ public class Student {
     public void setStuAge(String stuAge) {
         this.stuAge = stuAge;
     }
+
+    public static void function_static_mehod(){
+        Log.e("TAG","function_static_mehod静态方法调用");
+    }
+
 }

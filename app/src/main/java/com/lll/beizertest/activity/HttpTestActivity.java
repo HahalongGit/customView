@@ -9,12 +9,18 @@ import com.lll.beizertest.http.HttpUtils;
 import com.lll.beizertest.http.OkHttpEngine;
 import com.lll.beizertest.model.Student;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
+import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -32,6 +38,7 @@ public class HttpTestActivity extends AppCompatActivity {
         httpUtilTest();
 
         OkHttpClient okHttpClient = new OkHttpClient();
+
         FormBody formBody = new FormBody.Builder()
                 .add("key","value")
                 .build();
@@ -43,10 +50,20 @@ public class HttpTestActivity extends AppCompatActivity {
                 .tag("")
                 .url("").build();
 
-        //添加拦截器
+        //添加拦截器等中间操作
         okHttpClient.newBuilder().addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
+                return null;
+            }
+        }).cookieJar(new CookieJar() {
+            @Override
+            public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+
+            }
+
+            @Override
+            public List<Cookie> loadForRequest(HttpUrl url) {
                 return null;
             }
         });
@@ -56,6 +73,7 @@ public class HttpTestActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // 异步执行
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
