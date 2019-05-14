@@ -6,6 +6,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.webkit.JsPromptResult;
+import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -31,6 +33,27 @@ public class ServiceTestActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
+    }
+
+    private void webViewTest() {
+        webView.removeJavascriptInterface("");//
+        webView.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+                return super.onJsAlert(view, url, message, result);
+            }
+
+            @Override
+            public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
+                return super.onJsConfirm(view, url, message, result);
+            }
+
+            @Override
+            public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
+                // 在这里做JSBridge
+                return super.onJsPrompt(view, url, message, defaultValue, result);
+            }
+        });
     }
 
     @OnClick(R.id.btn_serviceTest)

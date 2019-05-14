@@ -10,10 +10,12 @@ import android.util.Log;
  * @Date 2019/5/6
  */
 
-public class ArtsStudent extends Student {
+public abstract class ArtsStudent extends Student {
 
     public static void function_static_mehod(){
         Log.e("TAG","function_static_mehod静态方法调用");
     }
 
+    @Override
+    protected abstract void setText();
 }

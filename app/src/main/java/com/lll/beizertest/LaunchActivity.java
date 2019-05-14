@@ -3,10 +3,13 @@ package com.lll.beizertest;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.PixelFormat;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -38,6 +41,7 @@ import com.lll.beizertest.activity.OriginCodeAnalysisActivity;
 import com.lll.beizertest.activity.PictureSelectorActivity;
 import com.lll.beizertest.activity.QQStepViewActivity;
 import com.lll.beizertest.activity.RatingBarActivity;
+import com.lll.beizertest.activity.RecycleViewActivity;
 import com.lll.beizertest.activity.RecycleViewHeaderFooterActivity;
 import com.lll.beizertest.activity.Retrofit2TestActivity;
 import com.lll.beizertest.activity.RoundImageActivity;
@@ -53,8 +57,12 @@ import com.lll.beizertest.ipc.ServiceTestActivity;
 import com.lll.beizertest.note_reflect.NoteReflectActivity;
 
 import java.lang.reflect.Proxy;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class LaunchActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private static final String TAG = "LaunchActivity";
 
     private ImageView imageView;
 
@@ -63,10 +71,38 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
 
     FloatingActionButton floatingActionButton;
 
+    private ThreadLocal<String> threadLocal = new ThreadLocal<>();
+
+    private ThreadPoolExecutor threadPoolExecutor;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
+
+
+//        Executors.newFixedThreadPool(4);//只有核心线程
+//        Executors.newCachedThreadPool();// 没有限制的线程池 大量的耗时少的任务
+//        Executors.newScheduledThreadPool(4);// 核心 线程数量有限制，非核心线程数量没有限制 处理定时任务和周期性的任务
+//        Executors.newSingleThreadExecutor();// 单个核心线程 不需要处理线程同步的问题
+
+        threadLocal.set("mainThread1");
+        Log.e(TAG, "mainThread1获取：" + threadLocal.get());
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                threadLocal.set("子线程1");
+                Log.e(TAG, "子线程1获取：" + threadLocal.get());
+            }
+        }).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.e(TAG, "子线程2获取：" + threadLocal.get());
+            }
+        }).start();
+
 //        WindowManager.LayoutParams params = new WindowManager.LayoutParams(
 //                WindowManager.LayoutParams.MATCH_PARENT,
 //                WindowManager.LayoutParams.MATCH_PARENT,
@@ -123,6 +159,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_retrofit2).setOnClickListener(this);
         findViewById(R.id.btn_moveView).setOnClickListener(this);
         findViewById(R.id.btn_noteReflect).setOnClickListener(this);
+        findViewById(R.id.btn_allRecycleView).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 0.6f, 0.2f, 1f);
         valueAnimator.setDuration(500);
@@ -147,6 +184,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             }
             case R.id.btn_animator: {
                 Intent intent = new Intent(this, AnimatorActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_allRecycleView: {// 专题
+                Intent intent = new Intent(this, RecycleViewActivity.class);
                 startActivity(intent);
                 break;
             }

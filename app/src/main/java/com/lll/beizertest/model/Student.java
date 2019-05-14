@@ -10,7 +10,7 @@ import android.util.Log;
  * @Date 2018/2/28
  */
 
-public class Student {
+public abstract class Student {
 
     private String stuName;
 
@@ -35,6 +35,10 @@ public class Student {
 
     public static void function_static_mehod(){
         Log.e("TAG","function_static_mehod静态方法调用");
+    }
+
+    protected void setText(){
+
     }
 
 }

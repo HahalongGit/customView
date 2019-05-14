@@ -37,6 +37,13 @@
                 android:padding="10dp"
                 android:text="动画学习" />
 
+            <!--RecycleViewActivity-->
+            <Button
+                android:id="@+id/btn_allRecycleView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="RecycleView 专题" />
             <Button
                 android:id="@+id/btn_livePerform"
                 android:layout_width="match_parent"
