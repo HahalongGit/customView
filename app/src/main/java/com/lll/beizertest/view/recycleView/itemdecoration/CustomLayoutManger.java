@@ -137,6 +137,7 @@ public class CustomLayoutManger extends RecyclerView.LayoutManager {
             if (travel > 0) {//向上滑动 回收当前屏幕上划动越界的View
                 if (getDecoratedBottom(child) - travel < 0) {//表示整个View都滑动出去屏幕了
                     removeAndRecycleView(child, recycler);
+                    continue;//继续
                 }
             } else if (travel < 0) {//向下滑动 最后一个item向下滑动出屏幕后回收
                 if (getDecoratedTop(child) - travel > getHeight() - getPaddingBottom()) {
@@ -162,7 +163,8 @@ public class CustomLayoutManger extends RecyclerView.LayoutManager {
                     // 所以我们需要把高度减去移动距离。需要注意的是，这个移动距离是不包含最新的移动距离travel的，
                     // 虽然我们在判断哪些item是新增的显示的，是假设已经移动了travel，但这只是识别哪些item将要显示出来的策略，
                     // 到目前为止，所有的item并未真正的移动
-
+                    Log.e(TAG, "---Rotation:" + childView.getRotationY());
+//                    childView.setRotation(childView.getRotationY() + 1);
                 } else {
                     // 不在滑动的区域内
                     break;
@@ -170,7 +172,7 @@ public class CustomLayoutManger extends RecyclerView.LayoutManager {
             }
         } else {// 向下滑动的时候填充空白
             View firstView = getChildAt(0);
-            int maxPos = getPosition(firstView)-1;// 取屏幕显示的第一个View的上一个View
+            int maxPos = getPosition(firstView) - 1;// 取屏幕显示的第一个View的上一个View
             for (int i = maxPos; i >= 0; i--) {
                 Rect rect = mItemRects.get(i);
                 if (Rect.intersects(visiabeArea, rect)) {
@@ -178,6 +180,8 @@ public class CustomLayoutManger extends RecyclerView.LayoutManager {
                     addView(childView, 0);//在显示区域，插在屏幕显示的第0个位置
                     measureChildWithMargins(childView, 0, 0);
                     layoutDecorated(childView, rect.left, rect.top - mSumDy, rect.right, rect.bottom - mSumDy);
+                    Log.e(TAG, "===Rotation:" + childView.getRotationY());
+//                    childView.setRotation(childView.getRotationY() + 1);
                 } else {
                     break;
                 }
@@ -191,7 +195,9 @@ public class CustomLayoutManger extends RecyclerView.LayoutManager {
         // Android中手指向下滑动是负值，向上滑动是正值
 //        offsetChildrenVertical(-dy);// 手指上划时子item向上滑动，item的值应该时减去dy
         // 手指上划时子item向上滑动，item的值应该时减去dy
-        offsetChildrenVertical(-travel);// 调用这个方法整体移动，调用以后才会把新增的显示出来。
+        offsetChildrenVertical(-travel);// 调用View的offsetTopAndBottom()方法来移动一个item指定的距离
+        // 调用这个方法整体移动，调用以后才会把新增的显示出来。系统LinearLayoutManager水平垂直滑动采用offsetChildrenVertical()
+        // offsetChildrenVertical()方法移动，用于item没有任何操作的移动，如果需要添加一些移动的变化（放大，缩小，旋转等）需要改变策略
 
         return travel;// dy是每次滚动的距离
     }

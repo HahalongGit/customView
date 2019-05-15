@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import com.lll.beizertest.R;
 import com.lll.beizertest.adapter.recycleview.CustomLayoutMnagerAdapter;
 import com.lll.beizertest.view.recycleView.itemdecoration.CustomLayoutManger;
+import com.lll.beizertest.view.recycleView.itemdecoration.CustomLayoutManger2;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,7 +21,7 @@ public class CustomLayoutManagerActivity extends AppCompatActivity {
     @BindView(R.id.recycle_customManger)
     RecyclerView recycleCustomManger;
 
-    private CustomLayoutManger customLayoutManger;
+    private CustomLayoutManger2 customLayoutManger;
 
     private CustomLayoutMnagerAdapter customLayoutMnagerAdapter;
 
@@ -30,7 +31,7 @@ public class CustomLayoutManagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_custom_layout_manager);
         ButterKnife.bind(this);
         customLayoutMnagerAdapter = new CustomLayoutMnagerAdapter(this);
-        customLayoutManger = new CustomLayoutManger();
+        customLayoutManger = new CustomLayoutManger2();
         recycleCustomManger.setLayoutManager(customLayoutManger);
         recycleCustomManger.setAdapter(customLayoutMnagerAdapter);
     }
