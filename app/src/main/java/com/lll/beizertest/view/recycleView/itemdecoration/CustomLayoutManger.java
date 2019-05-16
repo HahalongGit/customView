@@ -195,7 +195,7 @@ public class CustomLayoutManger extends RecyclerView.LayoutManager {
         // Android中手指向下滑动是负值，向上滑动是正值
 //        offsetChildrenVertical(-dy);// 手指上划时子item向上滑动，item的值应该时减去dy
         // 手指上划时子item向上滑动，item的值应该时减去dy
-        offsetChildrenVertical(-travel);// 调用View的offsetTopAndBottom()方法来移动一个item指定的距离
+        offsetChildrenVertical(-travel);// 调用View的offsetTopAndBottom()方法来让所有的item滑动一段距离，内部采用循环进行
         // 调用这个方法整体移动，调用以后才会把新增的显示出来。系统LinearLayoutManager水平垂直滑动采用offsetChildrenVertical()
         // offsetChildrenVertical()方法移动，用于item没有任何操作的移动，如果需要添加一些移动的变化（放大，缩小，旋转等）需要改变策略
 

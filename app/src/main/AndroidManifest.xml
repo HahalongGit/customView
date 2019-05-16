@@ -110,7 +110,10 @@
         <activity android:name=".activity.MoveViewActivity" />
         <activity android:name=".note_reflect.NoteReflectActivity" />
         <activity android:name=".activity.recycleview.CustomLayoutManagerActivity" />
-        <activity android:name=".activity.RecycleViewActivity"></activity>
+        <activity android:name=".activity.RecycleViewActivity" />
+        <activity android:name=".activity.hook.MainHookActivity" />
+        <activity android:name=".activity.hook.HookListenerActivity" />
+        <activity android:name=".activity.hook.HookActivityActivity"></activity>
     </application>
 
 </manifest>

@@ -52,6 +52,7 @@ import com.lll.beizertest.activity.StatusBarActivity;
 import com.lll.beizertest.activity.TagLayoutActivity;
 import com.lll.beizertest.activity.TouchViewActivity;
 import com.lll.beizertest.activity.VerticalDragViewActivity;
+import com.lll.beizertest.activity.hook.MainHookActivity;
 import com.lll.beizertest.ipc.IPCActivity;
 import com.lll.beizertest.ipc.ServiceTestActivity;
 import com.lll.beizertest.note_reflect.NoteReflectActivity;
@@ -59,6 +60,9 @@ import com.lll.beizertest.note_reflect.NoteReflectActivity;
 import java.lang.reflect.Proxy;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class LaunchActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -119,7 +123,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
 //            getWindow().setStatusBarColor(Color.TRANSPARENT);
 //        }
         getResources().getDisplayMetrics();
-
+        ButterKnife.bind(this);
         findViewById(R.id.btn_signature).setOnClickListener(this);
         findViewById(R.id.btn_livePerform).setOnClickListener(this);
         findViewById(R.id.btn_animator).setOnClickListener(this);
@@ -160,6 +164,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_moveView).setOnClickListener(this);
         findViewById(R.id.btn_noteReflect).setOnClickListener(this);
         findViewById(R.id.btn_allRecycleView).setOnClickListener(this);
+        findViewById(R.id.btn_mainHook).setOnClickListener(this);
 
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 0.6f, 0.2f, 1f);
         valueAnimator.setDuration(500);
@@ -168,6 +173,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         //listView.setAdapter();
 
     }
+
 
     @Override
     public void onClick(View view) {
@@ -360,6 +366,11 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btn_notRegist: {
                 //如果设置点击的时候绕过检测启动一个没有注册的Activity
                 Intent intent = new Intent(this, NotRegistedActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_mainHook: {// Hook技术
+                Intent intent = new Intent(this, MainHookActivity.class);
                 startActivity(intent);
                 break;
             }

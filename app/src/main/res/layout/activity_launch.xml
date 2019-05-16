@@ -283,6 +283,12 @@
                 android:text="绕过AndroidManifest.xml检测" />
 
             <Button
+                android:id="@+id/btn_mainHook"
+                android:text="Hook技术练习"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
                 android:id="@+id/btn_retrofit2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

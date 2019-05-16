@@ -4,6 +4,7 @@ import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
+import android.util.SparseBooleanArray;
 import android.view.View;
 
 /**
@@ -22,11 +23,12 @@ import android.view.View;
  * <p>
  * https://blog.csdn.net/harvic880925/article/details/84866486
  * <p>
- * 修改为不使用offsetChildrenVertical(); 直接通过设置移动后的ract layout布局item
+ * 修改为不使用offsetChildrenVertical(); 直接通过设置移动后的ract layout布局item。
+ * 修改后继续优化布局回收，不用从屏幕上剥离全部的view 直接布局
  * @Date 2019/5/14
  */
 
-public class CustomLayoutManger2 extends RecyclerView.LayoutManager {
+public class CustomLayoutManger3 extends RecyclerView.LayoutManager {
 
     private static final String TAG = "CustomLayoutManger";
     private int mSumDy = 0;
@@ -39,6 +41,11 @@ public class CustomLayoutManger2 extends RecyclerView.LayoutManager {
      * 保存所有item的位置参数
      */
     private SparseArray<Rect> mItemRects = new SparseArray<>();
+
+    /**
+     * item是否回收
+     */
+    private SparseBooleanArray mHasAttachedItems = new SparseBooleanArray();
 
     @Override
     public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -57,6 +64,8 @@ public class CustomLayoutManger2 extends RecyclerView.LayoutManager {
             return;
         }
         mItemRects.clear();
+        mHasAttachedItems.clear();
+
         detachAndScrapAttachedViews(recycler);
 
         View childView = recycler.getViewForPosition(0);// 获取一个View用来获取长宽等数据
@@ -69,6 +78,7 @@ public class CustomLayoutManger2 extends RecyclerView.LayoutManager {
         for (int i = 0; i < getItemCount(); i++) {
             Rect rect = new Rect(0, offsetsY, mItemWidth, offsetsY + mItemHeight);
             mItemRects.put(i, rect);
+            mHasAttachedItems.put(i, false);// 每一个 item都没有回收 false
             offsetsY += mItemHeight;
         }
 
@@ -120,18 +130,21 @@ public class CustomLayoutManger2 extends RecyclerView.LayoutManager {
             int position = getPosition(child);// 返回adapter中item的position
 //            Rect rect = mItemRects.get(i); // 写错误的地方
             Rect rect = mItemRects.get(position);// 取出保存的位置，对应的position是adapter中的item 的
+
             if (!Rect.intersects(rect, visiabeArea)) {
-                removeAndRecycleView(child, recycler);
+                removeAndRecycleView(child, recycler);//回收
+                mHasAttachedItems.put(position, false);//不在区域内，没有布局，被回收的
+            } else {// 重新加载布局
+                layoutDecoratedWithMargins(child, rect.left, rect.top - mSumDy, rect.right, rect.bottom - mSumDy);
+                child.setRotationY(child.getRotationY() + 1);//这里添加了一个旋转
+                mHasAttachedItems.put(position, true);
             }
-//            else {// 重新加载布局
-//                layoutDecoratedWithMargins(child, rect.left, rect.top - mSumDy, rect.right, rect.bottom - mSumDy);
-//            }
         }
 
         View lastView = getChildAt(getChildCount() - 1);
         View firstView = getChildAt(0);
 
-        detachAndScrapAttachedViews(recycler);//回收item
+//        detachAndScrapAttachedViews(recycler);//回收item 直接判断是否布局item来设置View，不需要剥离
 
         if (travel > 0) {
             if (firstView == null) {
@@ -154,15 +167,18 @@ public class CustomLayoutManger2 extends RecyclerView.LayoutManager {
 
     private void insertView(RecyclerView.Recycler recycler, Rect visiabeArea, int i, boolean is) {
         Rect rect = mItemRects.get(i);
-        if (Rect.intersects(visiabeArea, rect)) {//判断是否在区域内
+        //判断是否在区域内
+        if (Rect.intersects(visiabeArea, rect)
+                && !mHasAttachedItems.get(i)) {// 没有布局的item，添加布局
             View childView = recycler.getViewForPosition(i);
             if (is) {
                 addView(childView, 0);
             } else {
                 addView(childView);
             }
+            mHasAttachedItems.put(i, true);// 已经布局了
             measureChildWithMargins(childView, 0, 0);
-            layoutDecorated(childView, rect.left, rect.top - mSumDy, rect.right, rect.bottom - mSumDy);
+            layoutDecoratedWithMargins(childView, rect.left, rect.top - mSumDy, rect.right, rect.bottom - mSumDy);
             childView.setRotationY(childView.getRotationY() + 1);// 旋转
         }
     }

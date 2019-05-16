@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.lll.beizertest.R;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -27,8 +29,11 @@ public class CustomLayoutMnagerAdapter extends RecyclerView.Adapter {
 
     private Context context;
 
-    public CustomLayoutMnagerAdapter(Context context) {
+    private List<String> list;
+
+    public CustomLayoutMnagerAdapter(Context context, List<String> list) {
         this.context = context;
+        this.list = list;
     }
 
     private int mCreateViewHodler;
@@ -51,7 +56,7 @@ public class CustomLayoutMnagerAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 50;
+        return list.size();
     }
 
     /**
