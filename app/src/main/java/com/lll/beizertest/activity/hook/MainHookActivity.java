@@ -8,6 +8,12 @@ import android.widget.Button;
 
 import com.lll.beizertest.R;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -21,6 +27,12 @@ public class MainHookActivity extends AppCompatActivity {
     Button btnMainHook;
     @BindView(R.id.btn_hookActivity)
     Button btnHookActivity;
+
+    private Socket socket;
+
+    private ServerSocket serverSocket;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
