@@ -107,32 +107,32 @@ public class ViewInfectUtils {
                     Class<?> listenerType = eventBaseAnnotation.listenerType();// View.OnClickListener.class
                     String methodName = eventBaseAnnotation.methodName();// 方法名称onClick
 
-                    try {
-                        Method method1 = annotationType.getDeclaredMethod("value");
-                        try {
-                            int viewIds[] = (int[]) method1.invoke(annotation, null);
-                            // 通过DynamicHandler 和Proxy获取监听器的代理对象。？？？？
-                            DynamicHandler dynamicHandler = new DynamicHandler(activity);
-                            dynamicHandler.addMethod(methodName, method);
-                            Object listener = Proxy.newProxyInstance(
-                                    listenerType.getClassLoader(),
-                                    new Class<?>[]{listenerType}, dynamicHandler); // listenerType 就是监听的是那个类的 View.OnClickListener.class
-                            //遍历所有的View，通过反射设置事件
-                            for (int viewId : viewIds) {
-                                View view = activity.findViewById(viewId);
-                                Method setEventListenerMethod = view.getClass()
-                                        .getMethod(listenerSetter, listenerType);//获取onClick
-                                setEventListenerMethod.invoke(view, listener);//设置onClick
-                            }
-
-                        } catch (IllegalAccessException e) {
-                            e.printStackTrace();
-                        } catch (InvocationTargetException e) {
-                            e.printStackTrace();
-                        }
-                    } catch (NoSuchMethodException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        Method method1 = annotationType.getDeclaredMethod("value");
+//                        try {
+//                            int viewIds[] = (int[]) method1.invoke(annotation, null);
+//                            // 通过DynamicHandler 和Proxy获取监听器的代理对象。？？？？
+//                            DynamicHandler dynamicHandler = new DynamicHandler(activity);
+//                            dynamicHandler.addMethod(methodName, method);
+//                            Object listener = Proxy.newProxyInstance(
+//                                    listenerType.getClassLoader(),
+//                                    new Class<?>[]{listenerType}, dynamicHandler); // listenerType 就是监听的是那个类的 View.OnClickListener.class
+//                            //遍历所有的View，通过反射设置事件
+//                            for (int viewId : viewIds) {
+//                                View view = activity.findViewById(viewId);
+//                                Method setEventListenerMethod = view.getClass()
+//                                        .getMethod(listenerSetter, listenerType);//获取onClick
+//                                setEventListenerMethod.invoke(view, listener);//设置onClick
+//                            }
+//
+//                        } catch (IllegalAccessException e) {
+//                            e.printStackTrace();
+//                        } catch (InvocationTargetException e) {
+//                            e.printStackTrace();
+//                        }
+//                    } catch (NoSuchMethodException e) {
+//                        e.printStackTrace();
+//                    }
 
                 }
             }

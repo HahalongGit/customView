@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
-
+apply from:'test.gradle'
+apply plugin: CustomPulginInBuildGradle
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -73,4 +74,20 @@ dependencies {
     implementation project(':imageselectlibrary')
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
 
+
+}
+
+/**
+ * 定义一个插件
+ */
+class CustomPulginInBuildGradle implements Plugin<Project>{
+
+    @Override
+    void apply(Project target) {
+        target.task("runnginDigua"){
+            def  a = "这是一个gradle形式的plugin插件"
+            def b = target.toString()
+            println(a+b)
+        }
+    }
 }

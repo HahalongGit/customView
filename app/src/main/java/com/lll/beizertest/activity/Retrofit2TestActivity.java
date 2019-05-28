@@ -35,6 +35,7 @@ public class Retrofit2TestActivity extends AppCompatActivity {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://github.com/") //默认是用OkHttp3 作为网络请求框架
                 .addConverterFactory(GsonConverterFactory.create())
+                //.addCallAdapterFactory()
                 .build();
         ServiceApi serviceApi = retrofit.create(ServiceApi.class);
 

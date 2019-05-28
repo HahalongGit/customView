@@ -24,6 +24,8 @@ import com.lll.beizertest.R;
 
 public class RatingBar extends View {
 
+
+
     private Bitmap mStartNormal,mStartFocus;
 
     private int mGradeNumber;
