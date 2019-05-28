@@ -1,0 +1,18 @@
+// 测试 gradle 的 groovy语法 通过脚本的形式设置插件
+
+project.task("digua").doLast {
+    println("this is a groovy language")
+    haveFun();
+}
+
+def haveFun() {
+//    Book book = new Book();
+    println("out put a gradle plugin in function")
+}
+
+class Book {
+    private String name;// 默认添加了get/set方法
+    private setName(String name) {
+        this.name = name
+    }
+}
