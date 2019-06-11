@@ -1,12 +1,32 @@
 apply plugin: 'com.android.application'
-apply from:'test.gradle'
-apply plugin: CustomPulginInBuildGradle
+//apply from: 'test.gradle'//创建一个test.gradle文件的方式添加插件，引入test.gradle文件
+//apply plugin: CustomPulginInBuildGradle // 在本文件中定义的脚本插件
+//apply plugin: DiguaPlugin1  直接引用model的tast
+// 这个plugin后的字符串就是插件定义的properties中的文件名
+apply plugin: 'com.digua.buildsrc'//通过发布的plguin引用buildSrc model 中定义的插件
+
+///////////////引用本地发布的plugin设置 一下设置可以去掉 //////
+/// 只用apply plugin: 'com.digua.buildsrc'////////////////////
+buildscript {
+    repositories {
+        maven {
+            url uri('../repo')
+        }
+    }
+    dependencies {
+        classpath 'com.digua.buildsrc.plugin:buildSrc:1.0.0'
+    }
+}
+////////////////////////////////////////////
+
 android {
-    compileSdkVersion 27
+//    compileSdkVersion 27
+    compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.lll.beizertest"
-        minSdkVersion 19
-        targetSdkVersion 24
+        minSdkVersion rootProject.ext.minSdkVersion
+//        targetSdkVersion 24
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -15,22 +35,8 @@ android {
 //            abiFilters "armeabi", "armeabi-v7a", "x86"  //输出指定三种abi体系结构下的so库。
 //        }
     }
-    //设置jni 代码 编译
-//    sourceSets {
-//        main {
-//            jni.srcDirs = []  // [] 中是c 库的路径 不能生成.so 文件？？
-//            jniLibs.srcDirs = ['libs']
-//        }
-//    }
 
-//    task ndkBuild(type: Exec){
-//        commandLine "F:\\sdktools\\sdk\\ndk-bundle\\dk-bundle.cmd",
-//                'NDK_PROJECT_PATH=build/intermediates/ndk',
-//                'NDK_LIBS_OUT=libs'
-//    }
-//    tasks.withType(JavaCompile){
-//        compileTeak -> compileTask.dependsOn ndkBuild
-//    }
+
 
     buildTypes {
         release {
@@ -44,12 +50,27 @@ android {
         repositories {
             jcenter()
             maven { url 'https://jitpack.io' }
+
+        }
+    }
+
+    sourceSets {
+        main {
+            println("sourceSets-isRunAlone:" + isRunAlone)
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+//            if (!isRunAlone) {
+//                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+////                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+//            } else {
+//                manifest.srcFile 'src/main/AndroidManifest.xml'
+//            }
         }
     }
 
 }
 
 dependencies {
+
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -80,14 +101,14 @@ dependencies {
 /**
  * 定义一个插件
  */
-class CustomPulginInBuildGradle implements Plugin<Project>{
+class CustomPulginInBuildGradle implements Plugin<Project> {
 
     @Override
     void apply(Project target) {
-        target.task("runnginDigua"){
-            def  a = "这是一个gradle形式的plugin插件"
+        target.task("runnginDigua") {
+            def a = "这是一个脚本 gradle形式的plugin插件"
             def b = target.toString()
-            println(a+b)
+            println(a + b)
         }
     }
 }

@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         MessageBubbleView.attachView(findViewById(R.id.iv_showImage));
 
+//        getContentResolver().registerContentObserver();//
+
         final MediaPlayer mediaPlayer = MediaPlayer.create(this, Uri.parse(""));
 //        mediaPlayer.setAudioAttributes(AudioAttributes);
 //        mediaPlayer.setAudioStreamType();

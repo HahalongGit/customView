@@ -47,7 +47,7 @@ public class DatabaseActivity extends AppCompatActivity {
             Log.e("TAG","person:"+person);
             //iDaoSupport.insert(person);
             Log.e("TAG","currentTime-start:"+System.currentTimeMillis());
-            //iDaoSupport.insert(list);
+            iDaoSupport.insert(list);
             Log.e("TAG","currentTime-end:"+System.currentTimeMillis());
 
             //查询所有
