@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity" />
-        <activity android:name=".LaunchActivity">
+        <activity android:name=".GuideActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -113,7 +113,17 @@
         <activity android:name=".activity.hook.MainHookActivity" />
         <activity android:name=".activity.hook.HookListenerActivity" />
         <activity android:name=".activity.hook.HookActivityActivity" />
-        <activity android:name=".activity.ContentPorviderActivity"></activity>
+        <activity android:name=".activity.ContentPorviderActivity" />
+        <activity android:name=".activity.AsyncTaskActivity" />
+
+        <provider
+            android:process=":provider"
+            android:name=".activity.provider.BookProvider"
+            android:authorities="com.lll.beizertest.activity.provider" />
+
+        <activity android:name=".activity.provider.ProviderActivity" />
+        <activity android:name=".PartOneActivity" />
+        <activity android:name=".PartTwoActivity"></activity>
     </application>
 
 </manifest>

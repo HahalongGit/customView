@@ -64,9 +64,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LaunchActivity extends AppCompatActivity implements View.OnClickListener {
+public class PartOneActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG = "LaunchActivity";
+    private static final String TAG = "PartOneActivity";
 
     private ImageView imageView;
 
