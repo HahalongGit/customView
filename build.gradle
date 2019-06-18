@@ -5,14 +5,32 @@ buildscript {
     repositories {
         google()
         jcenter()
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0'
-        
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+}
+
+ext{
+    compileSdkVersion = 28
+    supportLibVersion =  27
+    targetSdkVersion =  24
+    minSdkVersion = 19
+    targetSdkVersion
+    // 这个配置方式也可以创建一个全局的config.gradle文件引入
+    android = [
+            compileSdkVersion: 28,
+            minSdkVersion: 19
+    ]
+    surportLib = [
+            v7:"com.android.support:appcompat-v7:$android.compileSdkVersion"
+    ]
+    //分类的版本信息访问方式
+//    rootProject.ext.android.compileSdkVersion
 }
 
 allprojects {

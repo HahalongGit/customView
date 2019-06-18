@@ -1,0 +1,47 @@
+//apply plugin: 'java-library'
+//apply plugin:'groovy'//定义一个插件的时候修改plugin依赖
+//apply plugin: 'maven'////用于发布本地 maven 仓库中
+plugins {
+    id 'groovy'
+    id 'maven'
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compile gradleApi()//定义一个插件的时候添加
+    compile localGroovy()//定义一个插件的时候添加
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+repositories {
+    mavenCentral()
+}
+group='com.digua.buildsrc.plugin'
+version='1.0.0'
+//配置本地仓库发布 然后再gradle中执行uploadAr
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../repo'))
+        }
+    }
+}
+
+//def groupName = 'com.jeanboy.plugin.test'//组名
+//def artifactName = 'TestPlugin'//项目名
+//def versionName = '1.0.1'//版本号
+
+//上传至本地仓库
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            pom.groupId = "${groupName}"
+//            pom.artifactId = "${artifactName}"
+//            pom.version = "${versionName}"
+//            repository(url: uri('../PluginRepository'))
+//        }
+//    }
+//}
