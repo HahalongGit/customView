@@ -2,13 +2,13 @@ package com.lll.beizertest.activity.recycleview;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 
 import com.lll.beizertest.R;
+import com.lll.beizertest.activity.recycleview.decoration.MyDecoration;
 import com.lll.beizertest.adapter.recycleview.CustomLayoutMnagerAdapter;
-import com.lll.beizertest.view.recycleView.itemdecoration.CustomLayoutManger;
-import com.lll.beizertest.view.recycleView.itemdecoration.CustomLayoutManger2;
-import com.lll.beizertest.view.recycleView.itemdecoration.CustomLayoutManger3;
+import com.lll.beizertest.view.recycleView.layoutmanager.CustomLayoutManger2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,11 @@ public class CustomLayoutManagerActivity extends AppCompatActivity {
 
     private CustomLayoutMnagerAdapter customLayoutMnagerAdapter;
 
+    /**
+     * 系统定义的分割线
+     */
+    private DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);//华丽的分割线
+
     private List<String> mData = new ArrayList<>();
 
     @Override
@@ -38,6 +43,7 @@ public class CustomLayoutManagerActivity extends AppCompatActivity {
         customLayoutMnagerAdapter = new CustomLayoutMnagerAdapter(this, mData);
         recycleCustomManger.setLayoutManager(new CustomLayoutManger2());
         recycleCustomManger.setAdapter(customLayoutMnagerAdapter);
+        recycleCustomManger.addItemDecoration(new MyDecoration());
     }
 
     private void initData() {

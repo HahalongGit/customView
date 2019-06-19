@@ -1,4 +1,4 @@
-package com.lll.beizertest.view.recycleView.itemdecoration;
+package com.lll.beizertest.view.recycleView.layoutmanager;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
