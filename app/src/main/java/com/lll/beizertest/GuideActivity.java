@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.lll.beizertest.test.MiddleStudent;
+import com.lll.beizertest.test.Student;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -25,18 +28,21 @@ public class GuideActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
         ButterKnife.bind(this);
+
+        Student student = new MiddleStudent();
+        student.haveClass();
     }
 
     @OnClick({R.id.btn_partOne, R.id.btn_partTwo})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_partOne: {
-                Intent intent = new Intent(this,PartOneActivity.class);
+                Intent intent = new Intent(this, PartOneActivity.class);
                 startActivity(intent);
                 break;
             }
             case R.id.btn_partTwo: {
-                Intent intent = new Intent(this,PartTwoActivity.class);
+                Intent intent = new Intent(this, PartTwoActivity.class);
                 startActivity(intent);
                 break;
             }
