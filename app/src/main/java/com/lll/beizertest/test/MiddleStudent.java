@@ -14,7 +14,6 @@ public class MiddleStudent extends Student {
 
     private static final String TAG = "MiddleStudent";
 
-
     @Override
     public void haveClass() {
         Log.e(TAG,"MiddleStudent - have class 1");
