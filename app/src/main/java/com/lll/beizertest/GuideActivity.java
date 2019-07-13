@@ -28,9 +28,8 @@ public class GuideActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
         ButterKnife.bind(this);
-
         Student student = new MiddleStudent();
-        student.haveClass();
+        student.haveClass();//asdf
     }
 
     @OnClick({R.id.btn_partOne, R.id.btn_partTwo})
