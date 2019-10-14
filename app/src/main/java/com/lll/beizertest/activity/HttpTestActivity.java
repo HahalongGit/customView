@@ -2,8 +2,13 @@ package com.lll.beizertest.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.lll.beizertest.R;
+import com.lll.beizertest.activity.okhttpdownload.AbsFileProgressCallback;
+import com.lll.beizertest.activity.okhttpdownload.DownloadFileUtils;
+import com.lll.beizertest.activity.okhttpdownload.InstallUtils;
+import com.lll.beizertest.activity.okhttpdownload.MNUtils;
 import com.lll.beizertest.http.HttpCallback;
 import com.lll.beizertest.http.HttpUtils;
 import com.lll.beizertest.http.OkHttpEngine;
@@ -31,6 +36,13 @@ import okhttp3.Response;
  */
 public class HttpTestActivity extends AppCompatActivity {
 
+    /**
+     * 是不是在正在下载
+     */
+    private static boolean isDownloading = false;
+
+    private static InstallUtils.DownloadCallBack mDownloadCallBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +52,11 @@ public class HttpTestActivity extends AppCompatActivity {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         FormBody formBody = new FormBody.Builder()
-                .add("key","value")
+                .add("key", "value")
                 .build();
         Request request = new Request.Builder()
-                .addHeader("","")
-                .method("POST",formBody)
+                .addHeader("", "")
+                .method("POST", formBody)
                 .put(formBody)
                 .cacheControl(CacheControl.FORCE_CACHE)
                 .tag("")
@@ -93,7 +105,7 @@ public class HttpTestActivity extends AppCompatActivity {
         //请求的参数和路径都要放在jni中，防止反编译。
         HttpUtils.with(this)
                 .url("")
-                .addParam("","")
+                .addParam("", "")
                 .cache(true)
                 .execute(new HttpCallback<Student>() {
                     @Override
@@ -107,4 +119,76 @@ public class HttpTestActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    /**
+     * 小易加油 demo 开始下载 demo
+     */
+    public void startDownload() {
+        //先取消之前的下载
+        if (isDownloading) {
+//            cancleDownload();
+        }
+        final String filePath = "";
+        //判断下载保存路径是不是空
+        if (TextUtils.isEmpty(filePath)) {
+//            filePath = MNUtils.getCachePath(mContext) + "/update.apk";
+        }
+        //文件权限处理
+        MNUtils.changeApkFileMode(new File(filePath));
+        //下载
+        DownloadFileUtils.with()
+                .downloadPath(filePath)
+                .url("")
+                .tag(InstallUtils.class)
+                .execute(new AbsFileProgressCallback() {
+                    int currentProgress = 0;
+
+                    @Override
+                    public void onSuccess(String result) {
+                        isDownloading = false;
+                        if (mDownloadCallBack != null) {
+                            mDownloadCallBack.onComplete(filePath);
+                        }
+                    }
+
+                    @Override
+                    public void onProgress(long bytesRead, long contentLength, boolean done) {
+                        isDownloading = true;
+                        if (mDownloadCallBack != null) {
+                            //计算进度
+                            int progress = (int) (bytesRead * 100 / contentLength);
+                            //只有进度+1才回调，防止过快
+                            if (progress - currentProgress >= 1) {
+                                mDownloadCallBack.onLoading(contentLength, bytesRead);
+                            }
+                            currentProgress = progress;
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(String errorMsg) {
+                        isDownloading = false;
+                        if (mDownloadCallBack != null) {
+                            mDownloadCallBack.onFail(new Exception(errorMsg));
+                        }
+                    }
+
+                    @Override
+                    public void onStart() {
+                        isDownloading = true;
+                        if (mDownloadCallBack != null) {
+                            mDownloadCallBack.onStart();
+                        }
+                    }
+
+                    @Override
+                    public void onCancle() {
+                        isDownloading = false;
+                        if (mDownloadCallBack != null) {
+                            mDownloadCallBack.cancle();
+                        }
+                    }
+                });
+    }
+
 }
