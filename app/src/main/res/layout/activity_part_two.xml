@@ -22,6 +22,12 @@
                 android:layout_height="wrap_content"
                 android:text="ContentProvider测试分析" />
 
+            <Button
+                android:id="@+id/btn_drawView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="拖动滑动的View" />
+
         </LinearLayout>
 
     </ScrollView>

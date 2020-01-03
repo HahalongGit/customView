@@ -7,8 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <!-- //系统轮询需要的权限（设置Service保活） -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- //系统轮询需要的权限（设置Service保活） -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
@@ -19,6 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.ScrollViewActivity">
+        </activity>
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".GuideActivity">
             <intent-filter>
@@ -87,12 +88,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
-        <service android:name=".ipc.QQMessageService" />
-        <!-- 设置多进程 -->
+        <service android:name=".ipc.QQMessageService" /> <!-- 设置多进程 -->
         <service
             android:name=".ipc.GuardService"
-            android:process=":guardService" />
-        <!-- 注册一个轮询工作Service -->
+            android:process=":guardService" /> <!-- 注册一个轮询工作Service -->
         <service
             android:name=".ipc.JobWakeupService"
             android:enabled="true"
@@ -117,13 +116,13 @@
         <activity android:name=".activity.AsyncTaskActivity" />
 
         <provider
-            android:process=":provider"
             android:name=".activity.provider.BookProvider"
-            android:authorities="com.lll.beizertest.activity.provider" />
+            android:authorities="com.lll.beizertest.activity.provider"
+            android:process=":provider" />
 
         <activity android:name=".activity.provider.ProviderActivity" />
         <activity android:name=".PartOneActivity" />
-        <activity android:name=".PartTwoActivity"></activity>
+        <activity android:name=".PartTwoActivity" />
     </application>
 
 </manifest>

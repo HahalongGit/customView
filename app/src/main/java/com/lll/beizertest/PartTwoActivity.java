@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.lll.beizertest.activity.ScrollViewActivity;
 import com.lll.beizertest.activity.provider.ProviderActivity;
 
 import butterknife.BindView;
@@ -20,6 +21,9 @@ public class PartTwoActivity extends AppCompatActivity {
     @BindView(R.id.btn_provider)
     Button btnProvider;
 
+    @BindView(R.id.btn_drawView)
+    Button btnDrawView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,11 +31,16 @@ public class PartTwoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.btn_provider})
+    @OnClick({R.id.btn_provider,R.id.btn_drawView})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_provider: {
                 Intent intent = new Intent(this, ProviderActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_drawView:{
+                Intent intent = new Intent(this, ScrollViewActivity.class);
                 startActivity(intent);
                 break;
             }
