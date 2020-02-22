@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lll.beizertest.view.nestedscrolling.StickyNavLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stickyNavLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.NestedScrollingActivity">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/color_green" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+</com.lll.beizertest.view.nestedscrolling.StickyNavLayout>

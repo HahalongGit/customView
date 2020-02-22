@@ -28,6 +28,12 @@
                 android:layout_height="wrap_content"
                 android:text="拖动滑动的View" />
 
+            <Button
+                android:id="@+id/btn_nestedScrolling"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NestedScrolling测试" />
+
         </LinearLayout>
 
     </ScrollView>

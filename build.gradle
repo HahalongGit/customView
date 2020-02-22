@@ -17,8 +17,8 @@ buildscript {
 
 ext{
     compileSdkVersion = 28
-    supportLibVersion =  27
-    targetSdkVersion =  23
+    supportLibVersion =  28
+    targetSdkVersion =  28
     minSdkVersion = 19
     targetSdkVersion
     // 这个配置方式也可以创建一个全局的config.gradle文件引入

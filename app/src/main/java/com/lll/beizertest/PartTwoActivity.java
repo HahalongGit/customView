@@ -6,8 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.lll.beizertest.activity.NestedScrollingActivity;
 import com.lll.beizertest.activity.ScrollViewActivity;
 import com.lll.beizertest.activity.provider.ProviderActivity;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,14 +28,22 @@ public class PartTwoActivity extends AppCompatActivity {
     @BindView(R.id.btn_drawView)
     Button btnDrawView;
 
+    @BindView(R.id.btn_nestedScrolling)
+    Button btnNestedScrolling;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_part_two);
         ButterKnife.bind(this);
+
     }
 
-    @OnClick({R.id.btn_provider,R.id.btn_drawView})
+
+
+    @OnClick({R.id.btn_provider, R.id.btn_drawView, R.id.btn_nestedScrolling})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_provider: {
@@ -39,11 +51,19 @@ public class PartTwoActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_drawView:{
+            case R.id.btn_drawView: {
                 Intent intent = new Intent(this, ScrollViewActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_nestedScrolling: {
+                Intent intent = new Intent(this, NestedScrollingActivity.class);
                 startActivity(intent);
                 break;
             }
         }
     }
+
+
+
 }
