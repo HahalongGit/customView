@@ -76,6 +76,13 @@ public class PartOneActivity extends AppCompatActivity implements View.OnClickLi
 
     private ThreadPoolExecutor threadPoolExecutor;
 
+//    private MediaBrowser mMediaBrowser;
+//
+//    private MediaBrowserService mMediaBrowserService;
+//
+//    private MediaController mMediaControllerl;
+//
+//    private MediaSession mMediaSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,7 +173,12 @@ public class PartOneActivity extends AppCompatActivity implements View.OnClickLi
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 0.6f, 0.2f, 1f);
         valueAnimator.setDuration(500);
         valueAnimator.start();
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
 
+            }
+        });
         //listView.setAdapter();
     }
 

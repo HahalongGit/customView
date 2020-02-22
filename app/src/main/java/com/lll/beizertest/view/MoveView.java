@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Scroller;
 
 /**
@@ -74,7 +73,7 @@ public class MoveView extends View {
 //                setLayoutParams(params);
                 // 4
 //                ((View) getParent()).scrollTo(-x, -y);// 终点坐标  ????
-//                ((View)getParent()).scrollBy(-offseX, -offseY);// 增量的相反数
+                ((View) getParent()).scrollBy(-offseX, -offseY);// 增量的相反数
 
                 // 5 Scroller 的用法 Scroller 的滑动不是即时的在手指滑动结束后渐渐平滑的滑动到手指的位置
                 // 5.1但却经常用它来实现手指抬起后，view回到初始位置
