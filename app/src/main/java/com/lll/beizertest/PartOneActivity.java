@@ -2,17 +2,13 @@ package com.lll.beizertest;
 
 import android.animation.ValueAnimator;
 import android.content.Intent;
-import android.graphics.PixelFormat;
-import android.os.Handler;
-import android.os.Message;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.lll.beizertest.activity.AnimatorActivity;
@@ -57,12 +53,9 @@ import com.lll.beizertest.ipc.IPCActivity;
 import com.lll.beizertest.ipc.ServiceTestActivity;
 import com.lll.beizertest.note_reflect.NoteReflectActivity;
 
-import java.lang.reflect.Proxy;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PartOneActivity extends AppCompatActivity implements View.OnClickListener {
 

@@ -99,7 +99,7 @@ dependencies {
 
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
 
-    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'// RxPermission 权限
+//    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'// RxPermission 权限
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'// RxPermission 权限
 
     // google Eastpermission

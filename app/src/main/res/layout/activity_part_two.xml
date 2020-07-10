@@ -34,6 +34,18 @@
                 android:layout_height="wrap_content"
                 android:text="NestedScrolling测试" />
 
+            <Button
+                android:id="@+id/btn_customDrawView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="自定义View绘制" />
+
+            <Button
+                android:id="@+id/btn_drawSignature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="绘制手写版" />
+
         </LinearLayout>
 
     </ScrollView>
