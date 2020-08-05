@@ -2,12 +2,9 @@ package com.lll.beizertest.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,9 +20,9 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animator);
-        imageView = findViewById(R.id.iv_animator);
-        findViewById(R.id.btn_start).setOnClickListener(this);
-        imageView.setOnClickListener(this);
+//        imageView = findViewById(R.id.iv_animator);
+//        findViewById(R.id.btn_start).setOnClickListener(this);
+//        imageView.setOnClickListener(this);
 
         //animator1();
 //        BitmapFactory.Options options = new  BitmapFactory.Options();
@@ -42,8 +39,8 @@ public class AnimatorActivity extends AppCompatActivity implements View.OnClickL
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f,5f,0f);
 
 
-        ObjectAnimator o = ObjectAnimator.ofFloat(valueAnimator,"translationX",3,4);
-        o.start();
+//        ObjectAnimator o = ObjectAnimator.ofFloat(valueAnimator,"translationX",3,4);
+//        o.start();
         valueAnimator.setDuration(1000);
         valueAnimator.start();
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
