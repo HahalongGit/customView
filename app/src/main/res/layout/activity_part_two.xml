@@ -44,7 +44,19 @@
                 android:id="@+id/btn_drawSignature"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="绘制手写版" />
+                android:text="贝萨尔曲线绘制手写版" />
+
+            <Button
+                android:id="@+id/btn_drawShader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Paint的Shader的使用" />
+
+            <Button
+                android:id="@+id/btn_drawLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="自定义ViewGroup测试" />
 
         </LinearLayout>
 

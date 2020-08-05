@@ -9,11 +9,10 @@ import android.widget.Button;
 import com.lll.beizertest.activity.NestedScrollingActivity;
 import com.lll.beizertest.activity.ScrollViewActivity;
 import com.lll.beizertest.activity.provider.ProviderActivity;
+import com.lll.beizertest.draw.DrawLayoutTestActivity;
+import com.lll.beizertest.draw.DrawShaderTestActivity;
 import com.lll.beizertest.draw.DrawSignatureViewActivity;
 import com.lll.beizertest.draw.DrawViewActivity;
-
-import java.util.LinkedList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +35,9 @@ public class PartTwoActivity extends AppCompatActivity {
     @BindView(R.id.btn_customDrawView)
     Button btnCustomDrawView;
 
+    @BindView(R.id.btn_drawShader)
+    Button mBtnDrawShader;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +47,8 @@ public class PartTwoActivity extends AppCompatActivity {
     }
 
     @OnClick({R.id.btn_provider, R.id.btn_drawView, R.id.btn_nestedScrolling,
-            R.id.btn_customDrawView,R.id.btn_drawSignature})
+            R.id.btn_customDrawView, R.id.btn_drawSignature, R.id.btn_drawShader,
+            R.id.btn_drawLayout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_provider: {
@@ -68,8 +71,18 @@ public class PartTwoActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             }
-            case R.id.btn_drawSignature:{
+            case R.id.btn_drawSignature: {
                 Intent intent = new Intent(this, DrawSignatureViewActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_drawShader: {
+                Intent intent = new Intent(this, DrawShaderTestActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btn_drawLayout: {
+                Intent intent = new Intent(this, DrawLayoutTestActivity.class);
                 startActivity(intent);
                 break;
             }
