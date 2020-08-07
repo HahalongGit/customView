@@ -58,6 +58,18 @@
                 android:layout_height="wrap_content"
                 android:text="自定义ViewGroup测试" />
 
+            <Button
+                android:id="@+id/btn_drawXfermode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="自定义View Xfermode" />
+
+            <Button
+                android:id="@+id/btn_drawEraser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Xfermode使用扩展实现橡皮擦刮刮乐" />
+
         </LinearLayout>
 
     </ScrollView>

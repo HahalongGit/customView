@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".draw.DrawLayoutTestActivity"></activity>
+        <activity android:name=".draw.XfermodeEraserViewActivity"></activity>
+        <activity android:name=".draw.DrawXfermodeActivity" />
+        <activity android:name=".draw.DrawLayoutTestActivity" />
         <activity android:name=".draw.DrawShaderTestActivity" />
         <activity android:name=".draw.DrawSignatureViewActivity" />
         <activity android:name=".draw.DrawViewActivity" />
@@ -115,14 +117,14 @@
             android:name=".ipc.JobWakeupService"
             android:enabled="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-    </application>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" /> <!-- //系统轮询需要的权限（设置Service保活） -->
+    </application> <!-- //系统轮询需要的权限（设置Service保活） -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>
