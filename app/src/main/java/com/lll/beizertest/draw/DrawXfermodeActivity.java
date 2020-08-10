@@ -17,6 +17,7 @@ import com.lll.beizertest.R;
 import com.lll.beizertest.draw.bean.XfermodeInfo;
 import com.lll.beizertest.draw.view.PDXfermodeView;
 import com.lll.beizertest.draw.view.XfermodeTestView;
+import com.lll.beizertest.draw.view.XfermodeTestView2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,9 @@ public class DrawXfermodeActivity extends AppCompatActivity {
     XfermodeTestView mXfermodeTestView;
     @BindView(R.id.recycle_mode)
     RecyclerView mRecycleMode;
+
+    @BindView(R.id.xfermodeTest2)
+    XfermodeTestView2 mXfermodeTest2;
 
     private List<XfermodeInfo> mStringList = new ArrayList<>();
 
@@ -54,6 +58,8 @@ public class DrawXfermodeActivity extends AppCompatActivity {
                 mPdmodeView.setXfermode(mStringList.get(position).getMode());
 
                 mXfermodeTestView.setXfermode(mStringList.get(position).getMode());
+                //两个图片换了xfermode的位置
+                mXfermodeTest2.setXfermode(mStringList.get(position).getMode());
 //                Toast.makeText(DrawXfermodeActivity.this,
 //                        mStringList.get(position).getMode()+"-", Toast.LENGTH_SHORT).show();
             }

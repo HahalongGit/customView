@@ -7,21 +7,56 @@
     android:layout_height="match_parent"
     tools:context=".draw.DrawXfermodeActivity">
 
-    <com.lll.beizertest.draw.view.PDXfermodeView
-        android:id="@+id/pdmodeView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_height="200dp"/>
+        android:layout_height="match_parent">
 
-    <com.lll.beizertest.draw.view.XfermodeTestView
-        android:id="@+id/xfermodeTestView"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycle_mode"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <com.lll.beizertest.draw.view.PDXfermodeView
+                android:id="@+id/pdmodeView"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="150dp"/>
+
+            <TextView
+                android:text="Dst在前Src图在后"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.lll.beizertest.draw.view.XfermodeTestView
+                android:id="@+id/xfermodeTestView"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"/>
+
+            <TextView
+                android:text="Src在前面Dst在后"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.lll.beizertest.draw.view.XfermodeTestView2
+                android:id="@+id/xfermodeTest2"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle_mode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
