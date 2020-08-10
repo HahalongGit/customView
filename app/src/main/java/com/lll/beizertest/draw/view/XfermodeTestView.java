@@ -2,11 +2,8 @@ package com.lll.beizertest.draw.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
@@ -15,10 +12,7 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-
-import com.lll.beizertest.R;
 
 /**
  * TODO:describe what the class or interface does.
@@ -32,9 +26,9 @@ public class XfermodeTestView extends View {
 
     private PorterDuff.Mode mMode;
 
-    private int mWidth = 400;
+    private int mWidth = 300;
 
-    private int mHeight = 400;
+    private int mHeight = 300;
 
     private Bitmap mDstBitmap;
 
@@ -79,7 +73,7 @@ public class XfermodeTestView extends View {
         mPaint.setXfermode(new PorterDuffXfermode(mMode));
         canvas.drawBitmap(mRscBitmap, mWidth / 2, mHeight / 2, mPaint);//方 起点在mWidth 一半处
         mPaint.setXfermode(null);
-
+        canvas.drawBitmap(mDstBitmap,new Rect(0,0,mWidth,mHeight),new Rect(0,0,mWidth,mHeight),mPaint);
         canvas.restoreToCount(layertId);
     }
 

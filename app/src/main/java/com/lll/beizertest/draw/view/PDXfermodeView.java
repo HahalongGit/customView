@@ -68,7 +68,7 @@ public class PDXfermodeView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         Log.e(TAG, "onDraw-mMode:" + mMode);
-        int width = 500;
+        int width = 400;
         int height = width * mBitmap.getHeight() / mBitmap.getWidth();
         int layertId = 0;
         if (Build.VERSION.SDK_INT > 21) {
