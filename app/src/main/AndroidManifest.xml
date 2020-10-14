@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lll.beizertest">
-
+    <!-- //系统轮询需要的权限（设置Service保活） -->
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".draw.XfermodeEraserViewActivity"></activity>
+        <activity android:name=".PartThreeActivity"></activity>
+        <activity android:name=".draw.XfermodeEraserViewActivity" />
         <activity android:name=".draw.DrawXfermodeActivity" />
         <activity android:name=".draw.DrawLayoutTestActivity" />
         <activity android:name=".draw.DrawShaderTestActivity" />
@@ -117,14 +118,14 @@
             android:name=".ipc.JobWakeupService"
             android:enabled="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-    </application> <!-- //系统轮询需要的权限（设置Service保活） -->
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    </application>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 </manifest>

@@ -32,7 +32,7 @@ public class GuideActivity extends AppCompatActivity {
         student.haveClass();//asdf
     }
 
-    @OnClick({R.id.btn_partOne, R.id.btn_partTwo})
+    @OnClick({R.id.btn_partOne, R.id.btn_partTwo,R.id.btn_partThree})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_partOne: {
@@ -42,6 +42,10 @@ public class GuideActivity extends AppCompatActivity {
             }
             case R.id.btn_partTwo: {
                 Intent intent = new Intent(this, PartTwoActivity.class);
+                startActivity(intent);
+                break;
+            } case R.id.btn_partThree:{
+                Intent intent = new Intent(this, PartThreeActivity.class);
                 startActivity(intent);
                 break;
             }
