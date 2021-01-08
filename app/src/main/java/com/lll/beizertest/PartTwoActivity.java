@@ -1,8 +1,14 @@
 package com.lll.beizertest;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapRegionDecoder;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 
@@ -15,6 +21,10 @@ import com.lll.beizertest.draw.DrawSignatureViewActivity;
 import com.lll.beizertest.draw.DrawViewActivity;
 import com.lll.beizertest.draw.DrawXfermodeActivity;
 import com.lll.beizertest.draw.XfermodeEraserViewActivity;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,12 +50,24 @@ public class PartTwoActivity extends AppCompatActivity {
     @BindView(R.id.btn_drawShader)
     Button mBtnDrawShader;
 
+    private BitmapRegionDecoder mBitmapRegionDecoder;
+
+    private Bitmap mBitmap;
+
+    private SharedPreferences mPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_part_two);
         ButterKnife.bind(this);
 
+        getClassLoader();
+        mPreferences = getSharedPreferences("",MODE_PRIVATE);
+        SharedPreferences.Editor edit = mPreferences.edit();
+        edit.putInt("",12);
+        boolean commit = edit.commit();
+        edit.apply();
     }
 
     @OnClick({R.id.btn_provider, R.id.btn_drawView, R.id.btn_nestedScrolling,
