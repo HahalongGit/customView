@@ -17,22 +17,29 @@
         <item name="textAllCaps">false</item>
     </style>
 
-    <declare-styleable name="core_area">
-        <attr name="underline_color"
-            format="color"/>
-        <attr name="underline_selected_color"
-            format="color"/>
-        <attr name="hint_color"
-            format="color"/>
-        <attr name="text_color"
-            format="color"/>
-        <attr name="hint_text"
-            format="string"/>
-        <attr name="displaying_char"
-            format="string"/>
-        <attr name="codes"
-            format="integer"/>
-    </declare-styleable>
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@color/colorAccent</item>
+<!--        <item name="android:windowIsTranslucent">true</item>-->
+        <item name="android:windowFullscreen">true</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <declare-styleable name="core_area">
+        <attr name="underline_color" format="color" />
+        <attr name="underline_selected_color" format="color" />
+        <attr name="hint_color" format="color" />
+        <attr name="text_color" format="color" />
+        <attr name="hint_text" format="string" />
+        <attr name="displaying_char" format="string" />
+        <attr name="codes" format="integer" />
+    </declare-styleable>
 
 </resources>

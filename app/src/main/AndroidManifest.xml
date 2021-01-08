@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lll.beizertest">
-    <!-- //系统轮询需要的权限（设置Service保活） -->
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -10,7 +10,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PartThreeActivity"></activity>
+        <activity
+            android:name=".SplashActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_splash"
+            android:theme="@style/FullscreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".PartThreeActivity" />
         <activity android:name=".draw.XfermodeEraserViewActivity" />
         <activity android:name=".draw.DrawXfermodeActivity" />
         <activity android:name=".draw.DrawLayoutTestActivity" />
@@ -20,13 +32,9 @@
         <activity android:name=".activity.NestedScrollingActivity" />
         <activity android:name=".activity.ScrollViewActivity" />
         <activity android:name=".activity.MainActivity" />
-        <activity android:name=".GuideActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity
+            android:name=".GuideActivity"
+            android:launchMode="singleTask"></activity>
         <activity android:name=".activity.LivePerformActivity" />
         <activity android:name=".activity.AnimatorActivity" />
         <activity android:name=".activity.MyTextViewActivity" />
@@ -101,6 +109,22 @@
             android:authorities="com.lll.beizertest.activity.provider"
             android:process=":provider" />
 
+        <receiver
+            android:name=".GuideActivity$InnerReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.lll.InnerReceiver" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".receiver.BootBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+        </receiver>
+
         <service android:name=".ipc.MessageService">
             <intent-filter>
 
@@ -114,18 +138,22 @@
         <service
             android:name=".ipc.GuardService"
             android:process=":guardService" />
+
         <service
             android:name=".ipc.JobWakeupService"
             android:enabled="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+
     </application>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
 </manifest>

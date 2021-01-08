@@ -32,7 +32,7 @@
         <attr name="progressTextSize" format="dimension"></attr>
         <attr name="progressTextColor" format="color"></attr>
     </declare-styleable>
-    
+
     <declare-styleable name="RatingBar">
         <attr name="startNormal" format="reference"></attr>
         <attr name="startFocus" format="reference"></attr>
@@ -43,7 +43,6 @@
     <declare-styleable name="DrawLayout">
         <attr name="menuWidth" format="dimension"></attr>
     </declare-styleable>
-
 
     <!--圆形图片-->
     <declare-styleable name="RoundImageView">
@@ -60,12 +59,12 @@
         <attr name="penMaxWidth" format="dimension" />
         <attr name="penColor" format="color" />
         <attr name="velocityFilterWeight" format="float" />
-        <attr name="clearOnDoubleClick" format="boolean"/>
+        <attr name="clearOnDoubleClick" format="boolean" />
     </declare-styleable>
 
     <!--自定义BannerView 属性-->
     <declare-styleable name="BannerView">
-        <attr name="dotIndicatorFocus" format="color|reference"/>
+        <attr name="dotIndicatorFocus" format="color|reference" />
         <attr name="dotIndicatorNormal" format="color|reference"></attr>
         <attr name="dotSize" format="dimension"></attr>
         <attr name="dotDistance" format="dimension"></attr>
@@ -81,11 +80,20 @@
     </declare-styleable>
 
     <declare-styleable name="ExpandableTextView">
-        <attr name="maxCollapsedLines" format="integer"/>
-        <attr name="animDuration" format="integer"/>
-        <attr name="animAlphaStart" format="float"/>
-        <attr name="expandDrawable" format="reference"/>
-        <attr name="collapseDrawable" format="reference"/>
+        <attr name="maxCollapsedLines" format="integer" />
+        <attr name="animDuration" format="integer" />
+        <attr name="animAlphaStart" format="float" />
+        <attr name="expandDrawable" format="reference" />
+        <attr name="collapseDrawable" format="reference" />
+    </declare-styleable>
+
+    <!-- Declare custom theme attributes that allow changing which styles are
+         used for button bars depending on the API level.
+         ?android:attr/buttonBarStyle is new as of API 11 so this is
+         necessary to support previous API levels. -->
+    <declare-styleable name="ButtonBarContainerTheme">
+        <attr name="metaButtonBarStyle" format="reference" />
+        <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
 
 </resources>

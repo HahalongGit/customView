@@ -23,6 +23,7 @@ public class MyApplication extends Application {
         Debug.startMethodTracing("longlongApp");
         CrashReport.initCrashReport(getApplicationContext(), "e903b8d2b5", false);
         try {
+//            Thread.sleep(2000);//测试耗时加载对应用启动的影响，白屏时间增加
             //对 插件化处理
             HookStartActivityUtil hookStartActivityUtil = new HookStartActivityUtil(this, ProxyActivity.class);
             hookStartActivityUtil.hookStartActivity();
