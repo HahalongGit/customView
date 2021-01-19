@@ -6,13 +6,19 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.lll.beizertest.router.RouterPathConstants;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
+@Route(path = RouterPathConstants.ACTIVITY_URL_SPLASH)
 public class SplashActivity extends AppCompatActivity {
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -109,8 +115,8 @@ public class SplashActivity extends AppCompatActivity {
         findViewById(R.id.btn_skip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SplashActivity.this,GuideActivity.class);
-                startActivity(intent);
+                Log.e("TAG","skip-onClick");
+                ARouter.getInstance().build(RouterPathConstants.ACTIVITY_URL_GUIDE).navigation();
                 finish();
             }
         });

@@ -2,7 +2,10 @@ package com.lll.beizertest;
 
 import android.app.Application;
 import android.os.Debug;
+import android.os.Trace;
+import android.util.Log;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.lll.beizertest.activity.ProxyActivity;
 import com.lll.beizertest.utils.HookStartActivityUtil;
 import com.tencent.bugly.crashreport.CrashReport;
@@ -20,7 +23,15 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Debug.startMethodTracing("longlongApp");
+//        Trace.beginSection("longlongTrace");
+        Debug.startMethodTracing("longlongAppTrace");
+
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
+        ARouter.init(this); // As early as possible, it is recommended to initialize in the Application
+
         CrashReport.initCrashReport(getApplicationContext(), "e903b8d2b5", false);
         try {
 //            Thread.sleep(2000);//测试耗时加载对应用启动的影响，白屏时间增加
@@ -32,5 +43,8 @@ public class MyApplication extends Application {
             e.printStackTrace();
         }
         Debug.stopMethodTracing();
+//        Trace.endSection();
+//        int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+//        Log.d("TAG", "Max memory is " + maxMemory + "KB");//Max memory is 262144KB ≈ 256M
     }
 }

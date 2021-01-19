@@ -12,6 +12,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.lll.beizertest.activity.NestedScrollingActivity;
 import com.lll.beizertest.activity.ScrollViewActivity;
 import com.lll.beizertest.activity.provider.ProviderActivity;
@@ -21,6 +22,7 @@ import com.lll.beizertest.draw.DrawSignatureViewActivity;
 import com.lll.beizertest.draw.DrawViewActivity;
 import com.lll.beizertest.draw.DrawXfermodeActivity;
 import com.lll.beizertest.draw.XfermodeEraserViewActivity;
+import com.lll.beizertest.router.RouterPathConstants;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,6 +35,7 @@ import butterknife.OnClick;
 /**
  * 第二部分测试
  */
+@Route(path = RouterPathConstants.ACTIVITY_URL_PART_TWO)
 public class PartTwoActivity extends AppCompatActivity {
 
     @BindView(R.id.btn_provider)

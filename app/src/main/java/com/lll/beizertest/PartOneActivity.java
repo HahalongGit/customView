@@ -3,6 +3,7 @@ package com.lll.beizertest;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Trace;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.lll.beizertest.activity.AnimatorActivity;
 import com.lll.beizertest.activity.BannerViewPagerActivity;
 import com.lll.beizertest.activity.BehaviorActivity;
@@ -52,11 +54,13 @@ import com.lll.beizertest.activity.hook.MainHookActivity;
 import com.lll.beizertest.ipc.IPCActivity;
 import com.lll.beizertest.ipc.ServiceTestActivity;
 import com.lll.beizertest.note_reflect.NoteReflectActivity;
+import com.lll.beizertest.router.RouterPathConstants;
 
 import java.util.concurrent.ThreadPoolExecutor;
 
 import butterknife.ButterKnife;
 
+@Route(path = RouterPathConstants.ACTIVITY_URL_PART_ONE)
 public class PartOneActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "PartOneActivity";
@@ -164,7 +168,6 @@ public class PartOneActivity extends AppCompatActivity implements View.OnClickLi
         valueAnimator.start();
 
         //listView.setAdapter();
-
     }
 
 

@@ -13,9 +13,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.lll.beizertest.receiver.MyReceiver;
 import com.lll.beizertest.receiver.MyReceiver1;
 import com.lll.beizertest.receiver.MyReceiver2;
+import com.lll.beizertest.router.RouterPathConstants;
 import com.lll.beizertest.test.MiddleStudent;
 import com.lll.beizertest.test.Student;
 
@@ -28,6 +31,8 @@ import butterknife.OnClick;
 /**
  * 页面功能导航
  */
+
+@Route(path = RouterPathConstants.ACTIVITY_URL_GUIDE)
 public class GuideActivity extends AppCompatActivity {
 
     private static final String TAG = "GuideActivity";
@@ -85,18 +90,15 @@ public class GuideActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_partOne: {
-                Intent intent = new Intent(this, PartOneActivity.class);
-                startActivity(intent);
+                ARouter.getInstance().build(RouterPathConstants.ACTIVITY_URL_PART_ONE).navigation();
                 break;
             }
             case R.id.btn_partTwo: {
-                Intent intent = new Intent(this, PartTwoActivity.class);
-                startActivity(intent);
+                ARouter.getInstance().build(RouterPathConstants.ACTIVITY_URL_PART_TWO).navigation();
                 break;
             }
             case R.id.btn_partThree: {
-                Intent intent = new Intent(this, PartThreeActivity.class);
-                startActivity(intent);
+                ARouter.getInstance().build(RouterPathConstants.ACTIVITY_URL_PART_THREE).navigation();
                 break;
             }
             case R.id.btn_sendBroadcast: {
