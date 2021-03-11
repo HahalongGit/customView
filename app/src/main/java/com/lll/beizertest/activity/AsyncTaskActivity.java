@@ -1,11 +1,12 @@
 package com.lll.beizertest.activity;
 
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.lll.beizertest.R;
+
+import java.util.HashMap;
 
 /**
  * AsyncTask 分析
@@ -21,7 +22,7 @@ public class AsyncTaskActivity extends AppCompatActivity {
         MyAsyncTask myAsyncTask = new MyAsyncTask();
 
         myAsyncTask.execute("url");//执行Task
-
+        HashMap hashMap = new HashMap();
     }
 
     class MyAsyncTask extends AsyncTask<String, Integer, String> {

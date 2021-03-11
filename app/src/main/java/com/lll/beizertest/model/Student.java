@@ -2,6 +2,8 @@ package com.lll.beizertest.model;
 
 import android.util.Log;
 
+import java.util.Objects;
+
 /**
  * Created by longlong on 2018/2/28.
  *
@@ -33,17 +35,30 @@ public abstract class Student {
         this.stuAge = stuAge;
     }
 
-    public static void function_static_mehod(){
-        Log.e("TAG","function_static_mehod静态方法调用");
+    public static void function_static_mehod() {
+        Log.e("TAG", "function_static_mehod静态方法调用");
     }
 
-    protected void setText(){
+    protected void setText() {
 
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Student)) {
+            return false;
+        }
+        Student student = (Student) o;
+        return getStuName().equals(student.getStuName()) &&
+                getStuAge().equals(student.getStuAge());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getStuName(), getStuAge());
     }
 
 

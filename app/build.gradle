@@ -104,7 +104,7 @@ dependencies {
     implementation 'org.litepal.android:core:1.6.1'
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.0'
     implementation project(':imageselectlibrary')
-    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+//    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
 
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
 
