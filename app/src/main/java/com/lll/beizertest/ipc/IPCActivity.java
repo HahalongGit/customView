@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -31,7 +30,7 @@ public class IPCActivity extends AppCompatActivity {
     Button btnPassword;
     private ServiceConnection serviceConnection;
 
-    private UserAidl userAidl;
+//    private UserAidl userAidl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,7 @@ public class IPCActivity extends AppCompatActivity {
             public void onServiceConnected(ComponentName name, IBinder service) {
                 Log.e(TAG, "链接好了");
                 // Service 是服务端给我们的Binder
-                userAidl = UserAidl.Stub.asInterface(service);
+//                userAidl = UserAidl.Stub.asInterface(service);
             }
 
             @Override
@@ -77,19 +76,19 @@ public class IPCActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_username:
-                try {
-                    //输出结果：
-                    Log.e(TAG,"username:"+userAidl.getUserName());
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    //输出结果：
+////                    Log.e(TAG,"username:"+userAidl.getUserName());
+//                } catch (RemoteException e) {
+//                    e.printStackTrace();
+//                }
                 break;
             case R.id.btn_password:
-                try {
-                    Log.e(TAG,"password:"+userAidl.getUserPassword());
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
+//                try {
+////                    Log.e(TAG,"password:"+userAidl.getUserPassword());
+//                } catch (RemoteException e) {
+//                    e.printStackTrace();
+//                }
                 break;
         }
     }
