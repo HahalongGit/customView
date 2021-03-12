@@ -1,5 +1,6 @@
 package com.lll.beizertest;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -33,11 +34,18 @@ public class PartThreeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.btn_dynamicProxy})
+    @OnClick({R.id.btn_dynamicProxy, R.id.btn_setRestlt})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_dynamicProxy: {
                 testDynamic();
+                break;
+            }
+            case R.id.btn_setRestlt: {
+                Intent intent = new Intent();
+                intent.putExtra("Data", "ARouter返回的数据~");
+                setResult(RESULT_OK, intent);
+                finish();
                 break;
             }
         }
@@ -50,7 +58,7 @@ public class PartThreeActivity extends AppCompatActivity {
         Log.e(TAG, "service-name: " + service.getClass().getName());// 输出结果：com.lll.beizertest.proxy.HelloServiceImpl
         //创建的代理对象，三个参数：被代理的类加载器，被代理的类的接口集合，InvocationHandler处理对象
         HelloService proxyService = (HelloService) Proxy.newProxyInstance(HelloService.class.getClassLoader(),
-                new Class<?>[]{HelloService.class},helloServiceProxy);
+                new Class<?>[]{HelloService.class}, helloServiceProxy);
         Log.e(TAG, "proxyService-name: " + proxyService.getClass().getName());//输出结果：$Proxy0
         proxyService.helloWorld("丽丽好~");
         // TODO: [RunningDigua create at 2020/10/14]

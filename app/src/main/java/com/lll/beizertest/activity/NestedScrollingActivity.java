@@ -109,7 +109,7 @@ public class NestedScrollingActivity extends AppCompatActivity {
         }
     }
 
-    protected class NestedScrollingViewHolder extends RecyclerView.ViewHolder {
+    protected static class NestedScrollingViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tv_itemContent)
         TextView tvItemContent;

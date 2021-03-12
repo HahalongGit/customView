@@ -25,7 +25,7 @@ public class AsyncTaskActivity extends AppCompatActivity {
         HashMap hashMap = new HashMap();
     }
 
-    class MyAsyncTask extends AsyncTask<String, Integer, String> {
+    static class MyAsyncTask extends AsyncTask<String, Integer, String> {
 
         @Override
         protected void onPreExecute() {

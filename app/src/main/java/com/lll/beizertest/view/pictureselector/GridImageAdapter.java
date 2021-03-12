@@ -65,7 +65,7 @@ public class GridImageAdapter extends
         this.list = list;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView mImg;
         LinearLayout ll_del;

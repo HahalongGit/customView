@@ -58,7 +58,7 @@ public class MyBannerAdapter extends BannerViewAdapter {
     }
 
 
-    class ItemViewHolder implements View.OnTouchListener{
+    static class ItemViewHolder implements View.OnTouchListener{
 
         private OnItemTouchListener onItemTouchListener;
 

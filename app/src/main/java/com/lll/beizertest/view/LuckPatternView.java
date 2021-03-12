@@ -574,7 +574,7 @@ public class LuckPatternView extends View {
     /**
      *Point 类
      */
-    class Point {
+    static class Point {
         public static final int NORMAL_STATUS = 1;
         public static final int PRESSED_STATUS = 2;
         public static final int ERROR_STATUS = 3;

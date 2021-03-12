@@ -11,8 +11,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.lll.beizertest.activity.AnimatorActivity;
 import com.lll.beizertest.activity.BannerViewPagerActivity;
 import com.lll.beizertest.activity.BehaviorActivity;
@@ -83,12 +86,20 @@ public class PartOneActivity extends AppCompatActivity implements View.OnClickLi
 //    private MediaController mMediaControllerl;
 //
 //    private MediaSession mMediaSession;
+    public static final String PART_ONT_PARAM_FLAG = "partOneParamFlag";
+
+    // 这里的name要和参数的key一致
+    @Autowired(name = PART_ONT_PARAM_FLAG)
+    String mParam;
+
+    @Autowired
+    int age;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ARouter.getInstance().inject(this);//ARouter注入
         setContentView(R.layout.activity_launch);
-
 
 //        Executors.newFixedThreadPool(4);//只有核心线程
 //        Executors.newCachedThreadPool();// 没有限制的线程池 大量的耗时少的任务
@@ -182,6 +193,11 @@ public class PartOneActivity extends AppCompatActivity implements View.OnClickLi
         //listView.setAdapter();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(this, "ARouter获取的数据：" + age + "--" + mParam, Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public void onClick(View view) {

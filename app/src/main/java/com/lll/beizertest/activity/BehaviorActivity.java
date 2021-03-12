@@ -38,7 +38,7 @@ public class BehaviorActivity extends AppCompatActivity {
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 BehaviorViewHolder viewHolder = new BehaviorViewHolder(
-                        LayoutInflater.from(BehaviorActivity.this).inflate(R.layout.recycle_behavior_adapter_item,parent,false));
+                        LayoutInflater.from(BehaviorActivity.this).inflate(R.layout.recycle_behavior_adapter_item, parent, false));
                 return viewHolder;
             }
 
@@ -55,7 +55,7 @@ public class BehaviorActivity extends AppCompatActivity {
     }
 
 
-    public class BehaviorViewHolder extends RecyclerView.ViewHolder{
+    public static class BehaviorViewHolder extends RecyclerView.ViewHolder{
 
         private TextView textView;
 

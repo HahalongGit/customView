@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="TextView">
-        <attr name="hahaText" format="string"></attr>
-        <attr name="hahaTextColor" format="color"></attr>
-        <attr name="hahaTextSize" format="dimension"></attr>
-        <attr name="hahaMaxLength" format="integer"></attr>
+        <attr name="hahaText" format="string" />
+        <attr name="hahaTextColor" format="color" />
+        <attr name="hahaTextSize" format="dimension" />
+        <attr name="hahaMaxLength" format="integer" />
         <attr name="inputType">
-            <enum name="number" value="1"></enum>
-            <enum name="text" value="2"></enum>
-            <enum name="password" value="3"></enum>
+            <enum name="number" value="1" />
+            <enum name="text" value="2" />
+            <enum name="password" value="3" />
         </attr>
     </declare-styleable>
 
     <declare-styleable name="StepView">
-        <attr name="outerColor" format="color"></attr>
-        <attr name="innerColor" format="color"></attr>
-        <attr name="borderWidth" format="dimension"></attr>
-        <attr name="stepTextSize" format="dimension"></attr>
-        <attr name="stepTextColor" format="color"></attr>
+        <attr name="outerColor" format="color" />
+        <attr name="innerColor" format="color" />
+        <attr name="borderWidth" format="dimension" />
+        <attr name="stepTextSize" format="dimension" />
+        <attr name="stepTextColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="ColorTrackTextView">
-        <attr name="originColor" format="color"></attr>
-        <attr name="changeColor" format="color"></attr>
+        <attr name="originColor" format="color" />
+        <attr name="changeColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="ProgressBar">
-        <attr name="outerBackgroundColor" format="color"></attr>
-        <attr name="innerBackgroundColor" format="color"></attr>
-        <attr name="progressBorderWidth" format="dimension"></attr>
-        <attr name="progressTextSize" format="dimension"></attr>
-        <attr name="progressTextColor" format="color"></attr>
+        <attr name="outerBackgroundColor" format="color" />
+        <attr name="innerBackgroundColor" format="color" />
+        <attr name="progressBorderWidth" format="dimension" />
+        <attr name="progressTextSize" format="dimension" />
+        <attr name="progressTextColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="RatingBar">
-        <attr name="startNormal" format="reference"></attr>
-        <attr name="startFocus" format="reference"></attr>
-        <attr name="gradeNumber" format="integer"></attr>
+        <attr name="startNormal" format="reference" />
+        <attr name="startFocus" format="reference" />
+        <attr name="gradeNumber" format="integer" />
     </declare-styleable>
 
     <!--侧滑后menu的宽度-->
     <declare-styleable name="DrawLayout">
-        <attr name="menuWidth" format="dimension"></attr>
+        <attr name="menuWidth" format="dimension" />
     </declare-styleable>
 
     <!--圆形图片-->
@@ -65,18 +65,18 @@
     <!--自定义BannerView 属性-->
     <declare-styleable name="BannerView">
         <attr name="dotIndicatorFocus" format="color|reference" />
-        <attr name="dotIndicatorNormal" format="color|reference"></attr>
-        <attr name="dotSize" format="dimension"></attr>
-        <attr name="dotDistance" format="dimension"></attr>
+        <attr name="dotIndicatorNormal" format="color|reference" />
+        <attr name="dotSize" format="dimension" />
+        <attr name="dotDistance" format="dimension" />
         <attr name="dotGravity" format="enum">
-            <enum name="center" value="0"></enum>
-            <enum name="right" value="1"></enum>
-            <enum name="left" value="-1"></enum>
+            <enum name="center" value="0" />
+            <enum name="right" value="1" />
+            <enum name="left" value="-1" />
         </attr>
-        <attr name="bottomColor" format="color"></attr>
+        <attr name="bottomColor" format="color" />
         <!--设置宽高比的参数-->
-        <attr name="widthProportion" format="float"></attr>
-        <attr name="hightProportion" format="float"></attr>
+        <attr name="widthProportion" format="float" />
+        <attr name="hightProportion" format="float" />
     </declare-styleable>
 
     <declare-styleable name="ExpandableTextView">

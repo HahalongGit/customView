@@ -32,7 +32,7 @@ public class WrapAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        WrapViewHolder viewHolder = new WrapViewHolder(LayoutInflater.from(context).inflate(R.layout.recycle_adapter_item_layout,parent,false));
+        WrapViewHolder viewHolder = new WrapViewHolder(LayoutInflater.from(context).inflate(R.layout.recycle_adapter_item_layout, parent, false));
         return viewHolder;
     }
 
@@ -52,7 +52,7 @@ public class WrapAdapter extends RecyclerView.Adapter {
         return 5;
     }
 
-    class WrapViewHolder extends RecyclerView.ViewHolder{
+    static class WrapViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.iv_imageshow)
         ImageView imageView;

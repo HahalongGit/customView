@@ -19,7 +19,6 @@
         android:layout_height="140dp"/>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/customViewPager"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_gravity="center"
