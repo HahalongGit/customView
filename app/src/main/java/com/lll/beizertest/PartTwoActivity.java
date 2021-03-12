@@ -16,6 +16,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.lll.beizertest.activity.NestedScrollingActivity;
 import com.lll.beizertest.activity.ScrollViewActivity;
 import com.lll.beizertest.activity.provider.ProviderActivity;
+import com.lll.beizertest.databinding.ActivityPartTwoBinding;
 import com.lll.beizertest.draw.DrawLayoutTestActivity;
 import com.lll.beizertest.draw.DrawShaderTestActivity;
 import com.lll.beizertest.draw.DrawSignatureViewActivity;
@@ -59,12 +60,15 @@ public class PartTwoActivity extends AppCompatActivity {
 
     private SharedPreferences mPreferences;
 
+    private ActivityPartTwoBinding mBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_part_two);
         ButterKnife.bind(this);
-
+        mBinding = ActivityPartTwoBinding.inflate(getLayoutInflater());
+//        mBinding.btnCustomDrawView
         getClassLoader();
         mPreferences = getSharedPreferences("",MODE_PRIVATE);
         SharedPreferences.Editor edit = mPreferences.edit();

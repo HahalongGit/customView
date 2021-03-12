@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.lll.beizertest.databinding.ActivityPartThreeBinding;
 import com.lll.beizertest.proxy.HelloService;
 import com.lll.beizertest.proxy.HelloServiceImpl;
 import com.lll.beizertest.proxy.HelloServiceProxy;
@@ -27,11 +28,15 @@ public class PartThreeActivity extends AppCompatActivity {
     @BindView(R.id.btn_dynamicProxy)
     Button mBtnDynamicProxy;
 
+    private ActivityPartThreeBinding mBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_part_three);
         ButterKnife.bind(this);
+        mBinding = ActivityPartThreeBinding.inflate(getLayoutInflater());
+        //采用viewBinding的方式
     }
 
     @OnClick({R.id.btn_dynamicProxy, R.id.btn_setRestlt})

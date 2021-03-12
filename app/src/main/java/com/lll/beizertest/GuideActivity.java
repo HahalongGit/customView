@@ -18,6 +18,7 @@ import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.lll.beizertest.databinding.ActivityGuideBinding;
 import com.lll.beizertest.receiver.MyReceiver;
 import com.lll.beizertest.receiver.MyReceiver1;
 import com.lll.beizertest.receiver.MyReceiver2;
@@ -53,11 +54,15 @@ public class GuideActivity extends AppCompatActivity {
 
     private MyReceiver2 mMyReceiver2;
 
+    private ActivityGuideBinding mBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
         ButterKnife.bind(this);
+        mBinding = ActivityGuideBinding.inflate(getLayoutInflater());
+
         ClassLoader classLoader = getClassLoader();
         while (classLoader != null) {
             Log.e(TAG, "classLoader-:" + classLoader.getClass().getName());

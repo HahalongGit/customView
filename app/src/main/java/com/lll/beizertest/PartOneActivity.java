@@ -54,6 +54,7 @@ import com.lll.beizertest.activity.TagLayoutActivity;
 import com.lll.beizertest.activity.TouchViewActivity;
 import com.lll.beizertest.activity.VerticalDragViewActivity;
 import com.lll.beizertest.activity.hook.MainHookActivity;
+import com.lll.beizertest.databinding.ActivityPartTwoBinding;
 import com.lll.beizertest.ipc.IPCActivity;
 import com.lll.beizertest.ipc.ServiceTestActivity;
 import com.lll.beizertest.note_reflect.NoteReflectActivity;
