@@ -3,6 +3,7 @@ package com.lll.beizertest.activity.recycleview;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.lll.beizertest.R;
@@ -30,9 +31,11 @@ public class CustomLayoutManagerActivity extends AppCompatActivity {
     /**
      * 系统定义的分割线
      */
-    private DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);//华丽的分割线
+//    private DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);//华丽的分割线
 
     private List<String> mData = new ArrayList<>();
+
+    private LinearLayoutManager mLinearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
