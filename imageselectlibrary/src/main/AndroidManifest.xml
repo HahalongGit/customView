@@ -3,7 +3,7 @@
     package="com.lll.imageselectlibrary">
 
     <application>
-        <activity android:name=".ImageSelectActivity"></activity>
+        <activity android:name=".ImageSelectActivity" />
     </application>
 
 </manifest>

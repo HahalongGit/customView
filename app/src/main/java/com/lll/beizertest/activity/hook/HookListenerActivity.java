@@ -84,7 +84,7 @@ public class HookListenerActivity extends AppCompatActivity {
     /**
      * 静态代理实现
      */
-    class HookOnClickListener implements View.OnClickListener {
+    static class HookOnClickListener implements View.OnClickListener {
 
         private View.OnClickListener listener;
 

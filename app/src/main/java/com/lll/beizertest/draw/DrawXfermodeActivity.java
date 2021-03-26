@@ -141,7 +141,7 @@ public class DrawXfermodeActivity extends AppCompatActivity {
         }
     }
 
-    protected class XfermodeViewHoder extends RecyclerView.ViewHolder {
+    protected static class XfermodeViewHoder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tv_itemName)
         TextView mItemName;

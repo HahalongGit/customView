@@ -62,7 +62,7 @@ public class CustomLayoutMnagerAdapter extends RecyclerView.Adapter {
     /**
      *
      */
-    protected class ItemViewHolder extends RecyclerView.ViewHolder {
+    protected static class ItemViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tv_itemContent)
         TextView tvItemContent;
 
