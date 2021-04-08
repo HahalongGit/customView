@@ -2,6 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lll.beizertest">
 
+<!--    测试自定义申请访问PartOneActivty的权限 权限级别是：dangerous 需要动态申请-->
+    <permission
+        android:protectionLevel="dangerous"
+        android:label="申请访问PartOneActivty"
+        android:name="com.lll.beizertest.permission.PART_ONE_ACCESS"/>
+
+<!--  申明  使用自定义权限-->
+    <uses-permission android:name="com.lll.beizertest.permission.PART_ONE_ACCESS"/>
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -62,8 +71,7 @@
             android:theme="@style/NoAction" />
         <activity android:name=".activity.ScreenMenuViewActivity" />
         <activity
-            android:name=".activity.CustomViewPagerActivity"
-            android:screenOrientation="portrait" />
+            android:name=".activity.CustomViewPagerActivity" />
         <activity android:name=".activity.LoadViewActivity" />
         <activity android:name=".activity.RecycleViewHeaderFooterActivity" />
         <activity android:name=".activity.BannerViewPagerActivity" />
@@ -93,7 +101,15 @@
         <activity android:name=".activity.ContentPorviderActivity" />
         <activity android:name=".activity.AsyncTaskActivity" />
         <activity android:name=".activity.provider.ProviderActivity" />
-        <activity android:name=".PartOneActivity" />
+
+<!--        使用自定义permission控制PartTwoActivity的访问 如果授权了就访问，否则不能-->
+<!--        android:permission="com.lll.beizertest.permission.PART_ONE_ACCESS"-->
+        <activity
+            android:exported="true"
+            android:permission="com.lll.beizertest.permission.PART_ONE_ACCESS"
+            android:name=".PartOneActivity" />
+
+
         <activity android:name=".PartTwoActivity" />
 
         <provider

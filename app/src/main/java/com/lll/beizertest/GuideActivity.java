@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.lll.beizertest.common.Manifest;
 import com.lll.beizertest.databinding.ActivityGuideBinding;
 import com.lll.beizertest.receiver.MyReceiver;
 import com.lll.beizertest.receiver.MyReceiver1;
@@ -28,16 +30,19 @@ import com.lll.beizertest.test.Student;
 
 import org.litepal.util.LogUtil;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * 页面功能导航
  */
 
 @Route(path = RouterPathConstants.ACTIVITY_URL_GUIDE)
-public class GuideActivity extends AppCompatActivity {
+public class GuideActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
     private static final String TAG = "GuideActivity";
 
@@ -55,6 +60,8 @@ public class GuideActivity extends AppCompatActivity {
     private MyReceiver2 mMyReceiver2;
 
     private ActivityGuideBinding mBinding;
+
+    private int PERMISSION_CODE = 10001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,11 +105,23 @@ public class GuideActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_partOne: {
-                ARouter.getInstance()
-                        .build(RouterPathConstants.ACTIVITY_URL_PART_ONE)
-                        .withString(PartOneActivity.PART_ONT_PARAM_FLAG, "我是通过ARouter传递的数据~")
-                        .withInt("age", 22)
-                        .navigation();
+                //自定义权限测试
+                String PERMISSION_STORAGE_MSG = "请授予权限，否则影响部分使用功能";
+                String[] PERMS = {Manifest.permission.ACCESS_PART_ONE};//自定义Manifest 常量ACCESS_PART_ONE
+                navigateToPartOne();
+//                if (EasyPermissions.hasPermissions(this, PERMS)) {
+                    // 已经申请过权限，做想做的事
+//                } else {
+                    // 没有申请过权限，现在去申请
+                    /**
+                     *@param host Context对象
+                     *@param rationale  权限弹窗上的提示语。
+                     *@param requestCode 请求权限的唯一标识码
+                     *@param perms 一系列权限
+                     */
+//                    EasyPermissions.requestPermissions(this, PERMISSION_STORAGE_MSG, PERMISSION_CODE, PERMS);
+//                }
+
                 break;
             }
             case R.id.btn_partTwo: {
@@ -125,6 +144,21 @@ public class GuideActivity extends AppCompatActivity {
         }
     }
 
+    private void navigateToPartOne() {
+        ARouter.getInstance()
+                .build(RouterPathConstants.ACTIVITY_URL_PART_ONE)
+                .withString(PartOneActivity.PART_ONT_PARAM_FLAG, "我是通过ARouter传递的数据~")
+                .withInt("age", 22)
+                .navigation();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //将结果转发给EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -139,6 +173,7 @@ public class GuideActivity extends AppCompatActivity {
      * 可以在onStop方法中去释放一些Activity相关的资源，比如说取消网络连接或者注销广播接收器等。当时像UI相关的资源应该
      * 一直要等到onTrimMemory的TRIM_MEMORY_UI_HIDDEN之后才释放，这样可以保证用户是从我们的程序的一个Activity回到了
      * 另外一个Activity，界面的相关资源都不需要重新加载，从而提高响应速度。
+     *
      * @param level
      */
     @Override
@@ -162,6 +197,27 @@ public class GuideActivity extends AppCompatActivity {
         unregisterReceiver(mMyReceiver1);
         unregisterReceiver(mMyReceiver2);
     }
+
+    /**
+     * EasyPermissions 权限的回调
+     * @param requestCode
+     * @param perms
+     */
+    @Override
+    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+        // 授权了
+        if (requestCode == PERMISSION_CODE) {
+            navigateToPartOne();
+            Toast.makeText(this, "授权成功了了" + perms.get(0), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+        // 未授权
+        Toast.makeText(this, "onPermissionsDenied 未授权", Toast.LENGTH_SHORT).show();
+    }
+
 
     public static class InnerReceiver extends BroadcastReceiver {
 
