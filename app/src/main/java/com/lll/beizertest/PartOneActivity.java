@@ -101,7 +101,6 @@ public class PartOneActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         ARouter.getInstance().inject(this);//ARouter注入
         setContentView(R.layout.activity_launch);
-
 //        Executors.newFixedThreadPool(4);//只有核心线程
 //        Executors.newCachedThreadPool();// 没有限制的线程池 大量的耗时少的任务
 //        Executors.newScheduledThreadPool(4);// 核心 线程数量有限制，非核心线程数量没有限制 处理定时任务和周期性的任务

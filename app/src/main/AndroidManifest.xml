@@ -1,25 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lll.beizertest">
-
-<!--    测试自定义申请访问PartOneActivty的权限 权限级别是：dangerous 需要动态申请-->
-    <permission
-        android:protectionLevel="dangerous"
-        android:label="申请访问PartOneActivty"
-        android:name="com.lll.beizertest.permission.PART_ONE_ACCESS"/>
-
-<!--  申明  使用自定义权限-->
-    <uses-permission android:name="com.lll.beizertest.permission.PART_ONE_ACCESS"/>
-
+    <!-- 测试自定义申请访问PartOneActivty的权限 权限级别是：dangerous 需要动态申请 -->
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:fullBackupContent="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.recycleview.DargRecycleViewActivity"></activity>
         <activity
             android:name=".SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -30,7 +22,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".PartThreeActivity" />
         <activity android:name=".draw.XfermodeEraserViewActivity" />
@@ -70,8 +61,7 @@
             android:name=".activity.BehaviorActivity"
             android:theme="@style/NoAction" />
         <activity android:name=".activity.ScreenMenuViewActivity" />
-        <activity
-            android:name=".activity.CustomViewPagerActivity" />
+        <activity android:name=".activity.CustomViewPagerActivity" />
         <activity android:name=".activity.LoadViewActivity" />
         <activity android:name=".activity.RecycleViewHeaderFooterActivity" />
         <activity android:name=".activity.BannerViewPagerActivity" />
@@ -100,16 +90,12 @@
         <activity android:name=".activity.hook.HookActivityActivity" />
         <activity android:name=".activity.ContentPorviderActivity" />
         <activity android:name=".activity.AsyncTaskActivity" />
-        <activity android:name=".activity.provider.ProviderActivity" />
-
-<!--        使用自定义permission控制PartTwoActivity的访问 如果授权了就访问，否则不能-->
-<!--        android:permission="com.lll.beizertest.permission.PART_ONE_ACCESS"-->
+        <activity android:name=".activity.provider.ProviderActivity" /> <!-- 使用自定义permission控制PartTwoActivity的访问 如果授权了就访问，否则不能 -->
+        <!-- android:permission="com.lll.beizertest.permission.PART_ONE_ACCESS" -->
         <activity
+            android:name=".PartOneActivity"
             android:exported="true"
-            android:permission="com.lll.beizertest.permission.PART_ONE_ACCESS"
-            android:name=".PartOneActivity" />
-
-
+            android:permission="com.lll.beizertest.permission.PART_ONE_ACCESS" />
         <activity android:name=".PartTwoActivity" />
 
         <provider
@@ -134,10 +120,10 @@
                 <action android:name="com.lll.InnerReceiver" />
             </intent-filter>
         </receiver>
-
         <receiver android:name=".receiver.BootBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </receiver>
@@ -155,14 +141,16 @@
         <service
             android:name=".ipc.GuardService"
             android:process=":guardService" />
-
         <service
             android:name=".ipc.JobWakeupService"
             android:enabled="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
-    </application>
-
+    </application> <!-- 申明  使用自定义权限 -->
+    <permission
+        android:name="com.lll.beizertest.permission.PART_ONE_ACCESS"
+        android:label="申请访问PartOneActivty"
+        android:protectionLevel="dangerous" />
+    <uses-permission android:name="com.lll.beizertest.permission.PART_ONE_ACCESS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

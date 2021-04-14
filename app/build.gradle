@@ -1,13 +1,17 @@
 apply plugin: 'com.android.application'
 //apply plugin: 'com.alibaba.arouter'
-//apply from: 'test.gradle'//创建一个test.gradle文件的方式添加插件，引入test.gradle文件
+apply from: 'test.gradle'//创建一个test.gradle文件的方式添加插件，引入test.gradle文件
 //apply plugin: CustomPulginInBuildGradle // 在本文件中定义的脚本插件
-//apply plugin: DiguaPlugin1  直接引用model的tast
+//apply plugin: DiguaPorjectPlugin  //直接引用model的tast
 // 这个plugin后的字符串就是插件定义的properties中的文件名
-//apply plugin: 'com.digua.buildsrc'//通过发布的plguin引用buildSrc model 中定义的插件
+//apply plugin: 'com.digua.buildsrc' //通过发布的plguin引用buildSrc model 中定义的插件
 
 ///////////////引用本地发布的plugin设置 一下设置可以去掉 //////
-/// 只用apply plugin: 'com.digua.buildsrc'////////////////////
+//只用
+//apply plugin: 'com.digua.buildsrc'////////////////////
+
+apply from: "${rootProject.rootDir}/config.gradle" //添加一个配置,通过config.gradle引入配置
+
 buildscript {
     repositories {
         maven {
@@ -119,6 +123,9 @@ dependencies {
     implementation 'pub.devrel:easypermissions:2.0.1'
     //bugly
     implementation 'com.tencent.bugly:crashreport:3.3.3'
+
+    //图片加载
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
 
     implementation 'com.alibaba:arouter-api:1.5.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'

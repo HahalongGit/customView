@@ -70,6 +70,11 @@
                 android:layout_height="wrap_content"
                 android:text="Xfermode使用扩展实现橡皮擦刮刮乐" />
 
+            <Button
+                android:id="@+id/btn_dragRecycleView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="可以拖拽的RecycleView" />
         </LinearLayout>
 
     </ScrollView>

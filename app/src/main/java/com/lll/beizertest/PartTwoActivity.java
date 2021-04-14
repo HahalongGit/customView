@@ -16,6 +16,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.lll.beizertest.activity.NestedScrollingActivity;
 import com.lll.beizertest.activity.ScrollViewActivity;
 import com.lll.beizertest.activity.provider.ProviderActivity;
+import com.lll.beizertest.activity.recycleview.DargRecycleViewActivity;
 import com.lll.beizertest.databinding.ActivityPartTwoBinding;
 import com.lll.beizertest.draw.DrawLayoutTestActivity;
 import com.lll.beizertest.draw.DrawShaderTestActivity;
@@ -65,21 +66,21 @@ public class PartTwoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_part_two);
-        ButterKnife.bind(this);
         mBinding = ActivityPartTwoBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
+        ButterKnife.bind(this);
 //        mBinding.btnCustomDrawView
         getClassLoader();
-        mPreferences = getSharedPreferences("",MODE_PRIVATE);
+        mPreferences = getSharedPreferences("", MODE_PRIVATE);
         SharedPreferences.Editor edit = mPreferences.edit();
-        edit.putInt("",12);
+        edit.putInt("", 12);
         boolean commit = edit.commit();
         edit.apply();
     }
 
     @OnClick({R.id.btn_provider, R.id.btn_drawView, R.id.btn_nestedScrolling,
             R.id.btn_customDrawView, R.id.btn_drawSignature, R.id.btn_drawShader,
-            R.id.btn_drawLayout,R.id.btn_drawXfermode,R.id.btn_drawEraser})
+            R.id.btn_drawLayout, R.id.btn_drawXfermode, R.id.btn_drawEraser, R.id.btn_dragRecycleView})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_provider: {
@@ -116,14 +117,20 @@ public class PartTwoActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, DrawLayoutTestActivity.class);
                 startActivity(intent);
                 break;
-            } case R.id.btn_drawXfermode:{
+            }
+            case R.id.btn_drawXfermode: {
                 Intent intent = new Intent(this, DrawXfermodeActivity.class);
                 startActivity(intent);
                 break;
-            } case R.id.btn_drawEraser:{
+            }
+            case R.id.btn_drawEraser: {
                 Intent intent = new Intent(this, XfermodeEraserViewActivity.class);
                 startActivity(intent);
                 break;
+            }
+            case R.id.btn_dragRecycleView: {
+                Intent intent = new Intent(this, DargRecycleViewActivity.class);
+                startActivity(intent);
             }
         }
     }

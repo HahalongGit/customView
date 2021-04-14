@@ -1,0 +1,7 @@
+//ext是语言的一个属性，直接给属性添加变量
+
+ext{
+    compileSdkVersion = 28
+    minSdkVersion = 19
+    targetSdkVersion = 28
+}
