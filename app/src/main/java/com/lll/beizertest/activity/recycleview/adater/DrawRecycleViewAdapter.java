@@ -51,9 +51,9 @@ public class DrawRecycleViewAdapter extends RecyclerView.Adapter<DrawRecycleView
         drawItemViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Log.e(TAG, "onLongClick--" + i);
+                Log.e(TAG, "onLongClick--"+drawItemViewHolder.getAdapterPosition());
                 if (mOnItemLongClickListener != null) {
-                    mOnItemLongClickListener.onItemLongClick(i, drawItemViewHolder);
+                    mOnItemLongClickListener.onItemLongClick(drawItemViewHolder.getAdapterPosition(), drawItemViewHolder);
                 }
                 return false;
             }

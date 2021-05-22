@@ -123,13 +123,13 @@ public class DrawXfermodeActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull XfermodeViewHoder viewHoder, final int position) {
-            viewHoder.mItemName.setText(mStringList.get(position).getModeName());
+        public void onBindViewHolder(@NonNull XfermodeViewHoder viewHoder, int position) {
+            viewHoder.mItemName.setText(mStringList.get(viewHoder.getAdapterPosition()).getModeName());
             viewHoder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mOnItemClickListener != null) {
-                        mOnItemClickListener.onItemClick(position);
+                        mOnItemClickListener.onItemClick(viewHoder.getAdapterPosition());
                     }
                 }
             });

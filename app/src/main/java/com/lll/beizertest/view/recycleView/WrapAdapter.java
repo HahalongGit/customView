@@ -37,12 +37,12 @@ public class WrapAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         WrapViewHolder wrapViewHolder = (WrapViewHolder) holder;
         wrapViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "点击：" + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "点击：" + holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
             }
         });
     }
