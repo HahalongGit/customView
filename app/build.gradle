@@ -35,6 +35,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 //        ndk {
 //            moduleName "native-lib"         //生成的so名字
@@ -136,6 +137,8 @@ dependencies {
 
     implementation 'com.alibaba:arouter-api:1.5.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
+
+    implementation 'com.android.support:multidex:1.0.3'
 
 //    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.6.3' //添加leakCanary
     debugCompile 'com.squareup.leakcanary:leakcanary-android:2.7' //添加leakCanary 2.7版本不需要在applicaiton中注册

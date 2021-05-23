@@ -16,3 +16,49 @@ class Book {
         this.name = name
     }
 }
+
+version = "1.0.1_SNAPSHOT"
+
+task first  {
+    println("first")
+}
+task second {
+    println("second")
+}
+
+
+task printVersion(dependsOn: [second,first]) {
+
+    doLast {
+        println(version)
+    }
+
+    doFirst {
+        println "打印版本号之前"
+    }
+}
+
+printVersion.doFirst {
+    println "调用printVersion的方法doFirst"
+}.doLast {
+    println "调用printVersion的方法doLast"
+    logger.quiet(version)
+}
+
+
+task third(dependsOn:printVersion){
+    println("print third")
+}
+//third.finalizeBy second
+
+task createDistribution(type:Zip,dependsOn: third){
+//    from war.outputs.files
+    from(sourceSets*.allSource)
+    from(rootDir){
+        include ""
+    }
+}
+
+//task helloworld <<{
+//    println "hello world~"
+//}
