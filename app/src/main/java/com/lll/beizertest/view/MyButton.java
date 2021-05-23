@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RadialGradient;
 import android.graphics.Shader;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -27,7 +28,7 @@ import android.widget.Button;
  * @author RunningDigua
  * @date 2020/8/4
  */
-public class MyButton extends Button {
+public class MyButton extends AppCompatButton {
 
     private static final String TAG = "MyButton";
 

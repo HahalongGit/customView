@@ -2,6 +2,7 @@ package com.lll.beizertest;
 
 import android.app.Application;
 import android.os.Debug;
+import android.support.multidex.MultiDexApplication;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.lll.beizertest.activity.ProxyActivity;
@@ -17,7 +18,8 @@ import com.tencent.bugly.crashreport.CrashReport;
  * @Date 2018/4/4
  */
 
-public class MyApplication extends Application {
+
+public class MyApplication extends MultiDexApplication {
 
 
     @Override
