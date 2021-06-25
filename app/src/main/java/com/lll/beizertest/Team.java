@@ -12,4 +12,7 @@ class Team {
 
     private String teamName;
 
+    private String slogon;
+
+
 }
