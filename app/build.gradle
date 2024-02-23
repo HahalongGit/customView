@@ -118,7 +118,8 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.2.4'
     implementation 'org.litepal.android:core:1.6.1'
-    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.0'
+//    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.0'
+    implementation 'io.github.lucksiege:pictureselector:v3.0.9'
     implementation project(':imageselectlibrary')
 //    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
 
@@ -140,21 +141,23 @@ dependencies {
 
     implementation 'com.android.support:multidex:1.0.3'
 
+//    implementation 'com.facebook.fresco:fresco:2.1.0'
+
 //    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.6.3' //添加leakCanary
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:2.7' //添加leakCanary 2.7版本不需要在applicaiton中注册
+//    debugCompile 'com.squareup.leakcanary:leakcanary-android:2.7' //添加leakCanary 2.7版本不需要在applicaiton中注册
 }
 
 /**
  * 定义一个插件
  */
-class CustomPulginInBuildGradle implements Plugin<Project> {
-
-    @Override
-    void apply(Project target) {
-        target.task("runnginDigua") {
-            def a = "这是一个脚本 gradle形式的plugin插件"
-            def b = target.toString()
-            println(a + b)
-        }
-    }
-}
+//class CustomPulginInBuildGradle implements Plugin<Project> {
+//
+//    @Override
+//    void apply(Project target) {
+//        target.task("runnginDigua") {
+//            def a = "这是一个脚本 gradle形式的plugin插件"
+//            def b = target.toString()
+//            println(a + b)
+//        }
+//    }
+//}

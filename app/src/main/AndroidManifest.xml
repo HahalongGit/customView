@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lll.beizertest">
-    <!-- 测试自定义申请访问PartOneActivty的权限 权限级别是：dangerous 需要动态申请 -->
+    <!-- 申明  使用自定义权限 -->
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -103,9 +103,9 @@
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
+<!--            <meta-data-->
+<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--                android:resource="@xml/file_paths" />-->
         </provider>
         <provider
             android:name=".activity.provider.BookProvider"
@@ -145,16 +145,20 @@
             android:name=".ipc.JobWakeupService"
             android:enabled="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-    </application> <!-- 申明  使用自定义权限 -->
+    </application>
+
     <permission
         android:name="com.lll.beizertest.permission.PART_ONE_ACCESS"
         android:label="申请访问PartOneActivty"
         android:protectionLevel="dangerous" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="com.lll.beizertest.permission.PART_ONE_ACCESS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />

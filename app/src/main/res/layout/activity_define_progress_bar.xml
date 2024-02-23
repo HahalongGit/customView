@@ -18,6 +18,18 @@
         android:layout_width="200dp"
         android:layout_height="200dp" />
 
+    <com.lll.beizertest.view.ZHProgressBar
+        android:id="@+id/downloadProgress"
+        app:outerBackgroundColor="#D3D3D3"
+        app:innerBackgroundColor="@color/blue"
+        app:progressTextColor="@color/colorAccent"
+        android:layout_marginTop="20dp"
+        app:progressBorderWidth="6dp"
+        app:progressTextSize="30sp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
+
     <Button
         android:id="@+id/btn_startProgress"
         android:text="开始计算"
